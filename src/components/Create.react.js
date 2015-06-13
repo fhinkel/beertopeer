@@ -20,14 +20,14 @@ var Create = React.createClass({
             eventName: this.refs.name.getValue(),
             totalAmount: this.refs.totalAmount.getValue(),
             currency: "EUR",
-            targetRippleAccountId: UserStore.getUser().rippleAccount,
-            eventCreator: UserStore.getUser().name
+            recipientRippleAccountId: UserStore.getUser().rippleAccount,
+            recipientUserName: UserStore.getUser().name
         };
         let url = Config.serverOptions.url + '/event';
         $.post(url, data, function (data, status) {
-            var eventCode = data;
+            var eventCode = data.eventCode;
             console.log("id for new event is " + eventCode);
-            this.context.router.transitionTo('show', {eventCode: eventCode})
+            this.context.router.transitionTo('show', {eventCode: eventCode});
         }.bind(this));
     },
 
