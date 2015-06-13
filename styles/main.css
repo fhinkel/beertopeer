@@ -13,14 +13,26 @@ html {
 }
 
 body, h1, h2, h3, h4, h5, h6 {
-    margin: 0;
+    /*margin: 0;*/
 }
 
 body {
-    font-size: 13px;
-    line-height: 20px;
+    font-size: 16px;
+    line-height: 24px;
+    margin: 0;
 }
 
 .upperCase input {
     text-transform: uppercase;
 }
+
+.mui-app-content-canvas {
+    padding-left: 24px;
+    padding-top: 24px;
+}
+
+.text-field-text-right > input {
+    text-align: right;
+}
+
+
