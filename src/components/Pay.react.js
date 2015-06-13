@@ -15,11 +15,6 @@ var keyMirror = require('keymirror');
 
 var UserStore = require('../stores/UserStore');
 
-// HARDCODED VALUES TO BE REPLACED (START)
-var currency = 'EUR'; // to be read from backend
-var targetRippleAccountId = 'rpUNr3n6SdqTX2obxt78RRVQBS9ZJ3az6N'; // TODO to be read from backend
-// HARDCODED VALUES TO BE REPLACED (END)
-
 var ripple = require('ripple-lib');
 
 var LoadingState = keyMirror({
@@ -39,9 +34,9 @@ var Pay = React.createClass({
 
         var amount = this.refs.amountField.getValue().replace(',', '.');
 
-        var rippleAmount = ripple.Amount.from_human(amount + ' ' + currency);
+        var rippleAmount = ripple.Amount.from_human(amount + ' ' + this.state.currency);
 
-        RippleService.pay(user.rippleSecret, targetRippleAccountId, rippleAmount, function (success) {
+        RippleService.pay(user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, function (success) {
             console.log('payment result ' + success);
             // TODO
         });
