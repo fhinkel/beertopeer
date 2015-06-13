@@ -12,7 +12,8 @@ var TransactionsConstants = require('../constants/TransactionsConstants.js');
 
 var RippleService = require('../services/RippleService');
 
-var CHANGE_EVENT = 'change';
+var CHANGE_EVENTCODE = 'changeEventCode';
+var CHANGE_TRANSACTIONS = 'changeTransactions';
 
 var eventCode = "";
 
@@ -27,6 +28,10 @@ function addTransaction(transaction) {
    transactions.push(transaction);
 }
 
+function setTransactions(newTransactions) {
+    transactions =  newTransactions;
+}
+
 var TransactionsStore = assign({}, EventEmitter.prototype, {
 
     getCurrentEventCode: function() {
@@ -37,23 +42,29 @@ var TransactionsStore = assign({}, EventEmitter.prototype, {
         return transactions;
     },
 
-    emitChange: function() {
-        this.emit(CHANGE_EVENT);
+    emitChangeEventCode: function() {
+        this.emit(CHANGE_EVENTCODE);
+        this.emit(CHANGE_TRANSACTIONS);
     },
 
-    /**
-     * @param {function} callback
-     */
-    addChangeListener: function(callback) {
-        this.on(CHANGE_EVENT, callback);
+    emitChangeTransactions: function() {
+        this.emit(CHANGE_TRANSACTIONS);
     },
 
-    /**
-     * @param {function} callback
-     */
-    removeChangeListener: function(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
+    addChangeEventCodeListener: function(callback) {
+        this.on(CHANGE_EVENTCODE, callback);
     },
+
+    removeChangeEventCodeListener: function(callback) {
+        this.removeListener(CHANGE_EVENTCODE, callback);
+    },
+    addChangeTransactionListener: function(callback) {
+        this.on(CHANGE_TRANSACTIONS, callback);
+    },
+
+    removeChangeTransactionListener: function(callback) {
+        this.removeListener(CHANGE_TRANSACTIONS, callback);
+    }
 });
 
 Beer2PeerDispatcher.register(function(action) {

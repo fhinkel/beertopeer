@@ -10,17 +10,13 @@ var TextField = mui.TextField;
 var RaisedButton = mui.RaisedButton;
 var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
-var keyMirror = require('keymirror');
 var Config = require('../constants/Config');
 
 var UserStore = require('../stores/UserStore');
 
 var ripple = require('ripple-lib');
 
-var LoadingState = keyMirror({
-    LOADING: null,
-    LOADED: null
-});
+var {Progress, LoadingState}  = require('./Progress.react');
 
 var ErrorMessage = React.createClass({
     render: function() {
@@ -69,8 +65,8 @@ var Pay = React.createClass({
                 eventName: data.eventName,
                 totalAmount: data.amount,
                 currency: data.currency,
-                targetRippleAccountId: data.senderAddress,
-                eventCreator: data.senderNickname
+                targetRippleAccountId: data.recipientRippleAccountId,
+                eventCreator: data.recipientUserName
             });
         }.bind(this));
         this.setLoadedState();
@@ -82,10 +78,7 @@ var Pay = React.createClass({
 
     render: function() {
         if(this.state.loadingState === LoadingState.LOADING) {
-            return (<div>
-                <p>{this.state.loadingMessage}</p>
-                <CircularProgress mode = "indeterminate" size={2}/>
-            </div>);
+            return (<Progress message = {this.state.loadingMessage}/>);
         } else {
             return (
                 <div>
