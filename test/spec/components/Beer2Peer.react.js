@@ -1,7 +1,5 @@
 'use strict';
 
-var assert = require('chai');
-
 describe('BeertopeerApp', function () {
   var React = require('react/addons');
   var BeertopeerApp, component;
@@ -17,7 +15,5 @@ describe('BeertopeerApp', function () {
 
   it('should create a new instance of BeertopeerApp', function () {
     expect(component).toBeDefined();
-      var magicNumber = 42;
-      assert.equal(42, magicNumber);
   });
 });
