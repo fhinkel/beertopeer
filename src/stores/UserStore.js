@@ -15,7 +15,7 @@ var RippleService = require('../services/RippleService');
 
 var CHANGE_EVENT = 'change';
 
-var user = {name: 'Dieter',
+var user = {name: LocalConfig.username || 'Dieter',
             rippleAccount: LocalConfig.ripple.account,
             rippleSecret: LocalConfig.ripple.secret};
 
