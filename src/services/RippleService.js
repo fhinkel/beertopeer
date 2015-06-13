@@ -15,7 +15,7 @@ var RippleService = {
         return ripple.Seed.from_json(secret).get_key().get_address().to_json();
     },
 
-    pay: function(amount, currency) {
+    pay: function(amount, currency, targetRippleAccountId) {
         console.log('Pay was called with ' + amount + ' ' + currency);
     }
 };

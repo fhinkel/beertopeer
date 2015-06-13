@@ -11,12 +11,14 @@ var DropDownMenu = mui.DropDownMenu;
 var RippleService = require('../services/RippleService');
 
 var currencyItems = [
-    { payload: '1', text: 'EUR' }
+    { payload: '1', text: 'EUR' },
+    { payload: '2', text: 'USD' }
 ];
 
 var Pay = React.createClass({
+
     onClickPayButton: function() {
-        RippleService.pay(this.refs.amountField.value, this.refs.currencyChoice.value);
+        RippleService.pay(this.refs.amountField.getValue(), this.props.currency, this.props.targetRippleAccountId);
     },
 
     render: function() {
@@ -29,7 +31,7 @@ var Pay = React.createClass({
                 <table>
                     <tr>
                         <td><TextField ref="amountField" defaultValue="0,00"/></td>
-                        <td><DropDownMenu ref="currencyChoice" menuItems={currencyItems}/></td>
+                        <td>{this.props.currency}</td>
                     </tr>
                 </table>
                 <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
