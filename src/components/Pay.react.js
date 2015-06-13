@@ -35,7 +35,8 @@ var ErrorMessage = React.createClass({
 var Pay = React.createClass({
     getInitialState: function() {
         return {
-            loadingState: LoadingState.LOADING
+            loadingState: LoadingState.LOADING,
+            loadingMessage: 'Retrieving event from server...'
         };
     },
 
@@ -46,7 +47,10 @@ var Pay = React.createClass({
 
         var rippleAmount = ripple.Amount.from_human(amount + ' ' + this.state.currency);
 
-        this.setState({loadingState: LoadingState.LOADING});
+        this.setState({
+            loadingState: LoadingState.LOADING,
+            loadingMessage: 'Transaction ongoing...'
+        });
         RippleService.pay(user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, this.props.params.eventCode, function (success) {
             console.log('payment result ' + success);
             if(!success) {
@@ -77,7 +81,10 @@ var Pay = React.createClass({
 
     render: function() {
         if(this.state.loadingState === LoadingState.LOADING) {
-            return (<CircularProgress mode = "indeterminate" size={2}/>);
+            return (<div>
+                <p>{this.state.loadingMessage}</p>
+                <CircularProgress mode = "indeterminate" size={2}/>
+            </div>);
         } else {
             return (
                 <div>
