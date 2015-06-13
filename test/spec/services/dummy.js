@@ -7,6 +7,6 @@ describe('RippleService', function () {
     });
 
     it('should break travis for testing', function () {
-        assert.equal(true, false);
+        assert.equal(true, true);
     });
 });
