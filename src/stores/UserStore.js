@@ -11,6 +11,8 @@ var assign = require('object-assign');
 var UserConstants = require('../constants/UserConstants.js');
 var LocalConfig = require('../constants/LocalConfig.js.template');
 
+var RippleService = require('../services/RippleService');
+
 var CHANGE_EVENT = 'change';
 
 var user = {name: 'Dieter',
@@ -21,6 +23,7 @@ function setUser(name, secret) {
     console.log('Setting user...');
     user.name = name;
     user.rippleSecret = secret;
+    user.rippleAccount = RippleService.getAccountFromSecret(secret);
 }
 
 var UserStore = assign({}, EventEmitter.prototype, {
