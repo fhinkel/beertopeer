@@ -35,4 +35,7 @@ body {
     text-align: right;
 }
 
+.right {
+    float: right;
+}
 
