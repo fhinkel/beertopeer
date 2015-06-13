@@ -24,7 +24,8 @@ var Show = React.createClass({
                 if (success) {
                     that.setState({
                             transactions: transactions,
-                            loadingState:LoadingState.LOADED
+                            loadingState:LoadingState.LOADED,
+                            event: event
                         }
                     );
                 }
@@ -36,20 +37,26 @@ var Show = React.createClass({
     getInitialState: function() {
         return {
             transactions: [],
-            loadingState: LoadingState.LOADING
+            loadingState: LoadingState.LOADING,
+            event: {}
         };
     },
     render: function() {
         var transactions = this.state.transactions;
         var transactionList = [];
         for (var i=0; i< transactions.length; i++) {
-            transactionList.push(<li><Transaction transaction={transactions[i]} /></li>);
+            transactionList.push(<div><Transaction transaction={transactions[i]} /></div>);
         }
         if (this.state.loadingState === LoadingState.LOADED) {
         return (
             <div>
-                <p>{this.props.params.eventCode}</p>
+                <h1>EventCode: {this.props.params.eventCode}</h1>
+                <p>
+                    {this.state.event.eventName} {this.state.event.totalAmount}
+                </p>
+                <p>
                     {transactionList}
+                </p>
             </div>
         );
         } else {
