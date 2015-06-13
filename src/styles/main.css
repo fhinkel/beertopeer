@@ -24,3 +24,8 @@ body {
 .upperCase input {
     text-transform: uppercase;
 }
+
+.mui-app-content-canvas {
+    padding-left: 24px;
+    padding-top: 24px;
+}
