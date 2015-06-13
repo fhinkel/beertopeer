@@ -10,6 +10,8 @@ var Transaction = require('./Transaction.react');
 var RippleService = require('../services/RippleService');
 var EventService = require('../services/EventService');
 
+
+
 var {Progress, LoadingState} = require('./Progress.react');
 
 var Show = React.createClass({
@@ -58,7 +60,7 @@ var Show = React.createClass({
         var transactionList = [];
         var received = 0.00;
         for (var i=0; i< transactions.length; i++) {
-            transactionList.push(<li><Transaction transaction={ transactions[i]} /></li>);
+            transactionList.push(<Transaction transaction={ transactions[i]} />);
             received = received + transactions[i].amount.to_human({precision: 2});
         }
 
@@ -72,9 +74,11 @@ var Show = React.createClass({
                 </p>
 
                 <p>{this.props.params.eventCode}</p>
-                <div>Total</div> <div className="right">{this.state.event.totalAmount}</div>
-                    {transactionList}
-                <div>Balance</div> <div className="right">{this.state.event.totalAmount - received}</div>
+                <table className="historyTable">
+                    <tr><td><b>Total</b></td><td><b>{this.state.event.totalAmount}</b></td></tr>
+                        {transactionList}
+                    <tr><td><b>Balance</b></td><th><b>{this.state.event.totalAmount - received}</b></th></tr>
+                </table>
 
             </div>
 

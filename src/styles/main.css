@@ -41,3 +41,16 @@ body {
 .right {
     float: right;
 }
+
+ .historyTable td,
+ .historyTable th
+ {
+     text-align:left;
+ }
+
+ #right,
+ .historyTable td + td,
+ .historyTable th + th
+ {
+     text-align:right;
+ }
