@@ -21,8 +21,12 @@ var Pay = React.createClass({
                 <p>This event has been created by {this.props.creator}. The total requested amount is
                     {this.props.totalamount} {this.props.currency} of which
                     {this.props.openamount} {this.props.currency} are still open</p>
-                <TextField defaultValue="0,00"/>
-                <DropDownMenu menuItems={currencyItems}/>
+                <table>
+                    <tr>
+                        <td><TextField defaultValue="0,00"/></td>
+                        <td><DropDownMenu menuItems={currencyItems}/></td>
+                    </tr>
+                </table>
                 <RaisedButton label="Pay!" primary={true}/>
             </div>
         );
