@@ -8,12 +8,17 @@ var mui = require('material-ui');
 var TextField = mui.TextField;
 var RaisedButton = mui.RaisedButton;
 var DropDownMenu = mui.DropDownMenu;
+var RippleActions = require('../actions/RippleActions');
 
 var currencyItems = [
     { payload: '1', text: 'EUR' }
 ];
 
 var Pay = React.createClass({
+    onClickPayButton: function() {
+        RippleActions.payForEvent(this.refs.amountField.value, this.refs.currencyChoice.value);
+    },
+
     render: function() {
         return (
             <div>
@@ -23,11 +28,11 @@ var Pay = React.createClass({
                     {this.props.openamount} {this.props.currency} are still open</p>
                 <table>
                     <tr>
-                        <td><TextField defaultValue="0,00"/></td>
-                        <td><DropDownMenu menuItems={currencyItems}/></td>
+                        <td><TextField ref="amountField" defaultValue="0,00"/></td>
+                        <td><DropDownMenu ref="currencyChoice" menuItems={currencyItems}/></td>
                     </tr>
                 </table>
-                <RaisedButton label="Pay!" primary={true}/>
+                <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
             </div>
         );
     }

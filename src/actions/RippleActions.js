@@ -5,7 +5,9 @@
 
 var Dispatcher = require('../dispatcher/Beer2PeerDispatcher');
 
-var UserActions = {
+var RippleConstants = require('../constants/RippleConstants');
+
+var RippleActions = {
     /**
      * @param  {string} text
      */
