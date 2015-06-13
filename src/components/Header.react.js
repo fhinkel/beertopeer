@@ -18,7 +18,8 @@ var Header = React.createClass({
         var menuItems = [
             { route: 'create', text: 'Create' },
             { route: 'join', text: 'Join' },
-            { route: 'show', text: 'Show' }
+            { route: 'show', text: 'Show' },
+            { route: 'pay', text: 'Pay'}
         ];
 
         var userText = <span>{this.props.user.name}</span>;

@@ -4,11 +4,19 @@
 'use strict';
 
 var React = require('react');
+var TextField = require('material-ui').TextField;
 
-var Join = React.createClass({
+var Pay = React.createClass({
     render: function() {
         return (
-            <div>Pay</div>
+            <div>
+                <h1>Contribute to event {this.props.eventname}</h1>
+                <p>This event has been created by {this.props.creator}. The total requested amount is
+                    {this.props.totalamount} {this.props.currency} of which
+                    {this.props.openamount} {this.props.currency} are still open</p>
+                <TextField defaultValue="0,00"/>
+                <TextField defaultValue="EUR"/>
+            </div>
         );
     }
 });
