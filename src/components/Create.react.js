@@ -4,20 +4,28 @@
 'use strict';
 
 var React = require('react');
-var RaisedButton = require('material-ui').RaisedButton;
+var $ = require('jquery');
+var mui = require('material-ui');
+var RaisedButton = mui.RaisedButton;
+var TextField = mui.TextField;
 
 var UserAction = require('../actions/UserActions');
 
 var Create = React.createClass({
 
-    onClick: function() {
-        console.log('onClick');
-        UserAction.loginUser("something else", "somekey");
+    onClickCreate: function() {
+        // TODO
     },
 
     render: function() {
         return (
-        <RaisedButton label="Change User" primary={true} onClick={this.onClick} />
+        <div>
+            <TextField defaultValue="Event name" />
+            <br/>
+            <TextField defaultValue="0,00" />
+            <br/>
+            <RaisedButton label="Create" primary={true} onClick={this.onClickCreate}/>
+        </div>
         );
     }
 });

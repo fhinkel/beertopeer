@@ -8,7 +8,6 @@ var React = require('react');
 var mui = require('material-ui');
 var TextField = mui.TextField;
 var RaisedButton = mui.RaisedButton;
-var DropDownMenu = mui.DropDownMenu;
 var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
 var keyMirror = require('keymirror');
