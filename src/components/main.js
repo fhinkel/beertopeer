@@ -11,6 +11,7 @@ var jQuery = require('jquery');
 var Create = require('./Create.react');
 var Join = require('./Join.react');
 var Show = require('./Show.react');
+var Pay = require('./Pay.react');
 
 var injectTapEventPlugin = require("react-tap-event-plugin");
 
@@ -22,6 +23,7 @@ var Routes = (
     <Route name='create' handler={Create} />
     <Route name='join' handler = {Join} />
     <Route name='show' handler = {Show} />
+      <Route name='pay' handler = {Pay} />
   </Route>
 );
 
