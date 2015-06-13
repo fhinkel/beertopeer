@@ -8,26 +8,44 @@ var $ = require('jquery');
 var mui = require('material-ui');
 var RaisedButton = mui.RaisedButton;
 var TextField = mui.TextField;
+var UserStore = require('../stores/UserStore');
+var Config = require('../constants/Config');
 
-var UserAction = require('../actions/UserActions');
 
 var Create = React.createClass({
 
-    onClickCreate: function() {
-        // TODO
+    onClickCreate: function () {
+
+        var data = {
+            eventName: this.refs.name.getValue(),
+            totalAmount: this.refs.totalAmount.getValue(),
+            currency: "EUR",
+            targetRippleAccountId: UserStore.getUser().rippleAccount,
+            eventCreator: UserStore.getUser().name
+        };
+        let url = Config.serverOptions.url + '/event';
+        $.post(url, data, function (data, status) {
+            var eventCode = data;
+            console.log("id for new event is " + eventCode);
+            this.context.router.transitionTo('show', {eventCode: eventCode})
+        }.bind(this));
     },
 
-    render: function() {
+    render: function () {
         return (
-        <div>
-            <TextField defaultValue="Event name" />
-            <br/>
-            <TextField defaultValue="0,00" />
-            <br/>
-            <RaisedButton label="Create" primary={true} onClick={this.onClickCreate}/>
-        </div>
+            <div>
+                <TextField ref="name" defaultValue="Event name" />
+                <br/>
+                <TextField ref="totalAmount" defaultValue="0,00" />
+                <br/>
+                <RaisedButton label="Create" primary={true} onClick={this.onClickCreate}/>
+            </div>
         );
     }
 });
+
+Create.contextTypes = {
+    router: React.PropTypes.func
+};
 
 module.exports = Create;
