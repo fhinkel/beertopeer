@@ -7,8 +7,8 @@ var React = require('react');
 var TextField = require('material-ui').TextField;
 var RaisedButton = require('material-ui').RaisedButton;
 
-var MIN_NUMBER_OF_DIGITS = 4;
-var MAX_NUMBER_OF_DIGITS = 6;
+var MIN_NUMBER_OF_CHARACTERS = 4;
+var MAX_NUMBER_OF_CHARACTERS = 6;
 
 var Join = React.createClass({
 
@@ -18,13 +18,13 @@ var Join = React.createClass({
 
     checkCode(eventCode) {
         console.log('Checking '+ eventCode);
-        return eventCode.toString().match(new RegExp('[A-Z]{'+MIN_NUMBER_OF_DIGITS+','+MAX_NUMBER_OF_DIGITS+'}'));
+        return eventCode.toString().match(new RegExp('^[A-Z]{'+MIN_NUMBER_OF_CHARACTERS+','+MAX_NUMBER_OF_CHARACTERS+'}$'));
     },
 
     onKeyDown() {
         var eventCode = this.refs.eventCode.getValue().toString().toUpperCase();
         if (!this.checkCode(eventCode)) {
-            this.setState( {errorText: MIN_NUMBER_OF_DIGITS+'-'+MAX_NUMBER_OF_DIGITS+' digits required.'});
+            this.setState( {errorText: MIN_NUMBER_OF_CHARACTERS+'-'+MAX_NUMBER_OF_CHARACTERS+' digits required.'});
         } else {
             this.setState( {errorText: ''});
         }
@@ -44,10 +44,10 @@ var Join = React.createClass({
                 <form onSubmit={this.joinEvent} >
                 <TextField
                     ref = "eventCode"
-                    hintText="Event Code"
                     errorText={this.state.errorText}
                     onKeyUp={this.onKeyDown}
-                    className = "upperCase"/>
+                    className = "upperCase"
+                    floatingLabelText="Event Code"/>
                 <br/>
                 <br/>
                 <RaisedButton label="Join" primary={true} />
