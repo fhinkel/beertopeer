@@ -5,5 +5,6 @@
 var keyMirror = require('keymirror');
 
 module.exports = keyMirror({
-    USER_CREATE_WITH_SECRET: null
+    USER_CREATE_WITH_SECRET: null,
+    USER_LOGOUT: null
 });

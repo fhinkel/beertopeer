@@ -34,8 +34,6 @@ var Create = React.createClass({
     render: function () {
         return (
             <div>
-                <h1>Request group payments</h1>
-
                 <TextField ref="name" defaultValue="Event name" />
                 <br/>
                 <TextField ref="totalAmount" defaultValue="0,00" />

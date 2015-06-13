@@ -12,6 +12,7 @@ var UserStore = require('../stores/UserStore');
 
 var Header = require('./Header.react');
 
+var Login = require('./Login.react');
 
 ThemeManager.setTheme(SocialPayTheme);
 var Beer2Peer = React.createClass({
@@ -41,12 +42,21 @@ var Beer2Peer = React.createClass({
   },
 
   render: function() {
+
+    var mainSection;
+
+      if (this.state.user.name === '') {
+          mainSection =  <Login />;
+      } else {
+          mainSection =  <RouteHandler />;
+      }
     return (
         <AppCanvas>
             <Header user = {this.state.user} />
-
-            <div className='mui-app-content-canvas'>
-                <RouteHandler />
+            <div className="centered">
+                <div className='mui-app-content-canvas'>
+                    {mainSection}
+                </div>
             </div>
         </AppCanvas>
     );

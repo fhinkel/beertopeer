@@ -20,14 +20,26 @@ var Show = React.createClass({
         var eventCode = this.props.params.eventCode;
 
         EventService.queryEvent(eventCode, function(event, status) {
+            console.log('found event ', event);
+
+            RippleService.subscribeToTransactionsForEvent(event.recipientRippleAccountId, eventCode, function(newT) {
+                console.log('new transaction', newT);
+
+                var ts = that.state.transactions;
+
+                ts.push(newT);
+
+                that.setState({
+                        transactions: ts,
+                    });
+            });
             RippleService.requestTransactionsForEvent(event.recipientRippleAccountId, eventCode, function (success,transactions) {
                 if (success) {
                     that.setState({
-                            transactions: transactions,
-                            loadingState:LoadingState.LOADED,
-                            event: event
-                        }
-                    );
+                        transactions: transactions,
+                        loadingState: LoadingState.LOADED,
+                        event: event
+                    });
                 }
             });
         });
