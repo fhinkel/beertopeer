@@ -4,13 +4,92 @@
 'use strict';
 
 var React = require('react');
+var TextField = require('material-ui').TextField;
+var RaisedButton = require('material-ui').RaisedButton;
+
+var $ = require('jquery');
+
+var MIN_NUMBER_OF_CHARACTERS = 5;
+var MAX_NUMBER_OF_CHARACTERS = 5;
 
 var Join = React.createClass({
+
+    getInitialState() {
+        return {errorText: '' };
+    },
+
+    getEventCode() {
+      return this.refs.eventCode.getValue().toString().toUpperCase();
+    },
+
+    checkCodeFormat(eventCode) {
+        console.log('Checking Format'+ eventCode);
+        return eventCode.toString().match(new RegExp('^[A-Z]{'+MIN_NUMBER_OF_CHARACTERS+','+MAX_NUMBER_OF_CHARACTERS+'}$'));
+    },
+
+    codeExists(eventCode) {
+        var codeExists;
+        var that = this;
+        console.log('Checking Code Existence '+ eventCode);
+        $.ajax({
+            method: "GET",
+            url: 'http://46.101.128.85:3000/event/'+eventCode,
+            dataType: "json",
+            error: function(xhr, status, error) { if (that.getEventCode() === eventCode) {
+                that.setState( {errorText: 'No event with this code exists.'});
+            } },
+            success: function(data, status, xhr) { if (that.getEventCode() === eventCode) {
+                that.setState( {errorText: ''});
+            } }
+        });
+    },
+
+    onKeyUp() {
+        var eventCode = this.getEventCode();
+        if (!this.checkCodeFormat(eventCode)) {
+            this.setState( {errorText: MIN_NUMBER_OF_CHARACTERS+'-'+MAX_NUMBER_OF_CHARACTERS+' digits required.'});
+        } else {
+            this.setState( {errorText: ''});
+            this.codeExists(eventCode);
+        }
+    },
+
+    joinEvent() {
+        var eventCode = this.getEventCode();
+        var that = this;
+        if (this.checkCodeFormat(eventCode)) {
+            $.ajax({
+                method: "GET",
+                url: 'http://46.101.128.85:3000/event/'+eventCode,
+                dataType: "json",
+                success: function(data, status, xhr) { if (that.getEventCode() === eventCode) {
+                    that.context.router.transitionTo('pay', {eventCode: eventCode});
+                } }
+            });
+        }
+    },
+
     render: function() {
         return (
-            <div>Join</div>
+            <div>
+                <form onSubmit={this.joinEvent} >
+                <TextField
+                    ref = "eventCode"
+                    errorText={this.state.errorText}
+                    onKeyUp={this.onKeyUp}
+                    className = "upperCase"
+                    floatingLabelText="Event Code"/>
+                <br/>
+                <br/>
+                <RaisedButton label="Join" primary={true} />
+                </form>
+            </div>
         );
     }
 });
+
+Join.contextTypes = {
+    router: React.PropTypes.func
+};
 
 module.exports = Join;

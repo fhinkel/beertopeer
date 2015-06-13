@@ -3,28 +3,36 @@
  */
 'use strict';
 
+var $ = require('jquery');
 var React = require('react');
 var mui = require('material-ui');
 var TextField = mui.TextField;
 var RaisedButton = mui.RaisedButton;
 var DropDownMenu = mui.DropDownMenu;
+var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
+var keyMirror = require('keymirror');
 
 var UserStore = require('../stores/UserStore');
 
 // HARDCODED VALUES TO BE REPLACED (START)
-var eventPin = 1234; // to be passed as property
 var currency = 'EUR'; // to be read from backend
-var totalAmount = 23.45; // to be read from backend
-var openAmount = 17.23; // to be read from backend
-var eventCreator = 'Dieter'; // to be read from backend
-var eventName = 'Pizza'; // to be read from backend
-var targetRippleAccountId = 'rE6pwrUq1RYoAgYPWv4SDwzh4DGrpdaqJW'; // (Dieter) to be read from backend
+var targetRippleAccountId = 'rpUNr3n6SdqTX2obxt78RRVQBS9ZJ3az6N'; // TODO to be read from backend
 // HARDCODED VALUES TO BE REPLACED (END)
 
 var ripple = require('ripple-lib');
 
+var LoadingState = keyMirror({
+    LOADING: null,
+    LOADED: null
+});
+
 var Pay = React.createClass({
+    getInitialState: function() {
+        return {
+            loadingState: LoadingState.LOADING
+        };
+    },
 
     onClickPayButton: function() {
         var user = UserStore.getUser();
@@ -33,26 +41,50 @@ var Pay = React.createClass({
 
         var rippleAmount = ripple.Amount.from_human(amount + ' ' + currency);
 
-        RippleService.pay(user.rippleSecret, 'rpUNr3n6SdqTX2obxt78RRVQBS9ZJ3az6N', rippleAmount, function (success) {
+        RippleService.pay(user.rippleSecret, targetRippleAccountId, rippleAmount, function (success) {
             console.log('payment result ' + success);
             // TODO
         });
+
+    },
+
+    componentDidMount: function() {
+        $.get('http://46.101.128.85:3000/event/'+ this.props.params.eventCode, function(data, status) {
+            this.setState({
+                eventName: data.eventName,
+                totalAmount: data.amount,
+                currency: data.currency,
+                targetRippleAccountId: data.senderAddress,
+                eventCreator: data.senderNickname
+            });
+        }.bind(this));
+        this.setLoadedState();
+    },
+
+    setLoadedState: function() {
+        this.setState({loadingState: LoadingState.LOADED});
     },
 
     render: function() {
-        return (
-            <div>
-                <h1>Contribute to event {this.props.eventname}</h1>
-                <p>This event has been created by {eventCreator}. The total requested amount is {totalAmount} {currency} of which {openAmount} {currency} are still open</p>
-                <table>
-                    <tr>
-                        <td><TextField ref="amountField" defaultValue="0,00"/></td>
-                        <td>{currency}</td>
-                    </tr>
-                </table>
-                <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
-            </div>
-        );
+        if(this.state.loadingState === LoadingState.LOADING) {
+            return (<CircularProgress mode = "indeterminate" size={2}/>);
+        } else {
+            return (
+                <div>
+                    <h1>Contribute to event {this.state.eventname}</h1>
+
+                    <p>This event has been created by {this.state.eventCreator}. The total requested amount
+                        is {this.state.totalAmount} {this.state.currency}.</p>
+                    <table>
+                        <tr>
+                            <td><TextField ref="amountField" defaultValue="0,00"/></td>
+                            <td>{this.state.currency}</td>
+                        </tr>
+                    </table>
+                    <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
+                </div>
+            );
+        }
     }
 });
 

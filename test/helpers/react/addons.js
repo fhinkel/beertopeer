@@ -12649,7 +12649,7 @@ var eventTypes = {
   },
   keyDown: {
     phasedRegistrationNames: {
-      bubbled: keyOf({onKeyDown: true}),
+      bubbled: keyOf({onKeyUp: true}),
       captured: keyOf({onKeyDownCapture: true})
     }
   },

@@ -14,19 +14,21 @@ var Show = require('./Show.react');
 var Pay = require('./Pay.react');
 
 var injectTapEventPlugin = require("react-tap-event-plugin");
-
 injectTapEventPlugin();
 
 var Routes = (
   <Route name='beer2peer' path='/' handler={Beer2Peer}>
     <DefaultRoute handler = {Create} />
-    <Route name='create' handler={Create} />
-    <Route name='join' handler = {Join} />
-    <Route name='show' handler = {Show} />
-      <Route name='pay' handler = {Pay} />
+    <Route name='create'  handler={Create} />
+    <Route name='join'  handler = {Join} />
+    <Route name='show'  handler = {Show} />
+    <Route name='pay' path='pay/:eventCode' handler = {Pay} />
   </Route>
 );
 
-Router.run(Routes, function (Handler) {
+Router.create( {
+    routes: Routes,
+    scrollBehaviour: Router.ScrollToTopBehavior
+}).run(function (Handler) {
   React.render(<Handler/>, document.getElementById('content'));
 });
