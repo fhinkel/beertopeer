@@ -19,7 +19,7 @@ var RippleService = {
         return ripple.Seed.from_json(secret).get_key().get_address().to_json();
     },
 
-    pay: function(senderSecret, recipientAccount, amount, eventCode, callback) {
+    pay: function(userName, senderSecret, recipientAccount, amount, eventCode, callback) {
         console.log('Pay was called with ' + senderSecret + ' ' + recipientAccount + ' ' + amount);
 
         var senderAccount = this.getAccountFromSecret(senderSecret);
@@ -46,7 +46,8 @@ var RippleService = {
             memoType: 'beer2peer',
             memoFormat: 'json',
             memoData: {
-                eventCode: eventCode
+                eventCode: eventCode,
+                userName: userName
             }
         });
 
@@ -67,6 +68,65 @@ var RippleService = {
                 callback(true);
             }
         });
+    },
+
+    requestTransactionsForEvent(recipientAccount, eventCode, callback) {
+        var that = this;
+
+        var opts = {
+            account: recipientAccount,
+            ledger_index_min: -1,
+            ledger_index_max: -1,
+            limit: 100, // at some point we might want to implement paging
+            forward: false
+        };
+        this.remote.requestAccountTransactions(opts, function(err, resp) {
+            if (err) {
+                console.log("request account tx error", err);
+                callback(false);
+                return;
+            }
+            console.log("requestAccountTransactions resp", resp);
+
+            var ts = resp.transactions.
+                filter(function(t) {
+                    var isPaymentToDest = t.tx.TransactionType === 'Payment' && t.tx.Destination === recipientAccount;
+
+                    var memoData = that._getOurMemoData(t.tx.Memos);
+                    var isForEvent = memoData && memoData.eventCode === eventCode;
+
+                    return isPaymentToDest && isForEvent;
+                }).
+                map(function(t) {
+                    var memoData = that._getOurMemoData(t.tx.Memos);
+
+                    return {
+                        senderAccount: t.tx.Account,
+                        senderName: memoData.userName,
+                        amount: ripple.Amount.from_json(t.meta.delivered_amount)
+                    };
+                });
+
+            console.log('TS', ts);
+
+            callback(true, ts);
+        });
+    },
+
+    _getOurMemoData(memos) {
+        if (!memos) {
+            return null;
+        }
+
+        var ourMemos = memos.filter(function(m) {
+            return m.Memo.parsed_memo_type === 'beer2peer' && m.Memo.parsed_memo_format === 'json';
+        });
+
+        if (ourMemos.length === 1) {
+            return ourMemos[0].Memo.parsed_memo_data;
+        } else {
+            return null;
+        }
     },
 
     _connectToRemote() {
