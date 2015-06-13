@@ -8,7 +8,7 @@ var mui = require('material-ui');
 var TextField = mui.TextField;
 var RaisedButton = mui.RaisedButton;
 var DropDownMenu = mui.DropDownMenu;
-var RippleActions = require('../actions/RippleActions');
+var RippleService = require('../services/RippleService');
 
 var currencyItems = [
     { payload: '1', text: 'EUR' }
@@ -16,7 +16,7 @@ var currencyItems = [
 
 var Pay = React.createClass({
     onClickPayButton: function() {
-        RippleActions.payForEvent(this.refs.amountField.value, this.refs.currencyChoice.value);
+        RippleService.pay(this.refs.amountField.value, this.refs.currencyChoice.value);
     },
 
     render: function() {

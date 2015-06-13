@@ -1,3 +1,5 @@
+'use strict'
+
 var ripple = require('ripple-lib');
 
 var RippleService = {
@@ -11,6 +13,10 @@ var RippleService = {
         }
 
         return ripple.Seed.from_json(value).get_key().get_address().to_json();
+    },
+
+    pay: function(amount, currency) {
+        console.log('Pay was called with ' + amount + ' ' + currency);
     }
 };
 
