@@ -8,31 +8,50 @@ var Router = require('react-router');
 var {Route, RouteHandler, Link } = Router;
 var Mui = require('material-ui');
 
+var {Colors, Spacing, Typography} = Mui.Styles;
+
 var LeftNav = Mui.LeftNav;
 var AppBar = Mui.AppBar;
 var Tabs = Mui.Tabs;
 var Tab = Mui.Tab;
+
+var UserActions = require('../actions/UserActions');
+var NavBarHeader = require('./NavBarHeader.react');
 
 var Header = React.createClass({
 
     render: function () {
 
         var menuItems = [
-            { route: 'create', text: 'Create' },
-            { route: 'join', text: 'Join' },
-            { route: 'query', text: 'Show' }
+            { route:'join', text: 'Logout' },
         ];
 
-        var userText = <span>{this.props.user.name}</span>;
+        var headerStyles  = {
+                cursor: 'pointer',
+                //.mui-font-style-headline
+                fontSize: '24px',
+                color: Typography.textFullWhite,
+                lineHeight: Spacing.desktopKeylineIncrement + 'px',
+                fontWeight: Typography.fontWeightLight,
+                backgroundColor: Colors.cyan500,
+                paddingLeft: Spacing.desktopGutter,
+                paddingTop: '0px',
+                marginBottom: '8px'
+            };
+
+        var header = (
+                <div style={headerStyles}>
+                    {this.props.user.name}
+                </div>
+            );
 
         return(
             <div>
             <AppBar title='PeerPay'
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonTouchTap={this.toggleLeftNav}
-                    iconElementRight={userText}
                 />
-            <LeftNav ref='leftNav' docked={false} menuItems={menuItems} onChange={this.onLeftNavChange}/>
+            <LeftNav ref='leftNav' docked={false} menuItems={menuItems} onChange={this.onLeftNavChange} header = {header} />
             <Tabs>
                 <Tab label="Join payment" route="join" onActive={this._onActive} />
                 <Tab label="Request payment" route="create" onActive={this._onActive} />
@@ -47,6 +66,7 @@ var Header = React.createClass({
     },
 
     onLeftNavChange: function(e, key, payload) {
+        UserActions.logout();
         this.context.router.transitionTo(payload.route);
     },
 

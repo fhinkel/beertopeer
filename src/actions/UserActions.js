@@ -17,6 +17,11 @@ var UserActions = {
             username: username,
             secret: secret
         });
+    },
+    logout: function() {
+        Dispatcher.dispatch({
+           actionType: UserConstants.USER_LOGOUT,
+        });
     }
 };
 

@@ -15,15 +15,22 @@ var RippleService = require('../services/RippleService');
 
 var CHANGE_EVENT = 'change';
 
-var user = {name: 'Dieter',
-            rippleAccount: LocalConfig.ripple.account,
-            rippleSecret: LocalConfig.ripple.secret};
+var user = {name: 'asdf',
+            rippleAccount:'dasf',
+            rippleSecret: 'dsafasfds'};
 
 function setUser(name, secret) {
-    console.log('Setting user...');
+    console.log('Logging in...');
     user.name = name;
     user.rippleSecret = secret;
     user.rippleAccount = RippleService.getAccountFromSecret(secret);
+}
+
+function logout() {
+    console.log('Logging out...');
+    user.name = '';
+    user.rippleSecret = '';
+    user.rippleAccount = '';
 }
 
 var UserStore = assign({}, EventEmitter.prototype, {
@@ -62,6 +69,9 @@ Beer2PeerDispatcher.register(function(action) {
                 username = action.username.trim();
                 secret = action.secret.trim();
                 setUser(username, secret);
+                break;
+            case UserConstants.USER_LOGOUT:
+                logout();
                 break;
         }
 
