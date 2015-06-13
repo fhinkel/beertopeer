@@ -1,41 +1,22 @@
-/* Stiziles */
 
-html, body {
-  background: #222222;
+ a {
+    color: #ff4081; //pinkA200
+    text-decoration: none;
+ }
+
+a:hover {
+    text-decoration: underline;
 }
 
-/* main */
-
-.main {
-  width: 100%;
-  height: 100%;
-  background: #222222;
-  color: #fff;
+html {
+    font-family: 'Roboto', sans-serif;
 }
 
-.main img {
-  width: 103px;
-  height: 89px;
-  margin-bottom: 10px;
-  text-align: center;
+body, h1, h2, h3, h4, h5, h6 {
+    margin: 0;
 }
 
-/* transitions */
-
-.fade-enter {
-  opacity: 0.01;
-  transition: opacity .5s ease-in;
-}
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-}
-
-.fade-leave {
-  opacity: 1;
-  transition: opacity .5s ease-in;
-}
-
-.fade-leave.fade-leave-active {
-  opacity: 0.01;
+body {
+    font-size: 13px;
+    line-height: 20px;
 }

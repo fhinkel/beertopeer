@@ -48,8 +48,9 @@ after_success:
     - cp -R ../dist/* .
     - cp ../dist/.* .
     - git add -f .
-    - git config user.email ""
-    - git config user.name ""
+    - ls -al
+    - git config user.email "konstantin.knauf@tngtech.com"
+    - git config user.name "Konstantin Knauf"
     - git commit -am "adding the yeoman build files to gh-pages [ci skip]"
     # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
-    - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages > /dev/null 2>&1
+    - git push https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} HEAD:gh-pages
