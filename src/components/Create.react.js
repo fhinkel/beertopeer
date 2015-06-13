@@ -12,7 +12,6 @@ var Create = React.createClass({
 
     onClick: function() {
         console.log('onClick');
-        alert ("click");
         UserAction.loginUser("something else", "somekey");
     },
 
