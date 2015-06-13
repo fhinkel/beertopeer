@@ -27,7 +27,7 @@ var targetRippleAccountId = 'rE6pwrUq1RYoAgYPWv4SDwzh4DGrpdaqJW'; // (Dieter) to
 var LoadingState = keyMirror({
     LOADING: null,
     LOADED: null
-})
+});
 
 var Pay = React.createClass({
     getInitialState: function() {
