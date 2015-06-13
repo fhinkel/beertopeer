@@ -15,9 +15,9 @@ var RippleService = require('../services/RippleService');
 
 var CHANGE_EVENT = 'change';
 
-var user = {name: 'asdf',
-            rippleAccount:'dasf',
-            rippleSecret: 'dsafasfds'};
+var user = {name: '',
+            rippleAccount:'',
+            rippleSecret: ''};
 
 function setUser(name, secret) {
     console.log('Logging in...');
