@@ -3,6 +3,9 @@ var assert = require('chai').assert;
 describe('RippleService', function () {
     var RippleService = require('../../../src/services/RippleService');
 
+    beforeEach(function () {
+    });
+
     it('should validate ripple secrets', function () {
         assert.equal(RippleService.isSecretValid('asd'), false);
         assert.equal(RippleService.isSecretValid('asd'), false);
