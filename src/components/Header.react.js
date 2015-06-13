@@ -10,6 +10,8 @@ var Mui = require('material-ui');
 
 var LeftNav = Mui.LeftNav;
 var AppBar = Mui.AppBar;
+var Tabs = Mui.Tabs;
+var Tab = Mui.Tab;
 
 var Header = React.createClass({
 
@@ -31,6 +33,11 @@ var Header = React.createClass({
                     iconElementRight={userText}
                 />
             <LeftNav ref='leftNav' docked={false} menuItems={menuItems} onChange={this.onLeftNavChange}/>
+            <Tabs>
+                <Tab label="Join payment" route="join" onActive={this._onActive} />
+                <Tab label="Request payment" route="create" onActive={this._onActive} />
+                <Tab label="My requests" route="query" onActive={this._onActive} />
+            </Tabs>
             </div>
     );
     },
@@ -41,6 +48,10 @@ var Header = React.createClass({
 
     onLeftNavChange: function(e, key, payload) {
         this.context.router.transitionTo(payload.route);
+    },
+
+    _onActive: function(tab){
+        this.context.router.transitionTo(tab.props.route);
     }
 
 });

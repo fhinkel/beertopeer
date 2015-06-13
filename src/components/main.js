@@ -8,7 +8,6 @@ var DefaultRoute = Router.DefaultRoute;
 
 var jQuery = require('jquery');
 
-var Home = require('./Home.react');
 var Create = require('./Create.react');
 var Join = require('./Join.react');
 var Show = require('./Show.react');
@@ -20,7 +19,7 @@ injectTapEventPlugin();
 
 var Routes = (
   <Route name='beer2peer' path='/' handler={Beer2Peer}>
-    <DefaultRoute handler = {Home} />
+    <DefaultRoute handler = {Join} />
     <Route name='create'  handler={Create} />
     <Route name='join'  handler = {Join} />
     <Route name='show' path='show/:eventCode' handler = {Show} />
