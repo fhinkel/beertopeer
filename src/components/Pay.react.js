@@ -19,7 +19,7 @@ var totalAmount = 23.45; // to be read from backend
 var openAmount = 17.23; // to be read from backend
 var eventCreator = 'Dieter'; // to be read from backend
 var eventName = 'Pizza'; // to be read from backend
-var targetRippleAccountId = 'rE6pwrUq1RYoAgYPWv4SDwzh4DGrpdaqJW'; (Dieter) // to be read from backend
+var targetRippleAccountId = 'rE6pwrUq1RYoAgYPWv4SDwzh4DGrpdaqJW'; // (Dieter) to be read from backend
 // HARDCODED VALUES TO BE REPLACED (END)
 
 
@@ -27,7 +27,8 @@ var targetRippleAccountId = 'rE6pwrUq1RYoAgYPWv4SDwzh4DGrpdaqJW'; (Dieter) // to
 var Pay = React.createClass({
 
     onClickPayButton: function() {
-        RippleService.pay(parseFloat(this.refs.amountField.getValue()), currency, targetRippleAccountId);
+        var amountAsFloat = parseFloat(this.refs.amountField.getValue().replace(',','.'));
+        RippleService.pay(amountAsFloat, currency, targetRippleAccountId);
     },
 
     render: function() {
