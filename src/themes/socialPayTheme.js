@@ -15,12 +15,12 @@ var LightTheme = {
     contentFontFamily: 'Roboto, sans-serif',
     getPalette: function() {
         return {
-            primary1Color: Colors.cyan500,
-            primary2Color: Colors.cyan700,
-            primary3Color: Colors.cyan100,
-            accent1Color: Colors.blueGrey300,
-            accent2Color: Colors.blueGrey500,
-            accent3Color: Colors.blueGrey200,
+            primary1Color: Colors.lightBlue700,
+            primary2Color: Colors.lightBlue900,
+            primary3Color: Colors.lightBlue300,
+            accent1Color: Colors.lightBlueA400,
+            accent2Color: Colors.lightBlueA700,
+            accent3Color: Colors.lightBlueA200,
             textColor: Colors.darkBlack,
             canvasColor: Colors.white,
             borderColor: Colors.grey300,
