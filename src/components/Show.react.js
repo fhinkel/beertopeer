@@ -49,9 +49,7 @@ var Show = React.createClass({
         return (
             <div>
                 <p>{this.props.params.eventCode}</p>
-                <ul>
                     {transactionList}
-                </ul>
             </div>
         );
         } else {

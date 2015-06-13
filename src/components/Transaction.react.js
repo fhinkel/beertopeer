@@ -7,13 +7,12 @@ var React = require('react');
 
 var Transaction = React.createClass({
 
-    render: function() {
+    render: function () {
         var transaction = this.props.transaction;
         return (
             <div>
-            <span>{transaction.amount.to_human({precision: 2})}</span>
-            <span> from </span>
-            <span>{transaction.senderName}</span>
+                <div>{transaction.senderName}</div>
+                <div className="right">{transaction.amount.to_human({precision: 2})}</div>
             </div>
         );
     }
