@@ -1,13 +1,16 @@
 var assert = require('chai').assert;
 
 describe('RippleService', function () {
-    var number = 43;
     var RippleService = require('../../../src/services/RippleService');
-    beforeEach(function () {
-        number = 17;
+
+    it('should validate ripple secrets', function () {
+        assert.equal(RippleService.isSecretValid('asd'), false);
+        assert.equal(RippleService.isSecretValid('asd'), false);
+        assert.equal(RippleService.isSecretValid('snvMr7mkrPosYjRwejWsKcGXbBma1'), true);
+        assert.equal(RippleService.isSecretValid('snvMr7mkrPosYjRwejWsKcGXbBma2'), false);
     });
 
-    it.only('should foo', function () {
-        assert.equal(42, number);
+    it('should get account from secret', function () {
+        assert.equal(RippleService.getAccountFromSecret('snvMr7mkrPosYjRwejWsKcGXbBma1'), 'rMTnqqawC9SQQPVqWVSNwjQz1Z5nDnE9qt');
     });
 });

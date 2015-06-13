@@ -2,15 +2,15 @@ var ripple = require('ripple-lib');
 
 var RippleService = {
     isSecretValid: function (secret) {
-        return secret && Base.decode_check(33, secret);
+        return !!secret && !!ripple.Base.decode_check(33, secret);
     },
 
     getAccountFromSecret: function (secret) {
-        if (!isSecretValid(secret)) {
+        if (!this.isSecretValid(secret)) {
             throw 'invalid secret ' + secret;
         }
 
-        return ripple.Seed.from_json(value).get_key().get_address().to_json();
+        return ripple.Seed.from_json(secret).get_key().get_address().to_json();
     }
 };
 
