@@ -12,6 +12,6 @@ var RippleService = {
 
         return  ripple.Seed.from_json(value).get_key().get_address().to_json();
     }
-}
+};
 
-module.exports = RippleService
+module.exports = RippleService;
