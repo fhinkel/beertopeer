@@ -92,7 +92,7 @@ var Pay = React.createClass({
                     <h1>Contribute to {this.state.eventname}</h1>
 
                     <ErrorMessage message={this.props.errorMessage}/>
-                    <p>{this.state.eventCreator} has requested {this.state.totalAmount} {this.state.currency} from the group.</p>
+                    <p><b>{this.state.eventCreator}</b> has requested <b>{this.state.totalAmount} {this.state.currency}</b> from the group.</p>
                     <div>
                         <TextField ref="amountField"
                                    defaultValue="0,00"
