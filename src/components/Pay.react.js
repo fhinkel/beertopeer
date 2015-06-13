@@ -11,6 +11,7 @@ var RaisedButton = mui.RaisedButton;
 var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
 var keyMirror = require('keymirror');
+var Config = require('../constants/Config');
 
 var UserStore = require('../stores/UserStore');
 
@@ -62,7 +63,7 @@ var Pay = React.createClass({
     },
 
     componentDidMount: function() {
-        $.get('http://46.101.128.85:3000/event/'+ this.props.params.eventCode, function(data, status) {
+        $.get( Config.serverOptions.url + '/event/'+ this.props.params.eventCode, function(data, status) {
             this.setState({
                 eventName: data.eventName,
                 totalAmount: data.amount,

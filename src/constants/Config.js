@@ -8,7 +8,11 @@ var Config = {
     servers: [
       {host: 's-west.ripple.com', port: 443, secure: true}
     ]
-  }
+  },
+
+    serverOptions: {
+        url: 'http://46.101.128.85:3000'
+    }
 };
 
 module.exports = Config;

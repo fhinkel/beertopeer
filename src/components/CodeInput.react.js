@@ -10,6 +10,7 @@
 var React = require('react');
 var TextField = require('material-ui').TextField;
 var RaisedButton = require('material-ui').RaisedButton;
+var Config = require('../constants/Config');
 
 var $ = require('jquery');
 
@@ -37,7 +38,7 @@ var CodeInput = React.createClass({
         console.log('Checking Code Existence '+ eventCode);
         $.ajax({
             method: "GET",
-            url: 'http://46.101.128.85:3000/event/'+eventCode,
+            url: Config.serverOptions.url + '/event/'+eventCode,
             dataType: "json",
             error: function(xhr, status, error) { if (that.getEventCode() === eventCode) {
                 that.setState( {errorText: 'No event with this code exists.'});
