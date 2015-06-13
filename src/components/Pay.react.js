@@ -11,22 +11,13 @@ var RaisedButton = mui.RaisedButton;
 var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
 var Config = require('../constants/Config');
+var ErrorMessage = require('./ErrorMessage');
 
 var UserStore = require('../stores/UserStore');
 
 var ripple = require('ripple-lib');
 
 var {Progress, LoadingState}  = require('./Progress.react');
-
-var ErrorMessage = React.createClass({
-    render: function() {
-        if(this.props.message) {
-            return (<p><b>{this.props.message}</b></p>);
-        } else {
-            return (<div></div>);
-        }
-    }
-});
 
 var Pay = React.createClass({
     getInitialState: function() {
