@@ -44,20 +44,28 @@ var Show = React.createClass({
     render: function() {
         var transactions = this.state.transactions;
         var transactionList = [];
+        var received = 0.00;
         for (var i=0; i< transactions.length; i++) {
-            transactionList.push(<div><Transaction transaction={transactions[i]} /></div>);
+            transactionList.push(<li><Transaction transaction={ transactions[i]} /></li>);
+            received = received + transactions[i].amount.to_human({precision: 2});
         }
+
         if (this.state.loadingState === LoadingState.LOADED) {
-        return (
+
+            return (
             <div>
-                <h1>EventCode: {this.props.params.eventCode}</h1>
+
                 <p>
                     {this.state.event.eventName} {this.state.event.totalAmount}
                 </p>
-                <p>
+
+                <p>{this.props.params.eventCode}</p>
+                <div>Total</div> <div className="right">{this.state.event.totalAmount}</div>
                     {transactionList}
-                </p>
+                <div>Balance</div> <div className="right">{this.state.event.totalAmount - received}</div>
+
             </div>
+
         );
         } else {
             return (
