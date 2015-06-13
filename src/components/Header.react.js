@@ -53,9 +53,9 @@ var Header = React.createClass({
                 />
             <LeftNav ref='leftNav' docked={false} menuItems={menuItems} onChange={this.onLeftNavChange} header = {header} />
             <Tabs>
-                <Tab label="Join payment" route="join" onActive={this._onActive} />
-                <Tab label="Request payment" route="create" onActive={this._onActive} />
-                <Tab label="My requests" route="query" onActive={this._onActive} />
+                <Tab label="Join" route="join" onActive={this._onActive} />
+                <Tab label="Request" route="create" onActive={this._onActive} />
+                <Tab label="History" route="query" onActive={this._onActive} />
             </Tabs>
             </div>
     );

@@ -53,8 +53,10 @@ var Beer2Peer = React.createClass({
     return (
         <AppCanvas>
             <Header user = {this.state.user} />
-            <div className='mui-app-content-canvas'>
-                {mainSection}
+            <div className="centered">
+                <div className='mui-app-content-canvas'>
+                    {mainSection}
+                </div>
             </div>
         </AppCanvas>
     );

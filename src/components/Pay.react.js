@@ -77,7 +77,6 @@ var Pay = React.createClass({
         } else {
             return (
                 <div>
-                    <h1>Contribute to {this.state.eventName}</h1>
                     <ErrorMessage message={this.state.errorMessage}/>
                     <p><b>{this.state.eventCreator}</b> has requested <b>{this.state.totalAmount} {this.state.currency}</b> from the group.</p>
                     <div>

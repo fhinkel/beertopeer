@@ -28,7 +28,6 @@ var Join = React.createClass({
     render: function() {
         return (
             <div>
-                <h1>Join group payment</h1>
                 <CodeInput onSubmit={this.joinEvent} label="Join" />
             </div>
         );
