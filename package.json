@@ -9,6 +9,9 @@
   "dist": "dist",
   "mainInput": "main",
   "mainOutput": "main",
+  "scripts": {
+    "test": "grunt test"
+  },
   "dependencies": {
     "react-router": "^0.13.3",
     "flux": "^2.0.1",
