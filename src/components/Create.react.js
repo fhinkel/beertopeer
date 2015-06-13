@@ -5,10 +5,18 @@
 
 var React = require('react');
 
+var UserAction = require('../actions/UserActions');
+
 var Create = React.createClass({
+
+    onClick: function() {
+        console.log('onClick');
+        UserAction.loginUser("something else", "somekey");
+    },
+
     render: function() {
         return (
-            <div>Create</div>
+            <button onClick={this.onClick}>Change User</button>
         );
     }
 });

@@ -11,20 +11,39 @@ var Remote = require('ripple-lib').Remote;
 var Config = require('../constants/Config');
 var LocalConfig = require('../constants/LocalConfig');
 
+var UserStore = require('../stores/UserStore');
+
 var Header = require('./Header.react');
 
 var Beer2Peer = React.createClass({
 
-  //For Material UI
-  childContextTypes: {
-      muiTheme: React.PropTypes.object
-  },
+    getInitialState: function() {
+        return  {user: UserStore.getUser()} ;
+    },
+
+    componentDidMount: function() {
+        this.connectToRemote();
+        UserStore.addChangeListener(this.onChange);
+    },
+    componentWillUnmount: function() {
+        UserStore.removeChangeListener(this.onChange);
+    },
+
+    onChange: function() {
+        this.setState( {user: UserStore.getUser()});
+        this.onLoggedInUserChanged();
+    },
+
+    //For Material UI
+    childContextTypes: {
+        muiTheme: React.PropTypes.object
+    },
 
   getChildContext() {
       return {muiTheme: ThemeManager.getCurrentTheme()};
   },
 
-  componentDidMount() {
+  connectToRemote() {
     var remote = this.remote = new Remote(Config.rippleOptions);
 
     remote.on('error', function (error) {
@@ -41,14 +60,13 @@ var Beer2Peer = React.createClass({
   },
 
   onLoggedInUserChanged() {
-    // TODO: access user store here
-    this.remote.setSecret(LocalConfig.ripple.account, LocalConfig.ripple.secret);
+    this.remote.setSecret(this.state.user.name, this.state.user.secret);
   },
 
   render: function() {
     return (
         <AppCanvas>
-            <Header />
+            <Header user = {this.state.user} />
             <RouteHandler />
         </AppCanvas>
     );
