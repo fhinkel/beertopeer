@@ -15,6 +15,7 @@ var Query = React.createClass({
     render: function() {
         return (
             <div>
+            <h1>Query Event</h1>
                 <CodeInput onSubmit={this.eventCodeSelected} label="Show"/>
             </div>
         );

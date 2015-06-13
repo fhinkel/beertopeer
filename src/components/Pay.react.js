@@ -37,6 +37,7 @@ var Pay = React.createClass({
     },
 
     onClickPayButton: function() {
+
         var user = UserStore.getUser();
 
         var amount = this.refs.amountField.getValue().replace(',', '.');
@@ -51,9 +52,9 @@ var Pay = React.createClass({
         RippleService.pay(user.name, user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, this.props.params.eventCode, function (success) {
             console.log('payment result ' + success);
             if(!success) {
-                this.context.router.transitionTo('pay', {eventCode: this.props.eventCode, errorMessage: "Payment failed! Try again?"});
+                this.context.router.transitionTo('pay', {eventCode: this.props.params.eventCode, errorMessage: "Payment failed! Try again?"});
             } else {
-                this.context.router.transitionTo('show', {eventCode: this.props.eventCode});
+                this.context.router.transitionTo('show', {eventCode: this.props.params.eventCode});
             }
         }.bind(this));
 
@@ -63,7 +64,7 @@ var Pay = React.createClass({
         $.get( Config.serverOptions.url + '/event/'+ this.props.params.eventCode, function(data, status) {
             this.setState({
                 eventName: data.eventName,
-                totalAmount: data.amount,
+                totalAmount: data.totalAmount,
                 currency: data.currency,
                 targetRippleAccountId: data.recipientRippleAccountId,
                 eventCreator: data.recipientUserName

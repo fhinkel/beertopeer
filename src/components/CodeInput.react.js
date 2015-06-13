@@ -69,8 +69,6 @@ var CodeInput = React.createClass({
     render: function() {
         return (
             <div>
-                <h1>Join event via code</h1>
-
                 <form onSubmit={this.onSubmit} >
                     <TextField
                         ref = "eventCode"

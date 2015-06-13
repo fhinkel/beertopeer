@@ -48,6 +48,7 @@ var Show = React.createClass({
         if (this.state.loadingState === LoadingState.LOADED) {
         return (
             <div>
+                <p>{this.props.params.eventCode}</p>
                 <ul>
                     {transactionList}
                 </ul>

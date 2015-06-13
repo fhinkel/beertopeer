@@ -22,7 +22,7 @@ var Routes = (
     <DefaultRoute handler = {Create} />
     <Route name='create'  handler={Create} />
     <Route name='join'  handler = {Join} />
-    <Route name='show' path='show/:eventCode'  handler = {Show} />
+    <Route name='show' path='show/:eventCode' handler = {Show} />
     <Route name='query' handler= {Query} />
     <Route name='pay' path='pay/:eventCode' handler = {Pay} />
   </Route>
