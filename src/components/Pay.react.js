@@ -16,16 +16,9 @@ var currencyItems = [
 ];
 
 var Pay = React.createClass({
-    getInitialState: function() {
-        return {selectedCurrency: currencyItems[0].text};
-    },
-
-    onChange: function(event) {
-        this.setState({selectedCurrency: event.target.textContent});
-    },
 
     onClickPayButton: function() {
-        RippleService.pay(this.refs.amountField.getValue(), this.state.selectedCurrency);
+        RippleService.pay(this.refs.amountField.getValue(), this.props.currency, this.props.targetRippleAccountId);
     },
 
     render: function() {
@@ -38,7 +31,7 @@ var Pay = React.createClass({
                 <table>
                     <tr>
                         <td><TextField ref="amountField" defaultValue="0,00"/></td>
-                        <td><DropDownMenu ref="currencyChoice" menuItems={currencyItems} onChange={this.onChange}/></td>
+                        <td>{this.props.currency}</td>
                     </tr>
                 </table>
                 <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
