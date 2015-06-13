@@ -36,7 +36,7 @@ var Pay = React.createClass({
 
         var rippleAmount = ripple.Amount.from_human(amount + ' ' + this.state.currency);
 
-        RippleService.pay(user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, function (success) {
+        RippleService.pay(user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, this.props.params.eventCode, function (success) {
             console.log('payment result ' + success);
             // TODO
         });

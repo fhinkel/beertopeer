@@ -19,7 +19,7 @@ var RippleService = {
         return ripple.Seed.from_json(secret).get_key().get_address().to_json();
     },
 
-    pay: function(senderSecret, recipientAccount, amount, callback) {
+    pay: function(senderSecret, recipientAccount, amount, eventCode, callback) {
         console.log('Pay was called with ' + senderSecret + ' ' + recipientAccount + ' ' + amount);
 
         var senderAccount = this.getAccountFromSecret(senderSecret);
@@ -41,6 +41,14 @@ var RippleService = {
             amount: amount
         });
         tx.setSendMax(sendMax);
+
+        tx.addMemo({
+            memoType: 'beer2peer',
+            memoFormat: 'json',
+            memoData: {
+                eventCode: eventCode
+            }
+        });
 
         tx.on('state', function(state) {
             console.log('tx state changed to ' + state);
