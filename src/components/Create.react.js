@@ -4,6 +4,7 @@
 'use strict';
 
 var React = require('react');
+var RaisedButton = require('material-ui').RaisedButton;
 
 var UserAction = require('../actions/UserActions');
 
@@ -16,7 +17,7 @@ var Create = React.createClass({
 
     render: function() {
         return (
-            <button onClick={this.onClick}>Change User</button>
+        <RaisedButton label="Change User" primary={true} onClick={this.onClick} />
         );
     }
 });

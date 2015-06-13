@@ -22,10 +22,21 @@ var LoadingState = keyMirror({
     LOADED: null
 });
 
+var ErrorMessage = React.createClass({
+    render: function() {
+        if(this.props.message) {
+            return (<p><b>{this.props.message}</b></p>);
+        } else {
+            return (<div></div>);
+        }
+    }
+});
+
 var Pay = React.createClass({
     getInitialState: function() {
         return {
-            loadingState: LoadingState.LOADING
+            loadingState: LoadingState.LOADING,
+            loadingMessage: 'Retrieving event from server...'
         };
     },
 
@@ -36,10 +47,18 @@ var Pay = React.createClass({
 
         var rippleAmount = ripple.Amount.from_human(amount + ' ' + this.state.currency);
 
-        RippleService.pay(user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, function (success) {
-            console.log('payment result ' + success);
-            // TODO
+        this.setState({
+            loadingState: LoadingState.LOADING,
+            loadingMessage: 'Transaction ongoing...'
         });
+        RippleService.pay(user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, this.props.params.eventCode, function (success) {
+            console.log('payment result ' + success);
+            if(!success) {
+                this.context.router.transitionTo('pay', {eventCode: this.props.eventCode, errorMessage: "Payment failed! Try again?"});
+            } else {
+                this.context.router.transitionTo('show', {eventCode: this.props.eventCode});
+            }
+        }.bind(this));
 
     },
 
@@ -62,12 +81,16 @@ var Pay = React.createClass({
 
     render: function() {
         if(this.state.loadingState === LoadingState.LOADING) {
-            return (<CircularProgress mode = "indeterminate" size={2}/>);
+            return (<div>
+                <p>{this.state.loadingMessage}</p>
+                <CircularProgress mode = "indeterminate" size={2}/>
+            </div>);
         } else {
             return (
                 <div>
                     <h1>Contribute to event {this.state.eventname}</h1>
 
+                    <ErrorMessage message={this.props.errorMessage}/>
                     <p>This event has been created by {this.state.eventCreator}. The total requested amount
                         is {this.state.totalAmount} {this.state.currency}.</p>
                     <table>
@@ -76,11 +99,15 @@ var Pay = React.createClass({
                             <td>{this.state.currency}</td>
                         </tr>
                     </table>
-                    <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
+                    <RaisedButton ref="payButton" label="Pay!" primary={true} onClick={this.onClickPayButton}/>
                 </div>
             );
         }
     }
 });
+
+Pay.contextTypes = {
+    router: React.PropTypes.func
+};
 
 module.exports = Pay;
