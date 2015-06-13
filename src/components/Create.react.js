@@ -27,7 +27,7 @@ var Create = React.createClass({
         $.post(url, data, function (data, status) {
             var eventCode = data;
             console.log("id for new event is " + eventCode);
-            this.context.router.transitionTo('show', {eventCode: eventCode})
+            this.context.router.transitionTo('show', {eventCode: eventCode});
         }.bind(this));
     },
 
