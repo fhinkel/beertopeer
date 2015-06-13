@@ -4,7 +4,14 @@
 'use strict';
 
 var React = require('react');
-var TextField = require('material-ui').TextField;
+var mui = require('material-ui');
+var TextField = mui.TextField;
+var RaisedButton = mui.RaisedButton;
+var DropDownMenu = mui.DropDownMenu;
+
+var currencyItems = [
+    { payload: '1', text: 'EUR' }
+];
 
 var Pay = React.createClass({
     render: function() {
@@ -15,7 +22,8 @@ var Pay = React.createClass({
                     {this.props.totalamount} {this.props.currency} of which
                     {this.props.openamount} {this.props.currency} are still open</p>
                 <TextField defaultValue="0,00"/>
-                <TextField defaultValue="EUR"/>
+                <DropDownMenu menuItems={currencyItems}/>
+                <RaisedButton label="Pay!" primary={true}/>
             </div>
         );
     }
