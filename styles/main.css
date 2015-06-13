@@ -27,8 +27,11 @@ body {
 }
 
 .mui-app-content-canvas {
-    padding-left: 24px;
-    padding-top: 24px;
+    display: inline-block;
+}
+
+.centered {
+    text-align: center;
 }
 
 .text-field-text-right > input {
