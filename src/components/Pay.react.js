@@ -4,11 +4,36 @@
 'use strict';
 
 var React = require('react');
+var mui = require('material-ui');
+var TextField = mui.TextField;
+var RaisedButton = mui.RaisedButton;
+var DropDownMenu = mui.DropDownMenu;
+var RippleService = require('../services/RippleService');
 
-var Join = React.createClass({
+var currencyItems = [
+    { payload: '1', text: 'EUR' }
+];
+
+var Pay = React.createClass({
+    onClickPayButton: function() {
+        RippleService.pay(this.refs.amountField.value, this.refs.currencyChoice.value);
+    },
+
     render: function() {
         return (
-            <div>Pay</div>
+            <div>
+                <h1>Contribute to event {this.props.eventname}</h1>
+                <p>This event has been created by {this.props.creator}. The total requested amount is
+                    {this.props.totalamount} {this.props.currency} of which
+                    {this.props.openamount} {this.props.currency} are still open</p>
+                <table>
+                    <tr>
+                        <td><TextField ref="amountField" defaultValue="0,00"/></td>
+                        <td><DropDownMenu ref="currencyChoice" menuItems={currencyItems}/></td>
+                    </tr>
+                </table>
+                <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
+            </div>
         );
     }
 });
