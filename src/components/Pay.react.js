@@ -10,7 +10,7 @@ var RaisedButton = mui.RaisedButton;
 var DropDownMenu = mui.DropDownMenu;
 var RippleService = require('../services/RippleService');
 
-
+var UserStore = require('../stores/UserStore');
 
 // HARDCODED VALUES TO BE REPLACED (START)
 var eventPin = 1234; // to be passed as property
@@ -22,13 +22,21 @@ var eventName = 'Pizza'; // to be read from backend
 var targetRippleAccountId = 'rE6pwrUq1RYoAgYPWv4SDwzh4DGrpdaqJW'; // (Dieter) to be read from backend
 // HARDCODED VALUES TO BE REPLACED (END)
 
-
+var ripple = require('ripple-lib');
 
 var Pay = React.createClass({
 
     onClickPayButton: function() {
-        var amountAsFloat = parseFloat(this.refs.amountField.getValue().replace(',','.'));
-        RippleService.pay(amountAsFloat, currency, targetRippleAccountId);
+        var user = UserStore.getUser();
+
+        var amount = this.refs.amountField.getValue().replace(',', '.');
+
+        var rippleAmount = ripple.Amount.from_human(amount + ' ' + currency);
+
+        RippleService.pay(user.rippleSecret, 'rpUNr3n6SdqTX2obxt78RRVQBS9ZJ3az6N', rippleAmount, function (success) {
+            console.log('payment result ' + success);
+            // TODO
+        });
     },
 
     render: function() {

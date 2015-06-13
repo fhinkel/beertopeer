@@ -9,7 +9,7 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var UserConstants = require('../constants/UserConstants.js');
-var LocalConfig = require('../constants/LocalConfig.js.template');
+var LocalConfig = require('../constants/LocalConfig.js');
 
 var CHANGE_EVENT = 'change';
 
