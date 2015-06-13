@@ -52,7 +52,10 @@ var Pay = React.createClass({
         RippleService.pay(user.name, user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, this.props.params.eventCode, function (success) {
             console.log('payment result ' + success);
             if(!success) {
-                this.context.router.transitionTo('pay', {eventCode: this.props.params.eventCode, errorMessage: "Payment failed! Try again?"});
+                this.setState({
+                    errorMessage: "Payment failed! Try again?",
+                    loadingState: LoadingState.LOADED
+                });
             } else {
                 this.context.router.transitionTo('show', {eventCode: this.props.params.eventCode});
             }
@@ -85,7 +88,7 @@ var Pay = React.createClass({
                 <div>
                     <h1>Contribute to {this.state.eventname}</h1>
 
-                    <ErrorMessage message={this.props.errorMessage}/>
+                    <ErrorMessage message={this.state.errorMessage}/>
                     <p><b>{this.state.eventCreator}</b> has requested <b>{this.state.totalAmount} {this.state.currency}</b> from the group.</p>
                     <div>
                         <TextField ref="amountField"
