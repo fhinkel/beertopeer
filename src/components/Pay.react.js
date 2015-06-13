@@ -8,7 +8,9 @@ var mui = require('material-ui');
 var TextField = mui.TextField;
 var RaisedButton = mui.RaisedButton;
 var DropDownMenu = mui.DropDownMenu;
+var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
+var keyMirror = require('keymirror');
 
 
 
@@ -22,29 +24,50 @@ var eventName = 'Pizza'; // to be read from backend
 var targetRippleAccountId = 'rE6pwrUq1RYoAgYPWv4SDwzh4DGrpdaqJW'; // (Dieter) to be read from backend
 // HARDCODED VALUES TO BE REPLACED (END)
 
-
+var LoadingState = keyMirror({
+    LOADING: null,
+    LOADED: null
+})
 
 var Pay = React.createClass({
+    getInitialState: function() {
+        return {loadingState: LoadingState.LOADING};
+    },
 
     onClickPayButton: function() {
         var amountAsFloat = parseFloat(this.refs.amountField.getValue().replace(',','.'));
         RippleService.pay(amountAsFloat, currency, targetRippleAccountId);
     },
 
+    componentDidMount: function() {
+        // make call to backend to retrieve the event from this.props.params.eventCode
+        window.setTimeout(this.setLoadedState, 1000); // simulate loading time
+    },
+
+    setLoadedState: function() {
+        this.setState({loadingState: LoadingState.LOADED});
+    },
+
     render: function() {
-        return (
-            <div>
-                <h1>Contribute to event {this.props.eventname}</h1>
-                <p>This event has been created by {eventCreator}. The total requested amount is {totalAmount} {currency} of which {openAmount} {currency} are still open</p>
-                <table>
-                    <tr>
-                        <td><TextField ref="amountField" defaultValue="0,00"/></td>
-                        <td>{currency}</td>
-                    </tr>
-                </table>
-                <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
-            </div>
-        );
+        if(this.state.loadingState === LoadingState.LOADING) {
+            return (<CircularProgress mode = "indeterminate" size={2}/>);
+        } else {
+            return (
+                <div>
+                    <h1>Contribute to event {this.props.eventname}</h1>
+
+                    <p>This event has been created by {eventCreator}. The total requested amount
+                        is {totalAmount} {currency} of which {openAmount} {currency} are still open</p>
+                    <table>
+                        <tr>
+                            <td><TextField ref="amountField" defaultValue="0,00"/></td>
+                            <td>{currency}</td>
+                        </tr>
+                    </table>
+                    <RaisedButton label="Pay!" primary={true} onClick={this.onClickPayButton}/>
+                </div>
+            );
+        }
     }
 });
 
