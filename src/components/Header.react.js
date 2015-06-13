@@ -25,7 +25,7 @@ var Header = React.createClass({
 
         return(
             <div>
-            <AppBar title='Beer2Peer'
+            <AppBar title='PeerPay'
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonTouchTap={this.toggleLeftNav}
                     iconElementRight={userText}
