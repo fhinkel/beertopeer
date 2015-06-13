@@ -1,0 +1,8 @@
+var LocalConfig = {
+  ripple: {
+    account: '',
+    secret: ''
+  }
+};
+
+module.exports = LocalConfig;

@@ -9,17 +9,18 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var UserConstants = require('../constants/UserConstants.js');
+var LocalConfig = require('../constants/LocalConfig.js.template');
 
 var CHANGE_EVENT = 'change';
 
-
-var user = {name: 'TestUser',
-            secret: 'asdfw3rsadfasdf'};
+var user = {name: 'Dieter',
+            rippleAccount: LocalConfig.ripple.account,
+            rippleSecret: LocalConfig.ripple.secret};
 
 function setUser(name, secret) {
     console.log('Setting user...');
     user.name = name;
-    user.secret = secret;
+    user.rippleSecret = secret;
 }
 
 var UserStore = assign({}, EventEmitter.prototype, {
@@ -52,7 +53,7 @@ var UserStore = assign({}, EventEmitter.prototype, {
 });
 
 Beer2PeerDispatcher.register(function(action) {
-    var username, secret;
+    var username, secret, account;
         switch(action.actionType) {
             case UserConstants.USER_CREATE_WITH_SECRET:
                 username = action.username.trim();
