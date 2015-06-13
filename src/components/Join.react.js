@@ -26,7 +26,7 @@ var Join = React.createClass({
         },
     render: function() {
         return (
-            <CodeInput onSubmit={this.joinEvent} />
+            <CodeInput onSubmit={this.joinEvent} label="Join" />
         );
     }
 });

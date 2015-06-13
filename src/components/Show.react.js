@@ -7,6 +7,7 @@ var React = require('react');
 var TransactionsStore = require('../stores/TransactionsStore');
 var CodeInput = require('./CodeInput.react');
 var TransactionsActions = require('../actions/TransactionActions');
+var Transaction = require('./Transaction.react');
 
 var Show = React.createClass({
 
@@ -31,17 +32,25 @@ var Show = React.createClass({
         });
     },
 
-    eventCodeSelected() {
-        TransactionsActions.changeEventCode();
+    eventCodeSelected(eventCode) {
+        TransactionsActions.changeEventCode(eventCode);
     },
 
     render: function() {
+        var transactions = this.state.transactions;
+        var transactionList = [];
+        for (var i=0; i< transactions.length; i++) {
+            transactionList.push(<li><Transaction transaction={transactions[i]} /></li>);
+        }
         return (
-            <CodeInput onSubmit={this.eventCodeSelected}/>
+            <div>
+                <ul>
+                    {transactionList}
+                </ul>
+                <CodeInput onSubmit={this.eventCodeSelected} label="Show"/>
+            </div>
         );
     }
-
-
 });
 
 module.exports = Show;
