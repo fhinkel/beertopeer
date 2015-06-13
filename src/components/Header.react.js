@@ -23,17 +23,25 @@ var Header = React.createClass({
 
         return(
             <div>
-            <AppBar title='Title' iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.toggleLeftNav}/>
-            <LeftNav ref='leftNav' docked={false} menuItems={menuItems} />
+            <AppBar title='Beer2Peer' iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.toggleLeftNav}/>
+            <LeftNav ref='leftNav' docked={false} menuItems={menuItems} onChange={this.onLeftNavChange}/>
             </div>
     );
     },
 
     toggleLeftNav: function() {
-        console.log("Left Tap");
         this.refs.leftNav.toggle();
+    },
+
+    onLeftNavChange: function(e, key, payload) {
+        console.log(this.context.router);
+        this.context.router.transitionTo(payload.route);
     }
 
 });
+
+Header.contextTypes = {
+    router: React.PropTypes.func
+};
 
 module.exports = Header;
