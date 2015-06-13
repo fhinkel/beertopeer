@@ -77,7 +77,7 @@ var CodeInput = React.createClass({
                         floatingLabelText="Event Code"/>
                     <br/>
                     <br/>
-                    <RaisedButton label="Join" primary={true} />
+                    <RaisedButton label={this.props.label} primary={true} />
                 </form>
             </div>
         );

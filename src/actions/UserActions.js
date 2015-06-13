@@ -17,8 +17,7 @@ var UserActions = {
             username: username,
             secret: secret
         });
-    },
-
+    }
 };
 
 module.exports = UserActions;

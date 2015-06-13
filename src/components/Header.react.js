@@ -41,7 +41,6 @@ var Header = React.createClass({
     },
 
     onLeftNavChange: function(e, key, payload) {
-        console.log(this.context.router);
         this.context.router.transitionTo(payload.route);
     }
 
