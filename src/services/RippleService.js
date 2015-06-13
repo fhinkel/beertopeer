@@ -70,7 +70,7 @@ var RippleService = {
         });
     },
 
-    requestTransactionsForEvent(recipientAccount, eventCode, callback) {
+    requestTransactionsForEvent: function(recipientAccount, eventCode, callback) {
         var that = this;
 
         var opts = {
@@ -113,7 +113,7 @@ var RippleService = {
         });
     },
 
-    _getOurMemoData(memos) {
+    _getOurMemoData: function(memos) {
         if (!memos) {
             return null;
         }
@@ -129,7 +129,7 @@ var RippleService = {
         }
     },
 
-    _connectToRemote() {
+    _connectToRemote: function() {
         var remote = this.remote = new Remote(Config.rippleOptions);
 
         remote.on('error', function (error) {
