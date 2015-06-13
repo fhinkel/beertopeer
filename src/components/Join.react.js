@@ -55,6 +55,7 @@ var Join = React.createClass({
     },
 
     joinEvent() {
+        console.log('joinEvent called');
         var eventCode = this.getEventCode();
         var that = this;
         if (this.checkCodeFormat(eventCode)) {
@@ -62,7 +63,9 @@ var Join = React.createClass({
                 method: "GET",
                 url: 'http://46.101.128.85:3000/event/'+eventCode,
                 dataType: "json",
-                success: function(data, status, xhr) { if (that.getEventCode() === eventCode) {
+                async: false,
+                success: function(data, status, xhr) { if (that.getEventCode() === eventCode ) {
+                    console.log('AJAX call was successful');
                     that.context.router.transitionTo('pay', {eventCode: eventCode});
                 } }
             });
