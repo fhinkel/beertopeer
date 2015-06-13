@@ -13,12 +13,6 @@ var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
 var keyMirror = require('keymirror');
 
-
-
-// HARDCODED VALUES TO BE REPLACED (START)
-var eventPin = 37; // to be passed as property
-// HARDCODED VALUES TO BE REPLACED (END)
-
 var LoadingState = keyMirror({
     LOADING: null,
     LOADED: null
@@ -37,7 +31,7 @@ var Pay = React.createClass({
     },
 
     componentDidMount: function() {
-        $.get('http://46.101.128.85:3000/event/'+ eventPin, function(data, status) {
+        $.get('http://46.101.128.85:3000/event/'+ this.props.params.eventCode, function(data, status) {
             this.setState({
                 eventName: data.eventName,
                 totalAmount: data.amount,
