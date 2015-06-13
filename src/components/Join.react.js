@@ -23,13 +23,24 @@ var Join = React.createClass({
     },
 
     checkCodeFormat(eventCode) {
-        console.log('Checking '+ eventCode);
+        console.log('Checking Format'+ eventCode);
         return eventCode.toString().match(new RegExp('^[A-Z]{'+MIN_NUMBER_OF_CHARACTERS+','+MAX_NUMBER_OF_CHARACTERS+'}$'));
     },
 
     codeExists(eventCode) {
-        $.get('http://46.101.128.85:3000/event/'+eventCode, function(data,status,xhr) {
-             return (status === 'success');
+        var codeExists;
+        var that = this;
+        console.log('Checking Code Existence '+ eventCode);
+        $.ajax({
+            method: "GET",
+            url: 'http://46.101.128.85:3000/event/'+eventCode,
+            dataType: "json",
+            error: function(xhr, status, error) { if (that.getEventCode() === eventCode) {
+                that.setState( {errorText: 'No event with this code exists.'});
+            } },
+            success: function(data, status, xhr) { if (that.getEventCode() === eventCode) {
+                that.setState( {errorText: ''});
+            } }
         });
     },
 
@@ -37,22 +48,24 @@ var Join = React.createClass({
         var eventCode = this.getEventCode();
         if (!this.checkCodeFormat(eventCode)) {
             this.setState( {errorText: MIN_NUMBER_OF_CHARACTERS+'-'+MAX_NUMBER_OF_CHARACTERS+' digits required.'});
-        } else if (!this.codeExists(eventCode)) {
-            if (this.getEventCode() === eventCode) {
-                this.setState( {errorText: "No event with this code exists."});
-            } else {
-                this.setState( {errorText: ''});
-            }
         } else {
             this.setState( {errorText: ''});
+            this.codeExists(eventCode);
         }
     },
 
     joinEvent() {
         var eventCode = this.getEventCode();
-        if (this.checkCodeFormat(eventCode) && this.codeExists(eventCode)) {
-            console.log('Joining Event: ' +eventCode);
-            this.context.router.transitionTo('pay', {eventCode: eventCode});
+        var that = this;
+        if (this.checkCodeFormat(eventCode)) {
+            $.ajax({
+                method: "GET",
+                url: 'http://46.101.128.85:3000/event/'+eventCode,
+                dataType: "json",
+                success: function(data, status, xhr) { if (that.getEventCode() === eventCode) {
+                    that.context.router.transitionTo('pay', {eventCode: eventCode});
+                } }
+            });
         }
     },
 
