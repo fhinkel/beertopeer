@@ -19,7 +19,7 @@ injectTapEventPlugin();
 
 var Routes = (
   <Route name='beer2peer' path='/' handler={Beer2Peer}>
-    <DefaultRoute handler = {Create} />
+    <DefaultRoute handler = {Join} />
     <Route name='create'  handler={Create} />
     <Route name='join'  handler = {Join} />
     <Route name='show' path='show/:eventCode' handler = {Show} />

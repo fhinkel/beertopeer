@@ -11,22 +11,13 @@ var RaisedButton = mui.RaisedButton;
 var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
 var Config = require('../constants/Config');
+var ErrorMessage = require('./ErrorMessage');
 
 var UserStore = require('../stores/UserStore');
 
 var ripple = require('ripple-lib');
 
 var {Progress, LoadingState}  = require('./Progress.react');
-
-var ErrorMessage = React.createClass({
-    render: function() {
-        if(this.props.message) {
-            return (<p><b>{this.props.message}</b></p>);
-        } else {
-            return (<div></div>);
-        }
-    }
-});
 
 var Pay = React.createClass({
     getInitialState: function() {
@@ -86,8 +77,7 @@ var Pay = React.createClass({
         } else {
             return (
                 <div>
-                    <h1>Contribute to {this.state.eventname}</h1>
-
+                    <h1>Contribute to {this.state.eventName}</h1>
                     <ErrorMessage message={this.state.errorMessage}/>
                     <p><b>{this.state.eventCreator}</b> has requested <b>{this.state.totalAmount} {this.state.currency}</b> from the group.</p>
                     <div>

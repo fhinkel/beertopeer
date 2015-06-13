@@ -36,9 +36,10 @@ var Show = React.createClass({
             RippleService.requestTransactionsForEvent(event.recipientRippleAccountId, eventCode, function (success,transactions) {
                 if (success) {
                     that.setState({
-                            transactions: transactions,
-                            loadingState:LoadingState.LOADED
-                        });
+                        transactions: transactions,
+                        loadingState: LoadingState.LOADED,
+                        event: event
+                    });
                 }
             });
         });
@@ -48,21 +49,35 @@ var Show = React.createClass({
     getInitialState: function() {
         return {
             transactions: [],
-            loadingState: LoadingState.LOADING
+            loadingState: LoadingState.LOADING,
+            event: {}
         };
     },
     render: function() {
         var transactions = this.state.transactions;
         var transactionList = [];
+        var received = 0.00;
         for (var i=0; i< transactions.length; i++) {
-            transactionList.push(<li><Transaction transaction={transactions[i]} /></li>);
+            transactionList.push(<li><Transaction transaction={ transactions[i]} /></li>);
+            received = received + transactions[i].amount.to_human({precision: 2});
         }
+
         if (this.state.loadingState === LoadingState.LOADED) {
-        return (
+
+            return (
             <div>
+
+                <p>
+                    {this.state.event.eventName} {this.state.event.totalAmount}
+                </p>
+
                 <p>{this.props.params.eventCode}</p>
+                <div>Total</div> <div className="right">{this.state.event.totalAmount}</div>
                     {transactionList}
+                <div>Balance</div> <div className="right">{this.state.event.totalAmount - received}</div>
+
             </div>
+
         );
         } else {
             return (

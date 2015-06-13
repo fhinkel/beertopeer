@@ -12,7 +12,7 @@ var Transaction = React.createClass({
         return (
             <div>
                 <div>{transaction.senderName}</div>
-                <div className="right">{transaction.amount.to_human({precision: 2})}</div>
+                <div className="right"> - {transaction.amount.to_human({precision: 2})}</div>
             </div>
         );
     }
