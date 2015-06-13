@@ -19,6 +19,7 @@ var eventCode = "";
 var transactions = [];
 
 function setEventCode(newEventCode) {
+    console.log('Setting Event Code...');
     eventCode = newEventCode;
     transactions = [];
 }

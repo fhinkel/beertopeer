@@ -13,11 +13,9 @@ var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
 var keyMirror = require('keymirror');
 
+var UserStore = require('../stores/UserStore');
 
-
-// HARDCODED VALUES TO BE REPLACED (START)
-var eventPin = 37; // to be passed as property
-// HARDCODED VALUES TO BE REPLACED (END)
+var ripple = require('ripple-lib');
 
 var LoadingState = keyMirror({
     LOADING: null,
@@ -32,12 +30,21 @@ var Pay = React.createClass({
     },
 
     onClickPayButton: function() {
-        var amountAsFloat = parseFloat(this.refs.amountField.getValue().replace(',','.'));
-        RippleService.pay(amountAsFloat, this.state.currency, this.state.targetRippleAccountId);
+        var user = UserStore.getUser();
+
+        var amount = this.refs.amountField.getValue().replace(',', '.');
+
+        var rippleAmount = ripple.Amount.from_human(amount + ' ' + this.state.currency);
+
+        RippleService.pay(user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, function (success) {
+            console.log('payment result ' + success);
+            // TODO
+        });
+
     },
 
     componentDidMount: function() {
-        $.get('http://46.101.128.85:3000/event/'+ eventPin, function(data, status) {
+        $.get('http://46.101.128.85:3000/event/'+ this.props.params.eventCode, function(data, status) {
             this.setState({
                 eventName: data.eventName,
                 totalAmount: data.amount,

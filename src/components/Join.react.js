@@ -13,19 +13,17 @@ var $ = require('jquery');
 var Join = React.createClass({
 
     joinEvent(eventCode) {
-        console.log('Joining' + eventCode);
         var that = this;
             $.ajax({
                 method: "GET",
                 url: 'http://46.101.128.85:3000/event/'+eventCode,
                 dataType: "json",
+                async: false,
                 success: function(data, status, xhr) {
-                    if (eventCode === eventCode) {
-                        that.context.router.transitionTo('pay', {eventCode: eventCode});
-                    } }
+                    that.context.router.transitionTo('pay', {eventCode: eventCode});
+                }
             });
         },
-
     render: function() {
         return (
             <CodeInput onSubmit={this.joinEvent} />
