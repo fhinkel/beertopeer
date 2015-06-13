@@ -4,52 +4,60 @@
 'use strict';
 
 var React = require('react');
-var TransactionsStore = require('../stores/TransactionsStore');
 var CodeInput = require('./CodeInput.react');
-var TransactionsActions = require('../actions/TransactionActions');
 var Transaction = require('./Transaction.react');
+
+var RippleService = require('../services/RippleService');
+var EventService = require('../services/EventService');
+
+var {Progress, LoadingState} = require('./Progress.react');
 
 var Show = React.createClass({
 
-    componentDidMount: function() {
-        TransactionsStore.addChangeListener(this.onChange);
-    },
-    componentWillUnmount: function() {
-        TransactionsStore.removeChangeListener(this.onChange);
+    componentWillMount: function() {
+
+        var that = this;
+        var eventCode = this.props.params.eventCode;
+
+        EventService.queryEvent(eventCode, function(event, status) {
+            RippleService.requestTransactionsForEvent(event.recipientRippleAccountId, eventCode, function (success,transactions) {
+                if (success) {
+                    that.setState({
+                            transactions: transactions,
+                            loadingState:LoadingState.LOADED
+                        }
+                    );
+                }
+            });
+        });
+
     },
 
     getInitialState: function() {
         return {
-            eventCode: TransactionsStore.getCurrentEventCode(),
-            transactions: TransactionsStore.getAllTransactions()
+            transactions: [],
+            loadingState: LoadingState.LOADING
         };
     },
-
-    onChange: function () {
-        this.setState( {
-            eventCode: TransactionsStore.getCurrentEventCode(),
-            transactions: TransactionsStore.getAllTransactions()
-        });
-    },
-
-    eventCodeSelected(eventCode) {
-        TransactionsActions.changeEventCode(eventCode);
-    },
-
     render: function() {
         var transactions = this.state.transactions;
         var transactionList = [];
         for (var i=0; i< transactions.length; i++) {
             transactionList.push(<li><Transaction transaction={transactions[i]} /></li>);
         }
+        if (this.state.loadingState === LoadingState.LOADED) {
         return (
             <div>
                 <ul>
                     {transactionList}
                 </ul>
-                <CodeInput onSubmit={this.eventCodeSelected} label="Show"/>
             </div>
         );
+        } else {
+            return (
+                <Progress message = 'Loading Transactions...'/>
+            );
+        }
     }
 });
 
