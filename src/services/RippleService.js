@@ -44,9 +44,6 @@ var RippleService = {
 
         tx.on('state', function(state) {
             console.log('tx state changed to ' + state);
-            if (state === 'final') {
-                callback(tx.state === 'validated' && tx.finalized === true);
-            }
         });
 
         console.log('tx to be submitted: ', tx.tx_json);
@@ -55,9 +52,11 @@ var RippleService = {
             if (err) {
                 console.log('- Transaction Submit Callback Error -');
                 console.log(err);
+                callback(false);
             }
             else {
                 console.log('- Transaction Submit Callback -');
+                callback(true);
             }
         });
     },
