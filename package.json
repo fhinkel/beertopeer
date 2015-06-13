@@ -21,7 +21,8 @@
     "normalize.css": "~3.0.3",
     "material-ui": "~0.8.0",
     "jquery": "~2.1.4",
-    "react-tap-event-plugin": "~0.1.7"
+    "react-tap-event-plugin": "~0.1.7",
+    "keymirror": "~0.1.1"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

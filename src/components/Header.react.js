@@ -21,9 +21,15 @@ var Header = React.createClass({
             { route: 'show', text: 'Show' }
         ];
 
+        var userText = <span>{this.props.user.name}</span>;
+
         return(
             <div>
-            <AppBar title='Beer2Peer' iconClassNameRight="muidocs-icon-navigation-expand-more" onLeftIconButtonTouchTap={this.toggleLeftNav}/>
+            <AppBar title='Beer2Peer'
+                    iconClassNameRight="muidocs-icon-navigation-expand-more"
+                    onLeftIconButtonTouchTap={this.toggleLeftNav}
+                    iconElementRight={userText}
+                />
             <LeftNav ref='leftNav' docked={false} menuItems={menuItems} onChange={this.onLeftNavChange}/>
             </div>
     );
