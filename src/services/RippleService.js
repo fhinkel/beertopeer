@@ -16,7 +16,7 @@ var RippleService = {
     },
 
     pay: function(amount, currency, targetRippleAccountId) {
-        console.log('Pay was called with ' + amount + ' ' + currency);
+        console.log('Pay was called with ' + amount + ' ' + currency + '  to be paid to account with ID ' + targetRippleAccountId);
     }
 };
 
