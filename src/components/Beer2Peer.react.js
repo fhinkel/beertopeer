@@ -6,11 +6,14 @@ var {Route, RouteHandler, Link } = Router;
 var Styles = require('material-ui').Styles;
 var ThemeManager = new Styles.ThemeManager();
 var AppCanvas = require('material-ui').AppCanvas;
+var SocialPayTheme = require('../themes/socialPayTheme');
 
 var UserStore = require('../stores/UserStore');
 
 var Header = require('./Header.react');
 
+
+ThemeManager.setTheme(SocialPayTheme);
 var Beer2Peer = React.createClass({
 
     getInitialState: function() {

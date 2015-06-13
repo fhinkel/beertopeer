@@ -19,7 +19,6 @@ var eventCode = "";
 var transactions = [];
 
 function setEventCode(newEventCode) {
-    console.log('Setting Event Code...');
     eventCode = newEventCode;
     transactions = [];
 }
@@ -35,7 +34,7 @@ var TransactionsStore = assign({}, EventEmitter.prototype, {
     },
 
     getAllTransactions: function() {
-        return eventCode;
+        return transactions;
     },
 
     emitChange: function() {
@@ -58,12 +57,10 @@ var TransactionsStore = assign({}, EventEmitter.prototype, {
 });
 
 Beer2PeerDispatcher.register(function(action) {
-    var username, secret, account;
     switch(action.actionType) {
         case TransactionsConstants.CHANGE_EVENT_CODE:
-            username = action.username.trim();
-            secret = action.secret.trim();
-            setEventCode(username, secret);
+            console.log('Setting Event Code...');
+            setEventCode(action.eventCode);
             break;
         case TransactionsConstants.ADD_TRANSACTION:
             addTransaction(action.transaction);

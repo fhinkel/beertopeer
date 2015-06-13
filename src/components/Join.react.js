@@ -6,6 +6,7 @@
 var React = require('react');
 var TextField = require('material-ui').TextField;
 var RaisedButton = require('material-ui').RaisedButton;
+var Config = require('../constants/Config');
 var CodeInput = require('./CodeInput.react');
 
 var $ = require('jquery');
@@ -16,7 +17,7 @@ var Join = React.createClass({
         var that = this;
             $.ajax({
                 method: "GET",
-                url: 'http://46.101.128.85:3000/event/'+eventCode,
+                url: Config.serverOptions.url + '/event/'+eventCode,
                 dataType: "json",
                 async: false,
                 success: function(data, status, xhr) {
@@ -26,7 +27,7 @@ var Join = React.createClass({
         },
     render: function() {
         return (
-            <CodeInput onSubmit={this.joinEvent} />
+            <CodeInput onSubmit={this.joinEvent} label="Join" />
         );
     }
 });

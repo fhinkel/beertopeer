@@ -8,10 +8,10 @@ var React = require('react');
 var mui = require('material-ui');
 var TextField = mui.TextField;
 var RaisedButton = mui.RaisedButton;
-var DropDownMenu = mui.DropDownMenu;
 var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
 var keyMirror = require('keymirror');
+var Config = require('../constants/Config');
 
 var UserStore = require('../stores/UserStore');
 
@@ -35,7 +35,8 @@ var ErrorMessage = React.createClass({
 var Pay = React.createClass({
     getInitialState: function() {
         return {
-            loadingState: LoadingState.LOADING
+            loadingState: LoadingState.LOADING,
+            loadingMessage: 'Retrieving event from server...'
         };
     },
 
@@ -46,7 +47,11 @@ var Pay = React.createClass({
 
         var rippleAmount = ripple.Amount.from_human(amount + ' ' + this.state.currency);
 
-        this.setState({loadingState: LoadingState.LOADING});
+        this.setState({
+            loadingState: LoadingState.LOADING,
+            loadingMessage: 'Transaction ongoing...'
+        });
+
         RippleService.pay(user.name, user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, this.props.params.eventCode, function (success) {
             console.log('payment result ' + success);
             if(!success) {
@@ -59,7 +64,7 @@ var Pay = React.createClass({
     },
 
     componentDidMount: function() {
-        $.get('http://46.101.128.85:3000/event/'+ this.props.params.eventCode, function(data, status) {
+        $.get( Config.serverOptions.url + '/event/'+ this.props.params.eventCode, function(data, status) {
             this.setState({
                 eventName: data.eventName,
                 totalAmount: data.amount,
@@ -77,22 +82,29 @@ var Pay = React.createClass({
 
     render: function() {
         if(this.state.loadingState === LoadingState.LOADING) {
-            return (<CircularProgress mode = "indeterminate" size={2}/>);
+            return (<div>
+                <p>{this.state.loadingMessage}</p>
+                <CircularProgress mode = "indeterminate" size={2}/>
+            </div>);
         } else {
             return (
                 <div>
-                    <h1>Contribute to event {this.state.eventname}</h1>
+                    <h1>Contribute to {this.state.eventname}</h1>
 
                     <ErrorMessage message={this.props.errorMessage}/>
-                    <p>This event has been created by {this.state.eventCreator}. The total requested amount
-                        is {this.state.totalAmount} {this.state.currency}.</p>
-                    <table>
-                        <tr>
-                            <td><TextField ref="amountField" defaultValue="0,00"/></td>
-                            <td>{this.state.currency}</td>
-                        </tr>
-                    </table>
-                    <RaisedButton ref="payButton" label="Pay!" primary={true} onClick={this.onClickPayButton}/>
+                    <p>{this.state.eventCreator} has requested {this.state.totalAmount} {this.state.currency} from the group.</p>
+                    <div>
+                        <TextField ref="amountField"
+                                   defaultValue="0,00"
+                                   className="text-field-text-right"
+                                   style={{width:'5em'}}
+                            />
+                        <span>&nbsp;&nbsp;EUR&nbsp;&nbsp;&nbsp;</span>
+
+                        <RaisedButton label="Pay!"
+                                      primary={true}
+                                      onClick={this.onClickPayButton}/>
+                    </div>
                 </div>
             );
         }

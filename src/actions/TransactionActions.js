@@ -11,14 +11,14 @@ var Dispatcher = require('../dispatcher/Beer2PeerDispatcher');
 var UserActions = {
     changeEventCode: function(eventCode) {
         Dispatcher.dispatch({
-            actionType: TransactionConstants.USER_CREATE_WITH_SECRET,
+            actionType: TransactionConstants.CHANGE_EVENT_CODE,
             eventCode: eventCode
         });
     },
     addTransaction: function(transaction) {
         Dispatcher.dispatch({
             actionType: TransactionConstants.ADD_TRANSACTION,
-            eventCode: transaction
+            transaction: transaction
         });
     }
 };

@@ -10,6 +10,7 @@
 var React = require('react');
 var TextField = require('material-ui').TextField;
 var RaisedButton = require('material-ui').RaisedButton;
+var Config = require('../constants/Config');
 
 var $ = require('jquery');
 
@@ -37,7 +38,7 @@ var CodeInput = React.createClass({
         console.log('Checking Code Existence '+ eventCode);
         $.ajax({
             method: "GET",
-            url: 'http://46.101.128.85:3000/event/'+eventCode,
+            url: Config.serverOptions.url + '/event/'+eventCode,
             dataType: "json",
             error: function(xhr, status, error) { if (that.getEventCode() === eventCode) {
                 that.setState( {errorText: 'No event with this code exists.'});
@@ -68,16 +69,18 @@ var CodeInput = React.createClass({
     render: function() {
         return (
             <div>
+                <h1>Join event via code</h1>
+
                 <form onSubmit={this.onSubmit} >
                     <TextField
                         ref = "eventCode"
                         errorText={this.state.errorText}
                         onKeyUp={this.onKeyUp}
                         className = "upperCase"
-                        floatingLabelText="Event Code"/>
-                    <br/>
-                    <br/>
-                    <RaisedButton label="Join" primary={true} />
+                        floatingLabelText="Event Code"
+                        style={{width:'12em'}}/>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
+                    <RaisedButton label={this.props.label} primary={true} />
                 </form>
             </div>
         );
