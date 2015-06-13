@@ -68,15 +68,17 @@ var CodeInput = React.createClass({
     render: function() {
         return (
             <div>
+                <h1>Join event via code</h1>
+
                 <form onSubmit={this.onSubmit} >
                     <TextField
                         ref = "eventCode"
                         errorText={this.state.errorText}
                         onKeyUp={this.onKeyUp}
                         className = "upperCase"
-                        floatingLabelText="Event Code"/>
-                    <br/>
-                    <br/>
+                        floatingLabelText="Event Code"
+                        style={{width:'12em'}}/>
+                    <span>&nbsp;&nbsp;&nbsp;</span>
                     <RaisedButton label="Join" primary={true} />
                 </form>
             </div>
