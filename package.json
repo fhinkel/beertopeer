@@ -27,7 +27,8 @@
     "keymirror": "~0.1.1",
     "react-router": "^0.13.3",
     "ripple-lib": "^0.12.4",
-    "ripple-vault-client": "^0.4.9"
+    "ripple-vault-client": "^0.4.9",
+    "sjcl": "^1.0.3"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

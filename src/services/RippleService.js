@@ -3,8 +3,14 @@
 var ripple = require('ripple-lib');
 var Remote = ripple.Remote;
 var Config = require('../constants/Config');
+var sjcl = require('sjcl');
 
 var SEND_MAX_FACTOR = 1.01;
+
+function convertHexToString(hexString) {
+    var bits = sjcl.codec.hex.toBits(hexString);
+    return sjcl.codec.utf8String.fromBits(bits);
+}
 
 var RippleService = {
     isSecretValid: function (secret) {
@@ -90,21 +96,10 @@ var RippleService = {
 
             var ts = resp.transactions.
                 filter(function(t) {
-                    var isPaymentToDest = t.tx.TransactionType === 'Payment' && t.tx.Destination === recipientAccount;
-
-                    var memoData = that._getOurMemoData(t.tx.Memos);
-                    var isForEvent = memoData && memoData.eventCode === eventCode;
-
-                    return isPaymentToDest && isForEvent;
+                    return that._isIncomingPaymentForEvent(t.tx, recipientAccount, eventCode);
                 }).
                 map(function(t) {
-                    var memoData = that._getOurMemoData(t.tx.Memos);
-
-                    return {
-                        senderAccount: t.tx.Account,
-                        senderName: memoData.userName,
-                        amount: ripple.Amount.from_json(t.meta.delivered_amount)
-                    };
+                    return that._convertTxToInternalTransaction(t.tx, t.meta);
                 });
 
             console.log('TS', ts);
@@ -113,17 +108,79 @@ var RippleService = {
         });
     },
 
+    _isIncomingPaymentForEvent: function(tx, recipientAccount, eventCode) {
+        var isPaymentToDest = tx.TransactionType === 'Payment' && tx.Destination === recipientAccount;
+
+        var memoData = this._getOurMemoData(tx.Memos);
+        var isForEvent = memoData && memoData.eventCode === eventCode;
+
+        return isPaymentToDest && isForEvent;
+    },
+
+    _convertTxToInternalTransaction: function(tx, meta) {
+        var memoData = this._getOurMemoData(tx.Memos);
+
+        return {
+            senderAccount: tx.Account,
+            senderName: memoData.userName,
+            amount: ripple.Amount.from_json(meta.delivered_amount || tx.Amount)
+        };
+    },
+
+    subscribeToTransactionsForEvent: function(recipientAccount, eventCode, callback) {
+        var that = this;
+
+        console.log('starting to listen to account events ', recipientAccount);
+
+        var account = this.remote.addAccount(recipientAccount);
+
+        account.on('transaction-inbound', function(netT) {
+            console.log('new transaction pushed from network ', netT);
+            
+            var tx = netT.transaction;
+
+            if (that._isIncomingPaymentForEvent(tx, recipientAccount, eventCode)) {
+                var ta = that._convertTxToInternalTransaction(tx, netT.meta);
+                callback(ta);
+            }
+        });
+    },
+
+    _parseMemoData: function(memo) {
+        if (memo.MemoType !== undefined) {
+            memo.parsed_memo_type = convertHexToString(memo.MemoType);
+        }
+        if (memo.MemoFormat !== undefined) {
+            memo.parsed_memo_format = convertHexToString(memo.MemoFormat);
+        }
+        if (memo.MemoData !== undefined) {
+            if (memo.parsed_memo_format === 'json') {
+                memo.parsed_memo_data = JSON.parse(convertHexToString(memo.MemoData));
+            } else if (memo.parsed_memo_format === 'text') {
+                memo.parsed_memo_data = convertHexToString(memo.MemoData);
+            }
+        }
+
+        return memo;
+    },
+
     _getOurMemoData: function(memos) {
+        var that = this;
+
         if (!memos) {
             return null;
         }
 
-        var ourMemos = memos.filter(function(m) {
-            return m.Memo.parsed_memo_type === 'beer2peer' && m.Memo.parsed_memo_format === 'json';
-        });
+        var ourMemos = memos.
+            map(function(m) {
+                return that._parseMemoData(m.Memo);
+            }).
+            filter(function(m) {
+                return m.parsed_memo_type === 'beer2peer' && m.parsed_memo_format === 'json';
+            });
 
         if (ourMemos.length === 1) {
-            return ourMemos[0].Memo.parsed_memo_data;
+            return ourMemos[0].parsed_memo_data;
         } else {
             return null;
         }
