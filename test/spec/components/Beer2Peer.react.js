@@ -9,7 +9,7 @@ describe('BeertopeerApp', function () {
     container.id = 'content';
     document.body.appendChild(container);
 
-    BeertopeerApp = require('components/BeertopeerApp.js');
+    BeertopeerApp = require('components/Beer2Peer.react.js');
     component = React.createElement(BeertopeerApp);
   });
 
