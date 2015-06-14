@@ -57,7 +57,7 @@ var Login = React.createClass({
             <div>
                 <form onSubmit={this.login} >
                     <br/>
-                    <img src="http://blitzpay.biz/images/logo.png" width="200"></img>
+                    <img src="http://blitzpay.biz/images/logo.png" width="100"></img>
                     <br/>
                         <TextField
                             ref = "username"
