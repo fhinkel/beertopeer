@@ -108,6 +108,35 @@ var RippleService = {
         });
     },
 
+    getBalance: function(accountString, callback) {
+        var account = this.remote.addAccount(accountString);
+        var lineHandler = function(err, res) {
+            if (err) {
+                console.log('balance load error', err);
+                callback(false, null);
+                return;
+            }
+            console.log('lines', res);
+
+            var balances = res.lines.
+                map(function(l) {
+                   return ripple.Amount.from_json({
+                       currency: l.currency,
+                       issuer: l.account,
+                       value: l.balance
+                   });
+                });
+
+            callback(true, balances);
+        };
+
+        account.lines(lineHandler);
+
+        account.on('transaction', function() {
+            account.lines(lineHandler);
+        });
+    },
+
     _isIncomingPaymentForEvent: function(tx, recipientAccount, eventCode) {
         var isPaymentToDest = tx.TransactionType === 'Payment' && tx.Destination === recipientAccount;
 

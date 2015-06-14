@@ -14,11 +14,16 @@ var Header = require('./Header.react');
 
 var Login = require('./Login.react');
 
+var RippleService = require('../services/RippleService');
+
 ThemeManager.setTheme(SocialPayTheme);
 var Beer2Peer = React.createClass({
 
     getInitialState: function() {
-        return  {user: UserStore.getUser()} ;
+        return {
+            user: UserStore.getUser(),
+            balances: []
+        };
     },
 
     componentDidMount: function() {
@@ -29,7 +34,30 @@ var Beer2Peer = React.createClass({
     },
 
     onChange: function() {
-        this.setState( {user: UserStore.getUser()});
+        var user = UserStore.getUser();
+        this.setState({user: user});
+
+        if (user.name !== '') {
+            this.loadBalances(user);
+        }
+    },
+
+    loadBalances: function(user) {
+        if (user) {
+            RippleService.getBalance(user.rippleAccount, this.balanceLoaded);
+        }
+    },
+
+    balanceLoaded: function(succ, balances) {
+        console.log('balance loaded', balances);
+
+        if (!succ) {
+            return;
+        }
+
+        this.setState({
+            balances: balances
+        });
     },
 
     //For Material UI
@@ -50,9 +78,10 @@ var Beer2Peer = React.createClass({
       } else {
           mainSection =  <RouteHandler />;
       }
+
     return (
         <AppCanvas>
-            <Header user = {this.state.user} />
+            <Header user={this.state.user} balances={this.state.balances}/>
             <div className="centered">
                 <div className='mui-app-content-canvas'>
                     {mainSection}

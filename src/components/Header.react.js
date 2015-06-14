@@ -17,6 +17,7 @@ var Tab = Mui.Tab;
 
 var UserActions = require('../actions/UserActions');
 
+
 var Header = React.createClass({
 
     render: function () {
@@ -29,22 +30,39 @@ var Header = React.createClass({
             menuItems.push({ route:'join', text: 'Login' });
         }
 
-        var headerStyles  = {
+        var headerBoxStyles  = {
                 cursor: 'pointer',
-                //.mui-font-style-headline
-                fontSize: '24px',
                 color: Typography.textFullWhite,
-                lineHeight: Spacing.desktopKeylineIncrement + 'px',
-                fontWeight: Typography.fontWeightLight,
                 backgroundColor: Colors.cyan500,
                 paddingLeft: Spacing.desktopGutter,
                 paddingTop: '0px',
+                paddingBottom: '12px',
                 marginBottom: '8px'
             };
+        var headerNameStyles  = {
+            fontSize: '24px',
+            lineHeight: Spacing.desktopKeylineIncrement + 'px',
+            fontWeight: Typography.fontWeightLight
+        };
+        var balanceListStyles = {
+            margin: 0,
+            paddingLeft: '12px'
+        };
+        var balanceListItemStyles = {
+            listStyleType: 'none'
+        };
 
         var header = (
-                <div style={headerStyles}>
-                    {this.props.user.name}
+                <div style={headerBoxStyles}>
+                    <div style={headerNameStyles}>
+                        {this.props.user.name}
+                    </div>
+                    Balance:
+                    <ul style={balanceListStyles}>
+                    {this.props.balances.map(function(b) {
+                        return <li style={balanceListItemStyles}>{b.to_human({min_precision: 2, precision: 2})} {b.currency().to_human()}</li>;
+                    })}
+                    </ul>
                 </div>
             );
 
