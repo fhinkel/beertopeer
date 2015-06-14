@@ -56,7 +56,6 @@ var Beer2Peer = React.createClass({
             <div className="centered">
                 <div className='mui-app-content-canvas'>
                     {mainSection}
-                    <img src="../images/logo.png"></img>
                 </div>
             </div>
         </AppCanvas>

@@ -10,46 +10,49 @@ var Config = require('../constants/Config');
 var UserActions = require('../actions/UserActions');
 
 var $ = require('jquery');
+var logo = require('../images/logo.png');
 
 var RippleVaultClient = require('ripple-vault-client');
 var vc = new RippleVaultClient.VaultClient('rippletrade.com');
 
 var Login = React.createClass({
 
-    login: function() {
+    login: function () {
         var username = this.refs.username.getValue();
         var password = this.refs.password.getValue();
-        vc.loginAndUnlock(username, password, null, function(err, resp) {
+        vc.loginAndUnlock(username, password, null, function (err, resp) {
             console.log(username);
             console.log(password);
             UserActions.loginUser(username, resp.secret);
         });
     },
 
-    render: function() {
+    render: function () {
         return (
             <div>
                 <form onSubmit={this.login} >
-                    <TextField
-                        ref = "username"
-                        floatingLabelText="Username"
-                        style={{width:'12em'}}/>
+                    <img src={logo} width="200"></img>
                     <br/>
-                    <TextField
-                        type="password"
-                        ref = "password"
-                        floatingLabelText="Password"
-                        style={{width:'12em'}}/>
-                    <br/>
-                    <RaisedButton label='Login' primary={true} />
-                </form>
-            </div>
-        );
-    }
-});
+                        <TextField
+                            ref = "username"
+                            floatingLabelText="Username"
+                            style={{width: '12em'}}/>
+                        <br/>
+                        <TextField
+                            type="password"
+                            ref = "password"
+                            floatingLabelText="Password"
+                            style={{width: '12em'}}/>
+                        <br/>
+                        <RaisedButton label='Login' primary={true} />
+                    </form>
+                </div>
+                );
+                }
+                });
 
-Login.contextTypes = {
-    router: React.PropTypes.func
-};
+                Login.contextTypes = {
+                router: React.PropTypes.func
+                };
 
-module.exports = Login;
+                module.exports = Login;
