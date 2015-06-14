@@ -31,9 +31,8 @@ var Header = React.createClass({
         }
 
         var headerBoxStyles  = {
-                cursor: 'pointer',
                 color: Typography.textFullWhite,
-                backgroundColor: Colors.cyan500,
+                backgroundColor: Colors.lightBlue700,
                 paddingLeft: Spacing.desktopGutter,
                 paddingTop: '0px',
                 paddingBottom: '12px',
@@ -68,7 +67,7 @@ var Header = React.createClass({
 
         return(
             <div>
-            <AppBar title='PeerPay'
+            <AppBar title='BlitzPay'
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonTouchTap={this.toggleLeftNav}
                 />
@@ -78,6 +77,7 @@ var Header = React.createClass({
                 <Tab label="Request" route="create" onActive={this._onActive} />
                 <Tab label="History" route="query" onActive={this._onActive} />
             </Tabs>
+
             </div>
     );
     },

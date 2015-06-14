@@ -17,11 +17,11 @@ var LoadingState = keyMirror({
 });
 
 var Progress = React.createClass({
+                //<p>{this.props.message}</p>
 
     render: function() {
             return (<div>
-                <p>{this.props.message}</p>
-                <CircularProgress mode = "indeterminate" size={2}/>
+                <CircularProgress mode = "indeterminate" />
             </div>);
     }
 });
