@@ -29,6 +29,7 @@ var Create = React.createClass({
             console.log("id for new event is " + eventCode);
             this.context.router.transitionTo('show', {eventCode: eventCode});
         }.bind(this));
+        return false;
     },
 
     onClickNameField: function() {

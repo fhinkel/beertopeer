@@ -50,7 +50,7 @@ var Header = React.createClass({
 
         return(
             <div>
-            <AppBar title='PeerPay'
+            <AppBar title='BlitzPay'
                     iconClassNameRight="muidocs-icon-navigation-expand-more"
                     onLeftIconButtonTouchTap={this.toggleLeftNav}
                 />
@@ -60,6 +60,7 @@ var Header = React.createClass({
                 <Tab label="Request" route="create" onActive={this._onActive} />
                 <Tab label="History" route="query" onActive={this._onActive} />
             </Tabs>
+
             </div>
     );
     },
