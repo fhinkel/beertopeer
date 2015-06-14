@@ -29,6 +29,7 @@ var Login = React.createClass({
         return (
             <div>
                 <form onSubmit={this.login} >
+                    <br/>
                     <img src="http://blitzpay.biz/images/logo.png" width="200"></img>
                     <br/>
                         <TextField
@@ -41,6 +42,7 @@ var Login = React.createClass({
                             ref = "password"
                             floatingLabelText="Password"
                             style={{width: '12em'}}/>
+                        <br/>
                         <br/>
                         <RaisedButton label='Login' primary={true} />
                     </form>
