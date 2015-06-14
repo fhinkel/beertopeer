@@ -42,15 +42,22 @@ body {
     float: right;
 }
 
- .historyTable td,
- .historyTable th
- {
-     text-align:left;
- }
+.historyTable td,
+.historyTable th
+{
+   text-align:left;
+}
 
- #right,
- .historyTable td + td,
- .historyTable th + th
- {
-     text-align:right;
- }
+#right,
+.historyTable td + td,
+.historyTable th + th
+{
+   text-align:right;
+}
+
+.eventCode {
+    font-family: Consolas, "Courier New", Courier, monospace;
+    font-weight: bold;
+    font-size: 120%;
+    letter-spacing: 0.3em;
+}
