@@ -46,20 +46,23 @@ var Beer2Peer = React.createClass({
     var mainSection;
 
       if (this.state.user.name === '') {
-          mainSection =  <Login />;
+          return (
+              <div className="centered">
+                  <Login />
+              </div>
+          );
       } else {
-          mainSection =  <RouteHandler />;
+          return (
+              <AppCanvas>
+                  <Header user = {this.state.user} />
+                  <div className="centered">
+                      <div className='mui-app-content-canvas'>
+                          <RouteHandler />
+                      </div>
+                  </div>
+              </AppCanvas>
+          );
       }
-    return (
-        <AppCanvas>
-            <Header user = {this.state.user} />
-            <div className="centered">
-                <div className='mui-app-content-canvas'>
-                    {mainSection}
-                </div>
-            </div>
-        </AppCanvas>
-    );
   }
 });
 
