@@ -12,7 +12,7 @@ var Transaction = React.createClass({
         return (
             <tr>
                 <td>{transaction.senderName}</td>
-                <td>{-transaction.amount.to_human({precision: 2})}</td>
+                <td>{-transaction.amount.to_human({precision: 2, min_precision: 2})}</td>
             </tr>
         );
     }
