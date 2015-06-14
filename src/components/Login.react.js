@@ -10,7 +10,7 @@ var Config = require('../constants/Config');
 var UserActions = require('../actions/UserActions');
 
 var $ = require('jquery');
-var logo = require('../images/logo.png');
+var logo = require('./../images/logo.png');
 
 var RippleVaultClient = require('ripple-vault-client');
 var vc = new RippleVaultClient.VaultClient('rippletrade.com');
