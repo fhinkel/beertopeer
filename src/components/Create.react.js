@@ -11,11 +11,11 @@ var TextField = mui.TextField;
 var UserStore = require('../stores/UserStore');
 var Config = require('../constants/Config');
 
+var moment = require('moment');
 
 var Create = React.createClass({
 
     onClickCreate: function () {
-
         var data = {
             eventName: this.refs.name.getValue(),
             totalAmount: this.refs.totalAmount.getValue(),
@@ -31,15 +31,32 @@ var Create = React.createClass({
         }.bind(this));
     },
 
+    onClickNameField: function() {
+        var inputField = React.findDOMNode(this.refs.name).getElementsByTagName('input')[0];
+        console.log(inputField);
+        inputField.setSelectionRange(0, inputField.value.length);
+        return true;
+    },
+
     render: function () {
         return (
-            <div>
-                <TextField ref="name" defaultValue="Event name" />
+            <form onsubmit={this.onClickCreate}>
+                <TextField
+                    floatingLabelText="Event Name"
+                    ref="name"
+                    defaultValue={moment().format('YY-MM-DD HH:mm')}
+                    onClick={this.onClickNameField}
+                    />
                 <br/>
-                <TextField ref="totalAmount" defaultValue="0,00" />
+                <TextField
+                    ref="totalAmount"
+                    placeholder="0,00"
+                    type="number"
+                    step="0.01"/>
                 <br/>
-                <RaisedButton label="Create" primary={true} onClick={this.onClickCreate}/>
-            </div>
+                <br/>
+                <RaisedButton label="Create" primary={true}/>
+            </form>
         );
     }
 });

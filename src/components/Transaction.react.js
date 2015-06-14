@@ -10,10 +10,10 @@ var Transaction = React.createClass({
     render: function () {
         var transaction = this.props.transaction;
         return (
-            <div>
-                <div>{transaction.senderName}</div>
-                <div className="right"> - {transaction.amount.to_human({precision: 2})}</div>
-            </div>
+            <tr>
+                <td>{transaction.senderName}</td>
+                <td>{-transaction.amount.to_human({precision: 2, min_precision: 2})}</td>
+            </tr>
         );
     }
 });
