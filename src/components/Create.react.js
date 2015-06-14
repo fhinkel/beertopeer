@@ -40,7 +40,7 @@ var Create = React.createClass({
 
     render: function () {
         return (
-            <form onsubmit={this.onClickCreate}>
+            <form onSubmit={this.onClickCreate}>
                 <TextField
                     floatingLabelText="Event Name"
                     ref="name"
