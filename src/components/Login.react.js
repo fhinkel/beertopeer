@@ -43,7 +43,17 @@ var Login = React.createClass({
     },
 
     render: function () {
+
+        var progress;
+
+        if (this.state.loadingState === LoadingState.LOADING) {
+            progress =  <Progress />;
+        } else {
+            progress = '';
+        }
+
         return (
+
             <div>
                 <form onSubmit={this.login} >
                     <br/>
@@ -58,10 +68,12 @@ var Login = React.createClass({
                             type="password"
                             ref = "password"
                             floatingLabelText="Password"
+                            errorText = {this.state.errorText}
                             style={{width: '18em'}}/>
                         <br/>
                         <br/>
                         <RaisedButton label='Login' primary={true} />
+                        {progress}
                     </form>
                 </div>
                 );
