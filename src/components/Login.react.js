@@ -32,6 +32,7 @@ var Login = React.createClass({
                     <br/>
                     <img src="http://blitzpay.biz/images/logo.png" width="200"></img>
                     <br/>
+                    <br/>
                         <TextField
                             ref = "username"
                             floatingLabelText="Username"
@@ -44,7 +45,7 @@ var Login = React.createClass({
                             style={{width: '12em'}}/>
                         <br/>
                         <br/>
-                        <RaisedButton label='Login' primary={true} />
+                        <RaisedButton label='Login' primary={true} style={{width: '12em'}}/>
                     </form>
                 </div>
                 );
