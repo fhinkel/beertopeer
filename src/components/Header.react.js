@@ -16,15 +16,18 @@ var Tabs = Mui.Tabs;
 var Tab = Mui.Tab;
 
 var UserActions = require('../actions/UserActions');
-var NavBarHeader = require('./NavBarHeader.react');
 
 var Header = React.createClass({
 
     render: function () {
 
-        var menuItems = [
-            { route:'join', text: 'Logout' },
-        ];
+        var menuItems = [];
+
+        if (this.props.user.name !== '') {
+            menuItems.push({ route:'join', text: 'Logout' });
+        } else {
+            menuItems.push({ route:'join', text: 'Login' });
+        }
 
         var headerStyles  = {
                 cursor: 'pointer',
