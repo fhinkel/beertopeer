@@ -86,7 +86,7 @@ var Show = React.createClass({
 
                 return (
                     <div>
-                        <p>{this.state.event.eventName} (<span className="eventCode">{this.props.params.eventCode}</span>)</p>
+                        <p><span className="eventName">{this.state.event.eventName}</span> <span className="eventCode">{this.props.params.eventCode}</span></p>
                         <Paper>
                             <table id="table" className="table table-hover table-mc-light-blue table-condensed">
                                 <thead>
