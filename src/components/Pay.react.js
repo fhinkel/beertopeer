@@ -81,12 +81,13 @@ var Pay = React.createClass({
                     <p><b>{this.state.eventCreator}</b> has requested <b>{this.state.totalAmount} {this.state.currency}</b> from the group.</p>
                     <div>
                         <TextField ref="amountField"
-                                   defaultValue="0,00"
                                    className="text-field-text-right"
-                                   style={{width:'5em'}}
-                            />
-                        <span>&nbsp;&nbsp;EUR&nbsp;&nbsp;&nbsp;</span>
-
+                                   style={{width:'18em'}}
+                                   hintText="0.00"
+                                   floatingLabelText = "EUR"
+                        />
+                        <br/>
+                        <br/>
                         <RaisedButton label="Pay!"
                                       primary={true}
                                       onClick={this.onClickPayButton}/>

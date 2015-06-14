@@ -71,7 +71,8 @@ var LightTheme = {
             },
             leftNav: {
                 width: Spacing.desktopKeylineIncrement * 4,
-                color: Colors.white
+                color: palette.canvasColor,
+                backgroundColor: palette.primary1Color
             },
             menu: {
                 backgroundColor: Colors.white,

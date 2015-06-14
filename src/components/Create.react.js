@@ -51,9 +51,11 @@ var Create = React.createClass({
                 <br/>
                 <TextField
                     ref="totalAmount"
-                    placeholder="0.00"
+                    hintText="0.00"
+                    floatingLabelText = "EUR"
                     type="number"
                     step="0.01"/>
+
                 <br/>
                 <br/>
                 <RaisedButton label="Create" primary={true}/>
