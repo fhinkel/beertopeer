@@ -13,6 +13,8 @@ var mui = require('material-ui');
 var Paper = mui.Paper;
 var ripple = require('ripple-lib');
 
+var Colors = require('material-ui').Styles.Colors;
+
 var {Progress, LoadingState} = require('./Progress.react');
 
 
@@ -75,8 +77,10 @@ var Show = React.createClass({
 
         if (this.state.loadingState === LoadingState.LOADED) {
             var status;
-            if (remaining <= 0.00) {
-                status = 'OK';
+            var statusStyle;
+            if (remaining.to_human() <= 0.00) {
+                status = '✓';
+                statusStyle = {color: Colors.Li, fontSize: '150%', textAlign: 'center'};
             } else {
                 status = '';
             }
@@ -86,7 +90,13 @@ var Show = React.createClass({
 
                 return (
                     <div>
-                        <p><span className="eventName">{this.state.event.eventName}</span> <span className="eventCode">{this.props.params.eventCode}</span></p>
+                        <h2><span className="eventName">{this.state.event.eventName}</span></h2>
+                        <Paper>
+                        <table id="table" className="table table-mc-light-blue ">
+
+                                <div className="eventCode" style={{fontSize: '150%', textAlign: 'center', paddingTop: '15px', paddingBottom: '10px'}}>{this.props.params.eventCode}</div>
+                        </table>
+                        </Paper>
                         <Paper>
                             <table id="table" className="table table-hover table-mc-light-blue table-condensed">
                                 <thead>
@@ -105,7 +115,7 @@ var Show = React.createClass({
                                 <tr className="bold">
                                     <td>Remaining</td>
                                     <td style={{textAlign: 'right'}}>{remaining.to_human({precision: 2, min_precision: 2})}&nbsp;{remaining.currency().to_human()}</td>
-                                    <td>{status}</td>
+                                    <td style={statusStyle}>{status}</td>
                                 </tr>
                                 </tbody>
                             </table>
