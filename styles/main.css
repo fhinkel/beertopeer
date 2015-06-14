@@ -62,6 +62,12 @@ body {
     letter-spacing: 0.3em;
 }
 
+.eventName {
+    font-size: 120%;
+    color: #757575;
+    padding-right: 10px;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
