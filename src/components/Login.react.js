@@ -6,11 +6,9 @@
 var React = require('react');
 var TextField = require('material-ui').TextField;
 var RaisedButton = require('material-ui').RaisedButton;
-var Config = require('../constants/Config');
 var UserActions = require('../actions/UserActions');
 
 var $ = require('jquery');
-var logo = require('./../images/logo.png');
 
 var RippleVaultClient = require('ripple-vault-client');
 var vc = new RippleVaultClient.VaultClient('rippletrade.com');
@@ -31,7 +29,7 @@ var Login = React.createClass({
         return (
             <div>
                 <form onSubmit={this.login} >
-                    <img src={logo} width="200"></img>
+                    <img src="http://blitzpay.biz/images/logo.png" width="200"></img>
                     <br/>
                         <TextField
                             ref = "username"
