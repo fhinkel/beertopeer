@@ -86,7 +86,7 @@ var Show = React.createClass({
 
                 return (
                     <div>
-                        <p className="eventCode">{this.state.event.eventName} ({this.props.params.eventCode})</p>
+                        <p>{this.state.event.eventName} (<span className="eventCode">{this.props.params.eventCode}</span>)</p>
                         <Paper>
                             <table id="table" className="table table-hover table-mc-light-blue table-condensed">
                                 <thead>
@@ -98,15 +98,16 @@ var Show = React.createClass({
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
+                                <tr className="bold">
                                     <td>Total</td>
-                                    <td><b>{this.state.event.totalAmount}</b></td>
-                                    <td>{this.state.event.currency}</td>
+                                    <td style={{textAlign: 'right'}}>{total.to_human({precision: 2, min_precision: 2})}</td>
+                                    <td>{total.currency().to_human()}</td>
                                 </tr>
                                 {transactionList}
-                                <tr>
-                                    <td><b>Remaining</b></td>
-                                    <td><b>{remaining.to_human({precision: 2, min_precision: 2})}</b></td>
+                                <tr className="bold">
+                                    <td>Remaining</td>
+                                    <td style={{textAlign: 'right'}}>{remaining.to_human({precision: 2, min_precision: 2})}</td>
+                                    <td>{remaining.currency().to_human()}</td>
                                     <td>{status}</td>
                                 </tr>
                                 </tbody>

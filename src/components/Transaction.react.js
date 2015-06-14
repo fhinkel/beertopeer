@@ -14,8 +14,8 @@ var Transaction = React.createClass({
         return (
             <tr>
                 <td>{transaction.senderName}</td>
-                <td>{-transaction.amount.to_human({precision: 2, min_precision: 2})}</td>
-                <td>{transaction.amount.currency}</td>
+                <td style={{textAlign: 'right'}}>{-transaction.amount.to_human({precision: 2, min_precision: 2})}</td>
+                <td>{transaction.amount.currency().to_human()}</td>
                 <td>OK</td>
             </tr>
         );

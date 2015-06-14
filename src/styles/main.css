@@ -73,3 +73,7 @@ input::-webkit-inner-spin-button {
     padding-bottom: 10px;
     padding-right: 10px;
 }
+
+.bold td {
+    font-weight: bold;
+}
