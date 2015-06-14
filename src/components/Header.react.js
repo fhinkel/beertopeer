@@ -36,7 +36,9 @@ var Header = React.createClass({
                 paddingLeft: Spacing.desktopGutter,
                 paddingTop: '0px',
                 paddingBottom: '12px',
-                marginBottom: '8px'
+                marginBottom: '8px',
+                backgroundImage: 'url("/images/4303131832_b9e1de6614_z.jpg")',
+                backgroundSize: '100%'
             };
         var headerNameStyles  = {
             fontSize: '24px',
