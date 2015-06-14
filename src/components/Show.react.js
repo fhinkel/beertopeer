@@ -84,8 +84,6 @@ var Show = React.createClass({
             console.log('total', total.to_human_full());
             console.log('remaining', remaining.to_human_full());
 
-            if (this.state.loadingState === LoadingState.LOADED) {
-
                 return (
                     <div>
                         <p className="eventCode">{this.state.event.eventName} ({this.props.params.eventCode})</p>
@@ -122,7 +120,6 @@ var Show = React.createClass({
                 );
             }
         }
-    }
 });
 
 module.exports = Show;
