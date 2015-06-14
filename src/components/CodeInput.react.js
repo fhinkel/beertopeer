@@ -74,7 +74,7 @@ var CodeInput = React.createClass({
                         ref = "eventCode"
                         errorText={this.state.errorText}
                         onKeyUp={this.onKeyUp}
-                        className = "upperCase"
+                        className = "upperCase eventInput"
                         floatingLabelText="Event Code"
                         style={{width:'12em'}}/>
                     <br />

@@ -17,6 +17,7 @@
     "flux": "^2.0.1",
     "jquery": "~2.1.4",
     "material-ui": "~0.8.0",
+    "moment": "^2.10.3",
     "normalize.css": "~3.0.3",
     "object-assign": "^2.0.0",
     "react": "~0.13.3",
