@@ -41,3 +41,35 @@ body {
 .right {
     float: right;
 }
+
+.historyTable td,
+.historyTable th
+{
+   text-align:left;
+}
+
+#right,
+.historyTable td + td,
+.historyTable th + th
+{
+   text-align:right;
+}
+
+.eventCode, .eventInput input {
+    font-family: Consolas, "Courier New", Courier, monospace;
+    font-weight: bold;
+    font-size: 120%;
+    letter-spacing: 0.3em;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.paper {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}

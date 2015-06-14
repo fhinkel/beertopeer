@@ -64,6 +64,7 @@ var CodeInput = React.createClass({
         if (this.checkCodeFormat(eventCode)) {
             this.props.onSubmit(eventCode);
         }
+        return false;
     },
 
     render: function() {
@@ -74,9 +75,10 @@ var CodeInput = React.createClass({
                         ref = "eventCode"
                         errorText={this.state.errorText}
                         onKeyUp={this.onKeyUp}
-                        className = "upperCase"
+                        className = "upperCase eventInput"
                         floatingLabelText="Event Code"
-                        style={{width:'12em'}}/>
+                        style={{width:'18em'}}/>
+                    <br />
                     <br />
                     <RaisedButton label={this.props.label} primary={true} />
                 </form>
