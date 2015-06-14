@@ -78,7 +78,7 @@ var Show = React.createClass({
             if (remaining <= 0.00) {
                 status = 'OK';
             } else {
-                status = 'ONGOING';
+                status = '';
             }
 
             console.log('total', total.to_human_full());
@@ -93,21 +93,18 @@ var Show = React.createClass({
                                 <tr>
                                     <th>Name</th>
                                     <th>Amount</th>
-                                    <th>Currency</th>
                                     <th>Status</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr className="bold">
                                     <td>Total</td>
-                                    <td style={{textAlign: 'right'}}>{total.to_human({precision: 2, min_precision: 2})}</td>
-                                    <td>{total.currency().to_human()}</td>
+                                    <td style={{textAlign: 'right'}}>{total.to_human({precision: 2, min_precision: 2})}&nbsp;{total.currency().to_human()} </td>
                                 </tr>
                                 {transactionList}
                                 <tr className="bold">
                                     <td>Remaining</td>
-                                    <td style={{textAlign: 'right'}}>{remaining.to_human({precision: 2, min_precision: 2})}</td>
-                                    <td>{remaining.currency().to_human()}</td>
+                                    <td style={{textAlign: 'right'}}>{remaining.to_human({precision: 2, min_precision: 2})}&nbsp;{remaining.currency().to_human()}</td>
                                     <td>{status}</td>
                                 </tr>
                                 </tbody>

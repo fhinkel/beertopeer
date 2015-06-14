@@ -81,9 +81,10 @@ var Pay = React.createClass({
                     <p><b>{this.state.eventCreator}</b> has requested <b>{this.state.totalAmount} {this.state.currency}</b> from the group.</p>
                     <div>
                         <TextField ref="amountField"
-                                   className="text-field-text-right"
                                    style={{width:'18em'}}
                                    hintText="0.00"
+                                   step="0.01"
+                                   type="number"
                                    floatingLabelText = "EUR"
                         />
                         <br/>
