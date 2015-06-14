@@ -17,6 +17,8 @@ var $ = require('jquery');
 var MIN_NUMBER_OF_CHARACTERS = 5;
 var MAX_NUMBER_OF_CHARACTERS = 5;
 
+var NUMBER_OF_CHARACTERS = 5;
+
 var CodeInput = React.createClass({
 
     getInitialState() {
@@ -29,7 +31,7 @@ var CodeInput = React.createClass({
 
     checkCodeFormat(eventCode) {
         console.log('Checking Format'+ eventCode);
-        return eventCode.toString().match(new RegExp('^[A-Z]{'+MIN_NUMBER_OF_CHARACTERS+','+MAX_NUMBER_OF_CHARACTERS+'}$'));
+        return eventCode.toString().match(new RegExp('^[A-Z]{'+NUMBER_OF_CHARACTERS+'}$'));
     },
 
     codeExists(eventCode) {
@@ -52,7 +54,7 @@ var CodeInput = React.createClass({
     onKeyUp() {
         var eventCode = this.getEventCode();
         if (!this.checkCodeFormat(eventCode)) {
-            this.setState( {errorText: MIN_NUMBER_OF_CHARACTERS+'-'+MAX_NUMBER_OF_CHARACTERS+' digits required.'});
+            this.setState( {errorText: NUMBER_OF_CHARACTERS +' digits required.'});
         } else {
             this.setState( {errorText: ''});
             this.codeExists(eventCode);
