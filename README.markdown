@@ -7,7 +7,7 @@
 Simple payments among groups (C2C) and to businesses (B2C) using your smartphone.  Real-time, cross-border, multi-currency, and low-cost by leveraging existing crypto currency technologies. 
 
 
-**Winner of special prize for the highest economic impact by Bavarian Ministry of Economic Affairs and Media, Energy and Technology 
+**Winner of special prize for the _highest economic impact_ by Bavarian Ministry of Economic Affairs and Media, Energy and Technology 
          at [http://www.burdahackday.de](http://www.burdahackday.de) episode 3: future of finance.**
 
 
