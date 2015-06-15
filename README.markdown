@@ -8,7 +8,7 @@ Simple payments among groups (C2C) and to businesses (B2C) using your smartphone
 
 
 **Winner of special prize for the highest economic impact by Bavarian Ministry of Economic Affairs and Media, Energy and Technology 
-         at [http://www.burdahackday.de](http://www.burdahackday.de) episode 3: future of finance. **
+         at [http://www.burdahackday.de](http://www.burdahackday.de) episode 3: future of finance.**
 
 
 *MVP*: A simple web app for ad hoc payments. One user can create an invoice event, others can join the event and pay him. Instant, real-time feedback is given about received payments. Users log in with their existing Ripple credentials. 
