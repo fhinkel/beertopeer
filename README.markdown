@@ -11,16 +11,6 @@ Winner of special prize for the _highest economic impact_ by Bavarian Ministry o
          at [http://www.burdahackday.de](http://www.burdahackday.de) episode 3: future of finance. 
 
 
-
-![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/CreateEvent.png)
-![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/EventCreated2.png)
-![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/Join.png)
-![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/JoinUnknownEventCode.png)
-![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/LogoutBalance.png)
-![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/Pay.png)
-![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/ShowWithPayment.png)
-
-
 *MVP*: A simple web app for ad hoc payments. One user can create an invoice event, others can join the event and pay him. Instant, real-time feedback is given about received payments. Users log in with their existing Ripple credentials. 
 
 *Target group*: Individuals for paying and receiving money from friends; small businesses that want to receive secure payments at low cost in real-time. 
@@ -58,3 +48,13 @@ Back-end: https://github.com/fhinkel/backend
 - Steffen Rath (design, back-end)
 - Konstantin Knauf (concept, design, front-end)
 - Franziska Hinkelmann (back-end, infrastructure, continuous integration), @fhinkel
+
+
+
+![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/CreateEvent.png)
+![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/EventCreated2.png)
+![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/Join.png)
+![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/JoinUnknownEventCode.png)
+![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/LogoutBalance.png)
+![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/Pay.png)
+![BlitzPay](https://raw.githubusercontent.com/knaufk/beertopeer/master/resources/images/ShowWithPayment.png)
