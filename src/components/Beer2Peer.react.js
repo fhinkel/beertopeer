@@ -11,6 +11,7 @@ var SocialPayTheme = require('../themes/socialPayTheme');
 var UserStore = require('../stores/UserStore');
 
 var Header = require('./Header.react');
+var Footer = require('./Footer.react');
 
 var Login = require('./Login.react');
 
@@ -72,25 +73,28 @@ var Beer2Peer = React.createClass({
   render: function() {
 
     var mainSection;
-
+    var header;
       if (this.state.user.name === '') {
-          return (
-              <div className="centered">
-                  <Login />
-              </div>
-          );
+          mainSection = <Login />;
       } else {
-          return (
-              <AppCanvas>
-                  <Header user = {this.state.user} balances={this.state.balances}/>
-                  <div className="centered">
-                      <div className='mui-app-content-canvas'>
-                          <RouteHandler />
-                      </div>
-                  </div>
-              </AppCanvas>
-          );
+          header =  <Header user = {this.state.user} balances={this.state.balances}/>;
+          mainSection  = (
+                         <div>
+                            <RouteHandler />
+                          </div>);
       }
+      return (
+          <AppCanvas>
+              <div className="centered">
+                  {header}
+                  <div className='inlineBlock'>
+                  {mainSection}
+                </div>
+                <Footer />
+              </div>
+          </AppCanvas>
+      );
+
   }
 });
 

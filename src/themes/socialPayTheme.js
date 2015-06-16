@@ -13,7 +13,7 @@ var ColorManipulator = require('material-ui').Utils.ColorManipulator;
 var LightTheme = {
     spacing: Spacing,
     contentFontFamily: 'Roboto, sans-serif',
-    getPalette: function() {
+    getPalette: function () {
         return {
             primary1Color: Colors.lightBlue700,
             primary2Color: Colors.lightBlue900,
@@ -27,7 +27,7 @@ var LightTheme = {
             disabledColor: ColorManipulator.fade(Colors.darkBlack, 0.3)
         };
     },
-    getComponentThemes: function(palette) {
+    getComponentThemes: function (palette) {
         var obj = {
             appBar: {
                 color: palette.primary1Color,
@@ -94,7 +94,7 @@ var LightTheme = {
                 backgroundColor: Colors.white,
             },
             radioButton: {
-                borderColor:  palette.textColor,
+                borderColor: palette.textColor,
                 backgroundColor: Colors.white,
                 checkedColor: palette.primary1Color,
                 requiredColor: palette.primary1Color,

@@ -44,12 +44,17 @@ var Login = React.createClass({
 
     render: function () {
 
+        var style= {
+            fontSize: "80%",
+            color: "#757575"
+        };
+
         var progress;
 
         if (this.state.loadingState === LoadingState.LOADING) {
             progress =  <Progress />;
         } else {
-            progress = '';
+            progress = <span style={style}><p>Login with your <a href="https://rippletrade.com/">Ripple Trade</a> credentials.</p></span>;
         }
 
         return (
