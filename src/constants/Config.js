@@ -11,7 +11,7 @@ var Config = {
   },
 
     serverOptions: {
-        url: 'http://46.101.128.85:3000'
+        url: 'http://46.101.182.85:3000'
     }
 };
 
