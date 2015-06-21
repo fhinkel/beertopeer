@@ -9,7 +9,6 @@ var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
 var UserConstants = require('../constants/UserConstants.js');
-var LocalConfig = require('../constants/LocalConfig.js');
 
 var RippleService = require('../services/RippleService');
 
