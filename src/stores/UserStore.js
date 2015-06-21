@@ -12,11 +12,17 @@ var UserConstants = require('../constants/UserConstants.js');
 
 var RippleService = require('../services/RippleService');
 
-var CHANGE_EVENT = 'change';
+var CHANGE_USER_EVENT = 'change';
+var CHANGE_BALANCE_EVENT = 'changeBalance';
 
 var user = {name: '',
             rippleAccount:'',
-            rippleSecret: ''};
+            rippleSecret: '',
+            balances:[] };
+
+function setBalances(balances) {
+    user.balances = balances;
+}
 
 function setUser(name, secret) {
     console.log('Logging in...');
@@ -30,6 +36,7 @@ function logout() {
     user.name = '';
     user.rippleSecret = '';
     user.rippleAccount = '';
+    user.balances = [];
 }
 
 var UserStore = assign({}, EventEmitter.prototype, {
@@ -42,39 +49,50 @@ var UserStore = assign({}, EventEmitter.prototype, {
         return user;
     },
 
-    emitChange: function() {
-        this.emit(CHANGE_EVENT);
+    emitUserChange: function() {
+        this.emit(CHANGE_USER_EVENT);
     },
 
-    /**
-     * @param {function} callback
-     */
-    addChangeListener: function(callback) {
-        this.on(CHANGE_EVENT, callback);
+    emitBalanceChange: function() {
+        this.emit(CHANGE_BALANCE_EVENT);
     },
 
-    /**
-     * @param {function} callback
-     */
-    removeChangeListener: function(callback) {
-        this.removeListener(CHANGE_EVENT, callback);
+    addUserChangeListener: function(callback) {
+        this.on(CHANGE_USER_EVENT, callback);
+    },
+
+    removeUserChangeListener: function(callback) {
+        this.removeListener(CHANGE_USER_EVENT, callback);
+    },
+
+    addBalanceChangeListener: function(callback) {
+        this.on(CHANGE_BALANCE_EVENT, callback);
+    },
+
+    removeBalanceChangeListener: function(callback) {
+        this.removeListener(CHANGE_BALANCE_EVENT, callback);
     },
 });
 
 Beer2PeerDispatcher.register(function(action) {
-    var username, secret, account;
+    var username, secret, account, balances;
         switch(action.actionType) {
             case UserConstants.USER_CREATE_WITH_SECRET:
                 username = action.username.trim();
                 secret = action.secret.trim();
                 setUser(username, secret);
+                UserStore.emitUserChange();
                 break;
             case UserConstants.USER_LOGOUT:
                 logout();
+                UserStore.emitUserChange();
                 break;
+            case UserConstants.USER_BALANCE_CHANGE:
+                balances = action.balances;
+                setBalances(balances);
+                UserStore.emitBalanceChange();
         }
 
-    UserStore.emitChange();
     });
 
 module.exports = UserStore;

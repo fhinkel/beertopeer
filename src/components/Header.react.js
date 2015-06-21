@@ -60,7 +60,7 @@ var Header = React.createClass({
                     </div>
                     Balance:
                     <ul style={balanceListStyles}>
-                    {this.props.balances.map(function(b) {
+                    {this.props.user.balances.map(function(b) {
                         return <li style={balanceListItemStyles}>{b.to_human({min_precision: 2, precision: 2})} {b.currency().to_human()}</li>;
                     })}
                     </ul>

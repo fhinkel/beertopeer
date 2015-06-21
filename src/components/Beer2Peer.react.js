@@ -15,50 +15,35 @@ var Footer = require('./Footer.react');
 
 var Login = require('./Login.react');
 
-var RippleService = require('../services/RippleService');
+var RippleListener = require('../services/RippleListener');
 
 ThemeManager.setTheme(SocialPayTheme);
+
 var Beer2Peer = React.createClass({
 
     getInitialState: function() {
         return {
-            user: UserStore.getUser(),
-            balances: []
+            user: UserStore.getUser()
         };
     },
 
     componentDidMount: function() {
-        UserStore.addChangeListener(this.onChange);
+        UserStore.addUserChangeListener(this.onUserChange);
+        UserStore.addBalanceChangeListener(this.setUserFromStore);
     },
     componentWillUnmount: function() {
-        UserStore.removeChangeListener(this.onChange);
+        UserStore.removeUserChangeListener(this.onUserChange);
+        UserStore.removeBalanceChangeListener(this.setUserFromStore);
     },
 
-    onChange: function() {
+    onUserChange: function() {
+        this.setUserFromStore();
+        RippleListener.listenToBalanceChanges(this.state.user.rippleAccount);
+    },
+
+    setUserFromStore: function() {
         var user = UserStore.getUser();
         this.setState({user: user});
-
-        if (user.name !== '') {
-            this.loadBalances(user);
-        }
-    },
-
-    loadBalances: function(user) {
-        if (user) {
-            RippleService.getBalance(user.rippleAccount, this.balanceLoaded);
-        }
-    },
-
-    balanceLoaded: function(succ, balances) {
-        console.log('balance loaded', balances);
-
-        if (!succ) {
-            return;
-        }
-
-        this.setState({
-            balances: balances
-        });
     },
 
     //For Material UI
@@ -66,21 +51,21 @@ var Beer2Peer = React.createClass({
         muiTheme: React.PropTypes.object
     },
 
-  getChildContext() {
+    getChildContext() {
       return {muiTheme: ThemeManager.getCurrentTheme()};
-  },
+    },
 
-  render: function() {
+    render: function() {
 
     var mainSection;
     var header;
       if (this.state.user.name === '') {
           mainSection = <Login />;
       } else {
-          header =  <Header user = {this.state.user} balances={this.state.balances}/>;
+          header =  <Header user = {this.state.user}/>;
           mainSection  = (
                          <div>
-                            <RouteHandler />
+                            <RouteHandler user = {this.state.user} />
                           </div>);
       }
       return (
@@ -95,7 +80,7 @@ var Beer2Peer = React.createClass({
           </AppCanvas>
       );
 
-  }
+    }
 });
 
 module.exports = Beer2Peer;

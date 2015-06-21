@@ -22,6 +22,12 @@ var UserActions = {
         Dispatcher.dispatch({
            actionType: UserConstants.USER_LOGOUT,
         });
+    },
+    changeBalance: function(balances) {
+        Dispatcher.dispatch({
+            actionType: UserConstants.USER_BALANCE_CHANGE,
+            balances: balances
+        });
     }
 };
 
