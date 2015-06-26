@@ -11,7 +11,8 @@ var Config = {
   },
 
     serverOptions: {
-        url: 'http://46.101.182.85:3000'
+        url: 'http://blitzpay.biz',
+        backendPort: '3000'
     }
 };
 

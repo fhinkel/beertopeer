@@ -7,6 +7,8 @@ var React = require('react');
 var TextField = require('material-ui').TextField;
 var RaisedButton = require('material-ui').RaisedButton;
 var UserActions = require('../actions/UserActions');
+var Config = require('../constants/Config');
+
 
 var $ = require('jquery');
 
@@ -61,7 +63,7 @@ var Login = React.createClass({
             <div>
                 <form onSubmit={this.login} >
                     <br/>
-                    <img src="http://knaufk.github.io/beertopeer/images/logo.png" width="100"></img>
+                    <img src={Config.serverOptions.url + "/images/logo.png"} width="100"></img>
                     <br/>
                         <TextField
                             ref = "username"

@@ -23,7 +23,7 @@ var Create = React.createClass({
             recipientRippleAccountId: UserStore.getUser().rippleAccount,
             recipientUserName: UserStore.getUser().name
         };
-        let url = Config.serverOptions.url + '/event';
+        let url = Config.serverOptions.url + ':' + Config.serverOptions.port + '/event';
         $.post(url, data, function (data, status) {
             var eventCode = data.eventCode;
             console.log("id for new event is " + eventCode);
