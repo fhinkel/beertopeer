@@ -12,7 +12,7 @@ var Config = {
 
     serverOptions: {
         url: 'http://blitzpay.biz',
-        backendPort: '3000'
+        port: '3000'
     }
 };
 
