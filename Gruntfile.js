@@ -14,6 +14,8 @@ module.exports = function (grunt) {
     // Read configuration from package.json
     var pkgConfig = grunt.file.readJSON('package.json');
 
+    grunt.loadNpmTasks('grunt-string-replace');
+
     grunt.initConfig({
         pkg: pkgConfig,
 
@@ -111,6 +113,22 @@ module.exports = function (grunt) {
                     ]
                 }]
             }
+        },
+        'string-replace': {
+            inline: {
+                files: {
+                    'dest/': 'src/**'
+                },
+                options: {
+                    replacements: [
+                        // place files inline example
+                        {
+                            pattern: '{{VERSION}}',
+                            replacement: pkgConfig.version
+                        }
+                    ]
+                }
+            }
         }
     });
 
@@ -120,6 +138,7 @@ module.exports = function (grunt) {
         }
 
         grunt.task.run([
+            'string-replace',
             'open:dev',
             'webpack-dev-server'
         ]);
