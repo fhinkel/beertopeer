@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/knaufk/beertopeer.png?branch=master)](https://travis-ci.org/knaufk/beertopeer)
+[![Build Status](https://travis-ci.org/TNG/BlitzPay_Frontend.svg?branch=master)](https://travis-ci.org/TNG/BlitzPay_Frontend)
 
 ## BlitzPay
 

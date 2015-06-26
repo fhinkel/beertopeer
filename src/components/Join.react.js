@@ -17,7 +17,7 @@ var Join = React.createClass({
         var that = this;
             $.ajax({
                 method: "GET",
-                url: Config.serverOptions.url + '/event/'+eventCode,
+                url: Config.serverOptions.url + ':' + Config.serverOptions.port + '/event/'+eventCode,
                 dataType: "json",
                 async: false,
                 success: function(data, status, xhr) {

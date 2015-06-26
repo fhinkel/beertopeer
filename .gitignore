@@ -30,6 +30,7 @@ $RECYCLE.BIN/
 node_modules/
 .tmp
 dist
+dest
 /src/main.js
 
 src/constants/LocalConfig.js

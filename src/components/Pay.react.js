@@ -55,7 +55,7 @@ var Pay = React.createClass({
     },
 
     componentDidMount: function() {
-        $.get( Config.serverOptions.url + '/event/'+ this.props.params.eventCode, function(data, status) {
+        $.get( Config.serverOptions.url + ':' + Config.serverOptions.port + '/event/'+ this.props.params.eventCode, function(data, status) {
             this.setState({
                 eventName: data.eventName,
                 totalAmount: data.totalAmount,

@@ -1,6 +1,6 @@
 {
   "name": "beertopeer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "repository": "",
   "private": true,
@@ -21,15 +21,13 @@
     "normalize.css": "~3.0.3",
     "object-assign": "^2.0.0",
     "react": "~0.13.3",
-    "normalize.css": "~3.0.3",
-    "material-ui": "~0.8.0",
-    "jquery": "~2.1.4",
     "react-tap-event-plugin": "~0.1.7",
     "keymirror": "~0.1.1",
     "react-router": "^0.13.3",
     "ripple-lib": "^0.12.4",
     "ripple-vault-client": "^0.4.9",
-    "sjcl": "^1.0.3"
+    "sjcl": "^1.0.3",
+    "string-replace": "~0.2.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

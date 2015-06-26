@@ -40,7 +40,7 @@ var CodeInput = React.createClass({
         console.log('Checking Code Existence '+ eventCode);
         $.ajax({
             method: "GET",
-            url: Config.serverOptions.url + '/event/'+eventCode,
+            url: Config.serverOptions.url + ':' + Config.serverOptions.port + '/event/'+eventCode,
             dataType: "json",
             error: function(xhr, status, error) { if (that.getEventCode() === eventCode) {
                 that.setState( {errorText: 'No event with this code exists.'});

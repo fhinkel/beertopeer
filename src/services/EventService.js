@@ -9,7 +9,7 @@ var $ = require('jquery');
 
 var EventService = {
     queryEvent: function(eventCode, callback) {
-        $.get( Config.serverOptions.url + '/event/'+ eventCode, callback);
+        $.get( Config.serverOptions.url + ':' + Config.serverOptions.port + '/event/'+ eventCode, callback);
     }
 };
 
