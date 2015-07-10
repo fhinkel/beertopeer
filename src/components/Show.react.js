@@ -28,12 +28,12 @@ var Show = React.createClass({
         EventService.queryEvent(eventCode, function(event, status) {
             console.log('found event ', event);
 
-            RippleService.subscribeToTransactionsForEvent(event.recipientRippleAccountId, eventCode, function(newTransaction) {
-                console.log('new transaction', newTransaction);
+            RippleService.subscribeToTransactionsForEvent(event.recipientRippleAccountId, eventCode, function(newT) {
+                console.log('new transaction', newT);
 
                 var ts = that.state.transactions;
 
-                ts.push(newTransaction);
+                ts.push(newT);
 
                 that.setState({
                         transactions: ts,
@@ -63,7 +63,6 @@ var Show = React.createClass({
         var transactions = this.state.transactions;
         var transactionList = [];
         var received = ripple.Amount.from_human('0 EUR');
-
         for (var i = 0; i < transactions.length; i++) {
             transactionList.push(<Transaction transaction={ transactions[i]}/>);
             received = transactions[i].amount.add(received);

@@ -9,7 +9,6 @@ var Footer = React.createClass({
 
     render: function () {
 
-
         var style = {
             position: "absolute",
             bottom: "0px",
@@ -18,11 +17,10 @@ var Footer = React.createClass({
             color: "#757575"
         };
 
-        return (<div style={style}>
-                    <span style={{textAlign: "center"}}>
-                        BlitzPay {{VERSION}} by <a href="http://www.tngtech.com/en/"> TNG Technology Consulting</a>. Also visit us on <a href="https://github.com/TNG/BlitzPay_Frontend">GitHub</a>.
-                    </span>
-        </div>);
+        return (
+	    <div style={style}>
+                <span style={{textAlign: "center"}}><p>BlitzPay by <a href="http://www.tngtech.com/en/company-and-contact-information.html"> TNG Technology Consulting</a></p></span>
+            </div>);
     }
 });
 
