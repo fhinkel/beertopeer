@@ -56,7 +56,7 @@ var Create = React.createClass({
                     step="0.01"/>
                 <br/>
                 <br/>
-                <RaisedButton label="Create" primary={true}/>
+                <RaisedButton type="submit" label="Create" primary={true}/>
             </form>
         );
     }

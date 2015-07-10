@@ -16,7 +16,7 @@
     "events": "^1.0.2",
     "flux": "^2.0.1",
     "jquery": "~2.1.4",
-    "material-ui": "~0.8.0",
+    "material-ui": "~0.10.0",
     "moment": "^2.10.3",
     "object-assign": "^2.0.0",
     "react": "~0.13.3",

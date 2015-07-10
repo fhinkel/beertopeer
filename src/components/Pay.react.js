@@ -89,7 +89,7 @@ var Pay = React.createClass({
                         />
                         <br/>
                         <br/>
-                        <RaisedButton label="Pay!" primary={true}/>
+                        <RaisedButton type="submit" label="Pay!" primary={true}/>
                     </form>
                 </div>
             );

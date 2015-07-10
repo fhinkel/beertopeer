@@ -62,11 +62,7 @@ var Beer2Peer = React.createClass({
             mainSection = <Login />;
         } else {
             header = <Header user = {this.state.user}/>;
-            mainSection = (
-                <div>
-                    <RouteHandler user = {this.state.user} />
-                </div>
-            );
+            mainSection = <RouteHandler user = {this.state.user}/>;
         }
         return (
             <div className="centered">

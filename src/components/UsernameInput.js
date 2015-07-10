@@ -32,7 +32,7 @@ var UsernameInput = React.createClass({
         if (this.isValid()) {
             this.setState({errorText: ''});
         } else {
-            this.setState({errorText: 'Error: Invalid Username'});
+            this.setState({errorText: 'Invalid Username'});
         }
     },
 

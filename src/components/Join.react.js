@@ -5,7 +5,6 @@
 
 var React = require('react');
 var TextField = require('material-ui').TextField;
-var RaisedButton = require('material-ui').RaisedButton;
 var Config = require('../constants/Config');
 var CodeInput = require('./CodeInput.react');
 

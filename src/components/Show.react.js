@@ -17,6 +17,10 @@ var Colors = require('material-ui').Styles.Colors;
 
 var {Progress, LoadingState} = require('./Progress.react');
 
+var Table = mui.Table;
+var Card = mui.Card;
+var CardTitle = mui.CardTitle;
+var CardText = mui.CardText;
 
 var Show = React.createClass({
 
@@ -60,74 +64,59 @@ var Show = React.createClass({
         };
     },
     render: function() {
-        var transactions = this.state.transactions;
-        var transactionList = [];
-        var received = ripple.Amount.from_human('0 EUR');
-        for (var i = 0; i < transactions.length; i++) {
-            transactionList.push(<Transaction transaction={ transactions[i]}/>);
-            received = transactions[i].amount.add(received);
-            console.log('received', received.to_human_full());
-        }
 
-        var total = ripple.Amount.from_human(this.state.event.totalAmount + ' EUR');
-        var remaining = total.subtract(received);
-
-        console.log('total', total.to_human_full());
-        console.log('remaining', remaining.to_human_full());
 
         if (this.state.loadingState === LoadingState.LOADED) {
-            var status;
-            var statusStyle;
-            if (remaining.to_human() <= 0.00) {
-                status = '✓';
-                statusStyle = {color: Colors.Li, fontSize: '150%', textAlign: 'center'};
-            } else {
-                status = '';
-            }
+            var tableHeaders = {
+                senderName: {content: 'Name'},
+                amount: {content: 'Amount'},
+                status: {content: 'Status'}
+            };
+            var tableColOrder = ['senderName', 'amount', 'status'];
+            var tableData = this.state.transactions.map(function(transaction) {
+                return {
+                    senderName: {content: transaction.senderName},
+                    amount: {content: transaction.amount.to_human({precision: 2, min_precision: 2})+' '+transaction.amount.currency().to_human()},
+                    status: {content: '✓'}
+                };
+            });
 
-            console.log('total', total.to_human_full());
-            console.log('remaining', remaining.to_human_full());
+            var sumReceived = this.state.transactions.reduce(function(acc, t) {
+                return acc.add(t.amount);
+            }, ripple.Amount.from_human('0 EUR'));
 
-                return (
-                    <div>
-                        <h2><span className="eventName">{this.state.event.eventName}</span></h2>
-                        <Paper>
-                        <table id="table" className="table table-mc-light-blue ">
+            var total = ripple.Amount.from_human(this.state.event.totalAmount + ' EUR');
+            var remaining = total.subtract(sumReceived);
 
-                                <div className="eventCode" style={{fontSize: '150%', textAlign: 'center', paddingTop: '15px', paddingBottom: '10px'}}>{this.props.params.eventCode}</div>
-                        </table>
-                        </Paper>
-                        <Paper>
-                            <table id="table" className="table table-hover table-mc-light-blue table-condensed">
-                                <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Amount</th>
-                                    <th>Status</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr className="bold">
-                                    <td>Total</td>
-                                    <td style={{textAlign: 'right'}}>{total.to_human({precision: 2, min_precision: 2})}&nbsp;{total.currency().to_human()} </td>
-                                </tr>
-                                {transactionList}
-                                <tr className="bold">
-                                    <td>Remaining</td>
-                                    <td style={{textAlign: 'right'}}>{remaining.to_human({precision: 2, min_precision: 2})}&nbsp;{remaining.currency().to_human()}</td>
-                                    <td style={statusStyle}>{status}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </Paper>
-                    </div>
-                );
-            } else {
-                return (
-                    <Progress message='Loading Transactions...'/>
-                );
-            }
+            var remainingToHuman =  remaining.to_human({precision: 2, min_precision: 2})+' '+remaining.currency().to_human();
+            var tableFooter = {
+                    senderName: {content: 'Remaining'},
+                    amount: {content: remainingToHuman},
+                    status: {content: remaining.is_positive() ? ' ' : '✓'}
+                };
+
+            return (
+                <Card>
+                    <CardTitle title={this.props.params.eventCode} className="eventCode"/>
+                    <CardTitle subtitle={this.state.event.eventName} />
+                    <CardText>
+                        <Table
+                            headerColumns={tableHeaders}
+                            rowData={tableData}
+                            columnOrder = {tableColOrder}
+                            displayRowCheckbox={false}
+                            displaySelectAll={false}
+                            footerColumns={tableFooter}
+                            />
+                    </CardText>
+                </Card>
+            );
+        } else {
+            return (
+                <Progress message='Loading Transactions...'/>
+            );
         }
+    }
 });
 
 module.exports = Show;

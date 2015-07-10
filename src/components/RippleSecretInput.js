@@ -30,7 +30,7 @@ var RippleSecretInput = React.createClass({
         if (this.isValid()) {
             this.setState({errorText: ''});
         } else {
-            this.setState({errorText: 'Error: Invalid Secret'});
+            this.setState({errorText: 'Invalid Secret'});
         }
     },
 
