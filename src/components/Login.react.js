@@ -12,8 +12,6 @@ var Config = require('../constants/Config');
 
 var $ = require('jquery');
 
-var RippleVaultClient = require('ripple-vault-client');
-var vc = new RippleVaultClient.VaultClient('rippletrade.com');
 var {Progress, LoadingState}  = require('./Progress.react');
 
 
@@ -29,17 +27,8 @@ var Login = React.createClass({
         this.setState({ errorText: '',
             loadingState: LoadingState.LOADING});
         var username = this.refs.username.getValue();
-        var password = this.refs.password.getValue();
-        vc.loginAndUnlock(username, password, null, function(err, resp) {
-            if(!err) {
-                this.setState({ errorText: '',
-                    loadingState: LoadingState.LOADED});
-            } else {
-                this.setState({ errorText: err.toString(),
-                    loadingState: LoadingState.LOADED});
-            }
-            UserActions.loginUser(username, resp.secret);
-        }.bind(this));
+        var secret = this.refs.secret.getValue();
+        UserActions.loginUser(username, secret);
         return false;
     },
 
@@ -55,7 +44,7 @@ var Login = React.createClass({
         if (this.state.loadingState === LoadingState.LOADING) {
             progress =  <Progress />;
         } else {
-            progress = <span style={style}><p>Login with your <a href="https://rippletrade.com/">Ripple Trade</a> credentials.</p></span>;
+            progress = <span style={style}><p>Login with your any name and your Ripple secret.</p></span>;
         }
 
         return (
@@ -72,8 +61,8 @@ var Login = React.createClass({
                         <br/>
                         <TextField
                             type="password"
-                            ref = "password"
-                            floatingLabelText="Password"
+                            ref = "secret"
+                            floatingLabelText="Ripple Secret"
                             errorText = {this.state.errorText}
                             style={{width: '18em'}}/>
                         <br/>

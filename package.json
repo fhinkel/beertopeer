@@ -1,6 +1,6 @@
 {
   "name": "beertopeer",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "",
   "repository": "",
   "private": true,
@@ -25,7 +25,6 @@
     "keymirror": "~0.1.1",
     "react-router": "^0.13.3",
     "ripple-lib": "^0.12.4",
-    "ripple-vault-client": "^0.4.9",
     "sjcl": "^1.0.3",
     "string-replace": "~0.2.0"
   },
