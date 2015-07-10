@@ -37,7 +37,7 @@ var Header = React.createClass({
                 paddingTop: '0px',
                 paddingBottom: '12px',
                 marginBottom: '8px',
-                backgroundImage: 'url("/images/4303131832_b9e1de6614_z.jpg")', // by JD Hancock https://flic.kr/p/7yfFb9
+                backgroundImage: 'url("images/4303131832_b9e1de6614_z.jpg")', // by JD Hancock https://flic.kr/p/7yfFb9
                 backgroundSize: '100%'
             };
         var headerNameStyles  = {

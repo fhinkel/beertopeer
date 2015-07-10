@@ -26,7 +26,6 @@ var Create = React.createClass({
         let url = Config.serverOptions.url + ':' + Config.serverOptions.port + '/event';
         $.post(url, data, function (data, status) {
             var eventCode = data.eventCode;
-            console.log("id for new event is " + eventCode);
             this.context.router.transitionTo('show', {eventCode: eventCode});
         }.bind(this));
         return false;
@@ -34,7 +33,6 @@ var Create = React.createClass({
 
     onClickNameField: function() {
         var inputField = React.findDOMNode(this.refs.name).getElementsByTagName('input')[0];
-        console.log(inputField);
         inputField.setSelectionRange(0, inputField.value.length);
         return true;
     },
@@ -45,7 +43,7 @@ var Create = React.createClass({
                 <TextField
                     floatingLabelText="Event Name"
                     ref="name"
-                    defaultValue={moment().format('YY-MM-DD HH:mm')}
+                    defaultValue={'Event_from_'+moment().format('YY-MM-DD HH:mm')}
                     onClick={this.onClickNameField}
                     />
                 <br/>
@@ -55,7 +53,6 @@ var Create = React.createClass({
                     floatingLabelText = "EUR"
                     type="number"
                     step="0.01"/>
-
                 <br/>
                 <br/>
                 <RaisedButton label="Create" primary={true}/>
