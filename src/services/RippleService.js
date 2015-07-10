@@ -108,7 +108,7 @@ var RippleService = {
         });
     },
 
-    getBalance: function(accountString, callback) {
+    startListeningToBalanceChanges: function(accountString, callback) {
         var account = this.remote.findAccount(accountString);
         console.log('Getting balance: ', account._events);
         var lineHandler = function(err, res) {
@@ -135,6 +135,11 @@ var RippleService = {
         account.on('transaction', function() {
             account.lines(lineHandler);
         });
+    },
+
+    stopListeningToBalanceChanges: function(accountString) {
+        var account = this.remote.findAccount(accountString);
+        account.removeAllListeners('transaction');
     },
 
     _isIncomingPaymentForEvent: function(tx, recipientAccount, eventCode) {

@@ -15,10 +15,15 @@ var RippleService = require('../services/RippleService');
 var CHANGE_USER_EVENT = 'change';
 var CHANGE_BALANCE_EVENT = 'changeBalance';
 
-var user = {name: '',
-            rippleAccount:'',
-            rippleSecret: '',
-            balances:[] };
+var user = {
+    name: '',
+    rippleAccount:'',
+    rippleSecret: '',
+    balances:[] ,
+    isLoggedIn: function() {
+        return this.name !== '';
+    }
+};
 
 function setBalances(balances) {
     user.balances = balances;
@@ -48,6 +53,8 @@ var UserStore = assign({}, EventEmitter.prototype, {
     getUser: function() {
         return user;
     },
+
+
 
     emitUserChange: function() {
         this.emit(CHANGE_USER_EVENT);

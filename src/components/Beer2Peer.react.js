@@ -59,7 +59,7 @@ var Beer2Peer = React.createClass({
 
     var mainSection;
     var header;
-      if (this.state.user.name === '') {
+      if (!this.state.user.isLoggedIn) {
           mainSection = <Login />;
       } else {
           header =  <Header user = {this.state.user}/>;
