@@ -84,15 +84,13 @@ var Beer2Peer = React.createClass({
                           </div>);
       }
       return (
-          <AppCanvas>
               <div className="centered">
                   {header}
-                  <div className='inlineBlock'>
-                  {mainSection}
-                </div>
-                <Footer />
+                  <div className='inlineBlock'  id="realContent">
+                    {mainSection}
+                  </div>
+                  <Footer />
               </div>
-          </AppCanvas>
       );
 
   }
