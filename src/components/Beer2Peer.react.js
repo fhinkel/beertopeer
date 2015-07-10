@@ -52,32 +52,31 @@ var Beer2Peer = React.createClass({
     },
 
     getChildContext() {
-      return {muiTheme: ThemeManager.getCurrentTheme()};
+        return {muiTheme: ThemeManager.getCurrentTheme()};
     },
 
     render: function() {
-
-    var mainSection;
-    var header;
-      if (!this.state.user.isLoggedIn) {
-          mainSection = <Login />;
-      } else {
-          header =  <Header user = {this.state.user}/>;
-          mainSection  = (
-                         <div>
-                            <RouteHandler user = {this.state.user} />
-                          </div>);
-      }
-      return (
-              <div className="centered">
-                  {header}
-                  <div className='inlineBlock'  id="realContent">
+        var mainSection;
+        var header;
+        if (!this.state.user.isLoggedIn()) {
+            mainSection = <Login />;
+        } else {
+            header = <Header user = {this.state.user}/>;
+            mainSection = (
+                <div>
+                    <RouteHandler user = {this.state.user} />
+                </div>
+            );
+        }
+        return (
+            <div className="centered">
+                {header}
+                <div className='inlineBlock' id="realContent">
                     {mainSection}
-                  </div>
-                  <Footer />
-              </div>
-      );
-
+                </div>
+                <Footer />
+            </div>
+        );
     }
 });
 
