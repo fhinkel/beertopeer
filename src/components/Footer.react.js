@@ -11,7 +11,7 @@ var Footer = React.createClass({
 
         return (<div id="footer">
                     <span style={{textAlign: "center"}}>
-                        BlitzPay {{VERSION}} by <a href="http://www.tngtech.com/en/"> TNG Technology Consulting</a>. Also visit us on <a href="https://github.com/TNG/BlitzPay_Frontend">GitHub</a>.
+                        BlitzPay by <a href="http://www.tngtech.com/en/"> TNG Technology Consulting</a>. Also visit us on <a href="https://github.com/TNG/BlitzPay_Frontend">GitHub</a>.
                     </span>
         </div>);
     }
