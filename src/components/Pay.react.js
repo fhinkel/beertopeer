@@ -27,7 +27,8 @@ var Pay = React.createClass({
         };
     },
 
-    onClickPayButton: function() {
+    onSubmitPayment: function(e) {
+        e.preventDefault();
 
         var user = UserStore.getUser();
 
@@ -51,7 +52,6 @@ var Pay = React.createClass({
                 this.context.router.transitionTo('show', {eventCode: this.props.params.eventCode});
             }
         }.bind(this));
-
     },
 
     componentDidMount: function() {
@@ -79,7 +79,7 @@ var Pay = React.createClass({
                 <div>
                     <ErrorMessage message={this.state.errorMessage}/>
                     <p><b>{this.state.eventCreator}</b> has requested <b>{this.state.totalAmount} {this.state.currency}</b> from the group.</p>
-                    <div>
+                    <form onSubmit={this.onSubmitPayment}>
                         <TextField ref="amountField"
                                    style={{width:'18em'}}
                                    hintText="0.00"
@@ -89,10 +89,8 @@ var Pay = React.createClass({
                         />
                         <br/>
                         <br/>
-                        <RaisedButton label="Pay!"
-                                      primary={true}
-                                      onClick={this.onClickPayButton}/>
-                    </div>
+                        <RaisedButton label="Pay!" primary={true}/>
+                    </form>
                 </div>
             );
         }
