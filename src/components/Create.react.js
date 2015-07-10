@@ -15,7 +15,9 @@ var moment = require('moment');
 
 var Create = React.createClass({
 
-    onClickCreate: function () {
+    onClickCreate: function (e) {
+        e.preventDefault();
+
         var data = {
             eventName: this.refs.name.getValue(),
             totalAmount: this.refs.totalAmount.getValue(),
@@ -28,7 +30,6 @@ var Create = React.createClass({
             var eventCode = data.eventCode;
             this.context.router.transitionTo('show', {eventCode: eventCode});
         }.bind(this));
-        return false;
     },
 
     onClickNameField: function() {
