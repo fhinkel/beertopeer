@@ -109,7 +109,8 @@ var RippleService = {
     },
 
     getBalance: function(accountString, callback) {
-        var account = this.remote.addAccount(accountString);
+        var account = this.remote.findAccount(accountString);
+        console.log('Getting balance: ', account._events);
         var lineHandler = function(err, res) {
             if (err) {
                 console.log('balance load error', err);
@@ -131,7 +132,6 @@ var RippleService = {
         };
 
         account.lines(lineHandler);
-
         account.on('transaction', function() {
             account.lines(lineHandler);
         });
@@ -161,11 +161,13 @@ var RippleService = {
 
         console.log('starting to listen to account events ', recipientAccount);
 
-        var account = this.remote.addAccount(recipientAccount);
+        var account = this.remote.findAccount(recipientAccount);
+
+        console.log("Incoming Transaction", account._events);
 
         account.on('transaction-inbound', function(netT) {
             console.log('new transaction pushed from network ', netT);
-            
+
             var tx = netT.transaction;
 
             if (that._isIncomingPaymentForEvent(tx, recipientAccount, eventCode)) {
