@@ -79,7 +79,9 @@ var CodeInput = React.createClass({
                         onKeyUp={this.onKeyUp}
                         className = "upperCase eventInput"
                         floatingLabelText="Event Code"
-                        style={{width:'18em'}}/>
+                        style={{width:'18em'}}
+                        maxLength="5"
+                    />
                     <br />
                     <br />
                     <RaisedButton label={this.props.label} primary={true} />
