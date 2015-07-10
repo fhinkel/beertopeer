@@ -30,6 +30,9 @@ var Header = React.createClass({
             menuItems.push({ route:'join', text: 'Login' });
         }
 
+        var headerStyle = {
+            textAlign: 'left'
+        };
         var headerBoxStyles  = {
                 color: Typography.textFullWhite,
                 backgroundColor: Colors.lightBlue700,
@@ -68,18 +71,18 @@ var Header = React.createClass({
             );
 
         return(
-            <div>
-            <AppBar title='BlitzPay'
-                    iconClassNameRight="muidocs-icon-navigation-expand-more"
-                    onLeftIconButtonTouchTap={this.toggleLeftNav}
-                />
-            <LeftNav ref='leftNav' docked={false} menuItems={menuItems} onChange={this.onLeftNavChange} header = {header} />
-            <Tabs>
-                <Tab label="Pay" route="join" onActive={this._onActive} />
-                <Tab label="Get Paid" route="create" onActive={this._onActive} />
-                <Tab label="History" route="query" onActive={this._onActive} />
-            </Tabs>
+            <div style={headerStyle}>
+                <AppBar title='BlitzPay'
+                        iconClassNameRight="muidocs-icon-navigation-expand-more"
+                        onLeftIconButtonTouchTap={this.toggleLeftNav}
+                    />
+                <LeftNav ref='leftNav' docked={false} menuItems={menuItems} onChange={this.onLeftNavChange} header = {header} />
 
+                <Tabs>
+                    <Tab label="Pay" route="join" onActive={this._onActive} />
+                    <Tab label="Get Paid" route="create" onActive={this._onActive} />
+                    <Tab label="History" route="query" onActive={this._onActive} />
+                </Tabs>
             </div>
     );
     },
