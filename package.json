@@ -24,7 +24,7 @@
     "react-tap-event-plugin": "~0.1.7",
     "keymirror": "~0.1.1",
     "react-router": "^0.13.3",
-    "ripple-lib": "^0.12.4",
+    "ripple-lib": "0.12.4",
     "sjcl": "^1.0.3"
   },
   "devDependencies": {
