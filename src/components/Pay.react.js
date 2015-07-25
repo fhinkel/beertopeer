@@ -12,7 +12,6 @@ var CircularProgress = mui.CircularProgress;
 var RippleService = require('../services/RippleService');
 var Config = require('../constants/Config');
 var ErrorMessage = require('./ErrorMessage');
-var keyMirror = require('keymirror');
 
 var UserStore = require('../stores/UserStore');
 
@@ -20,19 +19,11 @@ var ripple = require('ripple-lib');
 
 var {Progress, LoadingState}  = require('./Progress.react');
 
-var PaymentState = keyMirror({
-    PAID: null,
-    NOT_PAID: null
-});
-
-
 var Pay = React.createClass({
     getInitialState: function() {
         return {
             loadingState: LoadingState.LOADING,
-            paymentState: PaymentState.NOT_PAID,
-            loadingMessage: 'Retrieving event from server...',
-            errorMessage: ''
+            loadingMessage: 'Retrieving event from server...'
         };
     },
 
@@ -47,7 +38,7 @@ var Pay = React.createClass({
 
         this.setState({
             loadingState: LoadingState.LOADING,
-            loadingMessage: 'Transaction ongoing...',
+            loadingMessage: 'Transaction ongoing...'
         });
 
         RippleService.pay(user.name, user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, this.props.params.eventCode, function (success) {
@@ -58,11 +49,7 @@ var Pay = React.createClass({
                     loadingState: LoadingState.LOADED
                 });
             } else {
-                this.setState({
-                    loadingState: LoadingState.LOADED,
-                    paymentState: PaymentState.PAID,
-                    errorMessage: ''
-                });
+                this.context.router.transitionTo('show', {eventCode: this.props.params.eventCode});
             }
         }.bind(this));
     },
@@ -87,8 +74,6 @@ var Pay = React.createClass({
     render: function() {
         if(this.state.loadingState === LoadingState.LOADING) {
             return (<Progress message = {this.state.loadingMessage}/>);
-        } else if (this.state.paymentState === PaymentState.PAID ){
-            return (<div><img src='../images/check.svg' width="80px"/></div>);
         } else {
             return (
                 <div>
