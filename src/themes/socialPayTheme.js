@@ -151,7 +151,33 @@ var LightTheme = {
                 menuHoverColor: 'rgba(0, 0, 0, .10)'
             },
             tabs: {
-                backgroundColor: palette.primary1Color,
+                backgroundColor: palette.primary1Color
+            },
+            table: {
+                backgroundColor: Colors.white
+            },
+            tableHeader: {
+                borderColor: palette.borderColor
+            },
+            tableHeaderColumn: {
+                textColor: Colors.lightBlack,
+                height: 56,
+                spacing: 12
+            },
+            tableFooter: {
+                borderColor: palette.borderColor,
+                textColor: Colors.lightBlack,
+            },
+            tableRow: {
+                hoverColor: Colors.grey200,
+                stripeColor: ColorManipulator.lighten(palette.primary1Color, 0.55),
+                selectedColor: Colors.grey300,
+                textColor: Colors.darkBlack,
+                borderColor: palette.borderColor
+            },
+            tableRowColumn: {
+                height: 48,
+                spacing: 12
             }
         };
 

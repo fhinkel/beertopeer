@@ -40,7 +40,7 @@ var Show = React.createClass({
                 ts.push(newT);
 
                 that.setState({
-                        transactions: ts,
+                        transactions: ts
                     });
             });
             RippleService.requestTransactionsForEvent(event.recipientRippleAccountId, eventCode, function (success,transactions) {
@@ -65,7 +65,7 @@ var Show = React.createClass({
     },
     render: function() {
 
-        var checkMark = <div style={{verticalAlign:'middle'}}><img style={{display: 'block', margin: 'auto'}} src='../images/check.svg' width="20px"/></div>;
+        var checkMark = <div style={{verticalAlign:'middle'}}><img style={{display: 'block'}} src='../images/check.svg' width="20px"/></div>;
 
         if (this.state.loadingState === LoadingState.LOADED) {
             var tableHeaders = {
@@ -91,9 +91,9 @@ var Show = React.createClass({
 
             var remainingToHuman =  remaining.to_human({precision: 2, min_precision: 2})+' '+remaining.currency().to_human();
             var tableFooter = {
-                    senderName: {content: 'Remaining'},
-                    amount: {content: remainingToHuman},
-                    status: {content: remaining.is_positive() ? ' ' : checkMark}
+                    senderName: {content: 'Remaining', style: {paddingLeft: "12px"}},
+                    amount: {content: remainingToHuman, style: {paddingLeft: "12px"}},
+                    status: {content: remaining.is_positive() ? ' ' : checkMark, style: {paddingLeft: "12px"}}
                 };
 
             return (
@@ -108,6 +108,7 @@ var Show = React.createClass({
                             displayRowCheckbox={false}
                             displaySelectAll={false}
                             footerColumns={tableFooter}
+                            style={{cell: {padding: 0}}}
                             />
                     </CardText>
                 </Card>
