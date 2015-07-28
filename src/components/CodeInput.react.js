@@ -84,7 +84,7 @@ var CodeInput = React.createClass({
                     />
                     <br />
                     <br />
-                    <RaisedButton label={this.props.label} primary={true} />
+                    <RaisedButton type="submit" label={this.props.label} primary={true} />
                 </form>
             </div>
         );

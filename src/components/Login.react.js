@@ -63,7 +63,7 @@ var Login = React.createClass({
                     <RippleSecretInput ref="rippleSecretInput" />
                     <br/>
                     <br/>
-                    <RaisedButton label='Login' primary={true} />
+                    <RaisedButton type="submit" label='Login' primary={true} />
                     {progress}
                 </form>
                 </div>
