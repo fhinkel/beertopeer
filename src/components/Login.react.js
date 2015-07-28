@@ -51,7 +51,7 @@ var Login = React.createClass({
         if (this.state.loadingState === LoadingState.LOADING) {
             progress =  <Progress />;
         } else {
-            progress = <span style={style}><p>Login with your any name and your Ripple secret.</p></span>;
+            progress = <span style={style}><p>Login with any name and your Ripple secret.</p></span>;
         }
 
         return (
