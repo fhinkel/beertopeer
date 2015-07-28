@@ -47,7 +47,7 @@ var Pay = React.createClass({
 
         this.setState({
             loadingState: LoadingState.LOADING,
-            loadingMessage: 'Transaction ongoing...',
+            loadingMessage: 'Processing transaction...',
         });
 
         RippleService.pay(user.name, user.rippleSecret, this.state.targetRippleAccountId, rippleAmount, this.props.params.eventCode, function (success) {
