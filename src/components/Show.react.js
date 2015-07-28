@@ -65,6 +65,7 @@ var Show = React.createClass({
     },
     render: function() {
 
+        var checkMark = <div style={{verticalAlign:'middle'}}><img style={{display: 'block', margin: 'auto'}} src='../images/check.svg' width="20px"/></div>;
 
         if (this.state.loadingState === LoadingState.LOADED) {
             var tableHeaders = {
@@ -77,7 +78,7 @@ var Show = React.createClass({
                 return {
                     senderName: {content: transaction.senderName},
                     amount: {content: transaction.amount.to_human({precision: 2, min_precision: 2})+' '+transaction.amount.currency().to_human()},
-                    status: {content: '✓'}
+                    status: {content: checkMark}
                 };
             });
 
@@ -92,7 +93,7 @@ var Show = React.createClass({
             var tableFooter = {
                     senderName: {content: 'Remaining'},
                     amount: {content: remainingToHuman},
-                    status: {content: remaining.is_positive() ? ' ' : '✓'}
+                    status: {content: remaining.is_positive() ? ' ' : checkMark}
                 };
 
             return (
