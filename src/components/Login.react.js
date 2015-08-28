@@ -10,14 +10,14 @@ var UsernameInput = require('./UsernameInput');
 
 var foo = require('./Progress.react');
 var Progress = foo.Progress;
-var LoadingState = foo.LoadingState;
+//var LoadingState = foo.LoadingState;
 
 
 var Login = React.createClass({
 
     getInitialState() {
         return {
-            loadingState: LoadingState.LOADED
+            loadingState: this.props.loadingState.LOADED
         };
     },
 

@@ -7,10 +7,12 @@ describe('Login page', function() {
         var Login = require('../src/components/Login.react.js');
         var TestUtils = React.addons.TestUtils;
 
-        //Login.getInitialState();
+        var foo = require('../src/components/Progress.react');
+        var loadingState = foo.LoadingState;
+
         var rippleSecretInput = {};
         var login = TestUtils.renderIntoDocument(
-            <Login>
+            <Login loadingState={loadingState}>
                 {rippleSecretInput}
             </Login>
         );
