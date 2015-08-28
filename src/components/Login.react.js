@@ -51,13 +51,15 @@ var Login = React.createClass({
             ref: "usernameInput"
         });
 
+        var rippleSecretInput = this.props.children[0];
+
         return (
             <div>
                 <img src={this.props.Config.serverOptions.url + "/images/logo.png"} width="100" style={{paddingTop: "50px"}}></img>
                 <form onSubmit={this.login} >
                     {usernameInput}
                     <br />
-                    {this.props.children[0]}
+                    {rippleSecretInput}
                     <br/>
                     <br/>
                     {raisedButton}

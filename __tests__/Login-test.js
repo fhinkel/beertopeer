@@ -9,9 +9,14 @@ describe('Login page', function () {
         var TestUtils = React.addons.TestUtils;
 
         var LoadingState = require('../src/components/LoadingState.js');
-        //console.log('LoadingState inside test: ');
-        //console.log(keyMirror);
-        //console.dir(LoadingState);
+        var Config = require('../src/constants/Config');
+        var UserActions = {}; //require('../src/actions/UserActions');
+
+        var RippleSecretInput = React.createClass({
+            render: function () {
+                return (<div />);
+            }
+        });
         var Progress = React.createClass({
             render: function () {
                 return (<div />);
@@ -22,22 +27,7 @@ describe('Login page', function () {
                 return (<div />);
             }
         });
-        //require('material-ui').RaisedButton;
-        var Config = require('../src/constants/Config');
-        var UserActions = {}; //require('../src/actions/UserActions');
         var UsernameInput = React.createClass({
-            render: function () {
-                return (<div />);
-            }
-        }); //require('../src/components/UsernameInput');
-        //console.dir(UsernameInput);
-        //
-        //UsernameInput = React.addons.cloneWithProps(UsernameInput, {
-        //    ref: "usernameInput"
-        //});
-        //console.dir(UsernameInput);
-
-        var RippleSecretInput = React.createClass({
             render: function () {
                 return (<div />);
             }
@@ -58,7 +48,6 @@ describe('Login page', function () {
 
         expect(login.state.loadingState).toBe('LOADED');
 
-        expect("hello").toBe("hello");
 
     });
 
