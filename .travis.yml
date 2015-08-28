@@ -49,4 +49,5 @@ deploy:
     script: scripts/deploy.sh
     on:
         branch: feature/jest
+        node: "iojs-v2.0.0"
 
