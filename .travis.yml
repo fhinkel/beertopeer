@@ -47,7 +47,7 @@ script:
 deploy:
     skip_cleanup: true
     provider: script
-    script: scripts/deploy.sh
+    script: deploy.sh
     on:
         branch: feature/jest
         node: "iojs-v2.0.0"
