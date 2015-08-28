@@ -21,4 +21,7 @@ var Progress = React.createClass({
     }
 });
 
-module.exports = {Progress: Progress, LoadingState: LoadingState};
+module.exports = {
+    Progress: Progress,
+    LoadingState: LoadingState
+};
