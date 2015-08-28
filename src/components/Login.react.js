@@ -1,6 +1,3 @@
-/**
- * Created by kknauf on 13.06.15.
- */
 'use strict';
 
 var React = require('react');
@@ -8,35 +5,37 @@ var TextField = require('material-ui').TextField;
 var RaisedButton = require('material-ui').RaisedButton;
 var UserActions = require('../actions/UserActions');
 var Config = require('../constants/Config');
-var RippleSecretInput = require('./RippleSecretInput');
+//var RippleSecretInput = require('./RippleSecretInput');
 var UsernameInput = require('./UsernameInput');
 
 
 var $ = require('jquery');
 
-var {Progress, LoadingState}  = require('./Progress.react');
+var foo  = require('./Progress.react');
+var Progress = foo.Progress;
+var LoadingState = foo.LoadingState;
 
 
 var Login = React.createClass({
 
     getInitialState() {
         return {
-                loadingState: LoadingState.LOADED
+                //loadingState: LoadingState.LOADED
         };
     },
 
     login: function(e) {
-        e.preventDefault();
-        this.refs.usernameInput.validate();
-        this.refs.rippleSecretInput.validate();
-        if (this.refs.rippleSecretInput.isValid() && this.refs.usernameInput.isValid()) {
-            this.setState({
-                loadingState: LoadingState.LOADING
-            });
-            var username = this.refs.usernameInput.getValue();
-            var secret = this.refs.rippleSecretInput.getValue();
-            UserActions.loginUser(username, secret);
-        }
+        //e.preventDefault();
+        //this.refs.usernameInput.validate();
+        //this.refs.rippleSecretInput.validate();
+        //if (this.refs.rippleSecretInput.isValid() && this.refs.usernameInput.isValid()) {
+        //    this.setState({
+        //        loadingState: LoadingState.LOADING
+        //    });
+        //    var username = this.refs.usernameInput.getValue();
+        //    var secret = this.refs.rippleSecretInput.getValue();
+        //    UserActions.loginUser(username, secret);
+        //}
     },
 
     render: function() {

@@ -7,7 +7,7 @@
 var React = require('react');
 var TextField = require('material-ui').TextField;
 
-var RippleService= require('../services/RippleService');
+//var RippleService= require('../services/RippleService');
 
 var USERNAME_REGEX = /^[^\s].{0,32}$/;
 
