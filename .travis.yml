@@ -26,9 +26,9 @@ env:
         # travis encrypt GH_OAUTH_TOKEN=XXXXXXXXXXXXXXX
         #
         # User specific env variables
-		- secure: "qu5w29aMSuc4JX/DzG5nD0YGS3y7Gb59BwvhVGDTpeATaQtIit0cFvPaEjFuUvhXkJ233XkskiIZHgRnTNHNaUGDOcgEA1nidpmxBd9gUhrtZGqFgdV75a5sQQsWF1wMGLAJrJtrYZLYhbwWDtZyg0/ipZLOynmRvWEZ06QuK3D6ptddgXxkR0GlL2wBjHzaZ3Wl9UzPGDIiRG/mejRZlnPE0K3k2fTkvcqspEUF4XDyYs3r9w9vmvQKVDc5bdWcwX6JRO2+PuPRW5WyriktlNuV6EqdL9YDs4Vgpc2WRaAniPmn1V9RTUacB5V4Y+xc5+5OODZT/iYDthoeFdpwQJ26AIan+OvDQ5JIDtRoTcoQR5KX76hbaHQbxNcxS/dwC9CFIHhaZmgs5Jtj+nZ6tc4cEK4fj50jo9YVvLc72FoIi1hrLDKhKgQNvoP/7/MqhbUShmOuhNNDEz78k8h8ycwX54nHjD7aYdM2XJX12Hv38pU/r1S2fF2Qkcj4PIsdF/mq1D58zpn0Z9LJipvnrCjCGQ5rh7vz84bbY00P3y9JDzN+CXz1zxQ0i1YjVfQ3c4LY3RGqldmCHKFWK7u/f9cFW9QM91SCVSsU7FMqmzt57ibbk81N2CtHJykAfERv73U7mw1qk/bAvJr+ZnE7zRj6vGq/EpR265BDxsfsgns="
         - GH_OWNER: fhinkel 
         - GH_PROJECT_NAME: beertopeer
+        - secure: "q8AlQM2NaUnLv4LBSdt1+sl8zRrikXGyN3rAU4kfFUeyQPrcULVfGvVHUjSabc53CZQsLS7yWZ2UwxItmJom/7nu9+nGqwAdvDjr0TP5LmBh0xVeDnXlELmji5A6O+v6WfX2XLL37zw7Ig71+K7QrNF/6Y/fFKdUInCBOI5GMKmcv/VaqA+0HK/2SP79rmomWBj8yg8hv8n2QAg2ORwrQ4viybf9RBe1AjpRvVHe/e6JYhiKG6NMuT48cAQzMiSLBsrKDJ7Zl48z/BpNtfE6wjFU2rNpMc5VbbCd3Pxr5s3bv/RiOcP04yjAEMpLJKSd6/rKj+CTVXk1Rvum1OQbESwHUc7+uEmK+yffTeZdHoHORNYO5dLdr77Y7ANRtWik8U86kvFx2BCwgOG7kNDLViDUk6dJOYgr8OFe2oyt6iRWacv2vCSgK8x3cPwVA76Yl/RWAjw99Mzuo5/y4MhNPRpUQLa6BPVtb4OpobKXzWPUvC+baJLT9CbJ2Q287Wj1RoXftLzAMW3yKuLrg4xIp1DGQnHE3ldRILTs646zLjTu8stO0D8vcmIo0SsY+Ipv2N1VcXrrx4vyvBshmNiTPQSPn+fW4jwqd7GEM0Y5ChywygHxiG7Ov8PaucwnIQypPjmbBm+B1kOr7sYrhZUAW0m9fCBPW5zKddDJGU4JzCQ="
         # This .travis.yml file instructs travis-ci.org to build your master branch using `yeoman build`
         # and deploy the output to your project's gh-pages branch.
 
