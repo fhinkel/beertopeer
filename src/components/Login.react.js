@@ -1,16 +1,14 @@
 'use strict';
 
 var React = require('react');
-var TextField = require('material-ui').TextField;
 var RaisedButton = require('material-ui').RaisedButton;
 var UserActions = require('../actions/UserActions');
 var Config = require('../constants/Config');
+
 var UsernameInput = require('./UsernameInput');
 
 
-var $ = require('jquery');
-
-var foo  = require('./Progress.react');
+var foo = require('./Progress.react');
 var Progress = foo.Progress;
 var LoadingState = foo.LoadingState;
 
@@ -19,11 +17,11 @@ var Login = React.createClass({
 
     getInitialState() {
         return {
-                //loadingState: LoadingState.LOADED
+            loadingState: LoadingState.LOADED
         };
     },
 
-    login: function(e) {
+    login: function (e) {
         e.preventDefault();
         this.refs.usernameInput.validate();
         this.refs.rippleSecretInput.validate();
@@ -37,9 +35,9 @@ var Login = React.createClass({
         }
     },
 
-    render: function() {
+    render: function () {
 
-        var style= {
+        var style = {
             fontSize: "80%",
             color: "#757575"
         };
@@ -47,7 +45,7 @@ var Login = React.createClass({
         var progress;
 
         if (this.state.loadingState === LoadingState.LOADING) {
-            progress =  <Progress />;
+            progress = <Progress />;
         } else {
             progress = <span style={style}><p>Login with any name and your Ripple secret.</p></span>;
         }
@@ -59,16 +57,17 @@ var Login = React.createClass({
                 <form onSubmit={this.login} >
                     <UsernameInput ref="usernameInput" />
                     <br />
-                    { this.props.children }
+                    {this.props.children}
                     <br/>
                     <br/>
                     <RaisedButton type="submit" label='Login' primary={true} />
                     {progress}
                 </form>
-                </div>
+            </div>
         );
     }
 });
+
 
 Login.contextTypes = {
     router: React.PropTypes.func

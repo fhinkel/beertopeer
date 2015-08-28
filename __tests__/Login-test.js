@@ -7,6 +7,7 @@ describe('Login page', function() {
         var Login = require('../src/components/Login.react.js');
         var TestUtils = React.addons.TestUtils;
 
+        //Login.getInitialState();
         var rippleSecretInput = {};
         var login = TestUtils.renderIntoDocument(
             <Login>
@@ -14,7 +15,7 @@ describe('Login page', function() {
             </Login>
         );
 
-        //expect(Login.state.loadingState).toBe('hello');
+        expect(login.state.loadingState).toBe('hello');
 
         expect("hello").toBe("hello");
 
