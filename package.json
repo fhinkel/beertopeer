@@ -1,8 +1,8 @@
 {
-  "name": "beertopeer",
-  "version": "0.1.2",
-  "description": "",
-  "repository": "",
+  "name": "BlitzPay",
+  "version": "0.2.0",
+  "description": "Frontend for Blitzpay",
+  "repository": "https://github.com/TNG/BlitzPay_Frontend",
   "private": true,
   "src": "src",
   "test": "test",
@@ -67,5 +67,6 @@
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react"
     ]
-  }
+  },
+  "engine": "node >= 2.0.0"
 }
