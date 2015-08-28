@@ -14,8 +14,8 @@
      echo 'ls'
      ls -al
 
-     git config user.email "konstantin.knauf@tngtech.com"
-     git config user.name "Konstantin Knauf"
+     git config user.email "franziska.hinkelmann@gmail.com"
+     git config user.name "Franziska Hinkelmann"
      echo 'commit'
      git commit -am "Deploy to gh-pages [ci skip]"
     # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
