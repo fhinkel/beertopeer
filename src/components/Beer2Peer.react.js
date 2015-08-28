@@ -17,6 +17,9 @@ var Login = require('./Login.react');
 
 var RippleListener = require('../services/RippleListener');
 
+var RippleSecretInput = require('./RippleSecretInput');
+
+
 ThemeManager.setTheme(SocialPayTheme);
 
 var Beer2Peer = React.createClass({
@@ -59,7 +62,9 @@ var Beer2Peer = React.createClass({
         var mainSection;
         var header;
         if (!this.state.user.isLoggedIn()) {
-            mainSection = <Login />;
+            mainSection =  (<Login>
+                <RippleSecretInput />
+                </Login>);
         } else {
             header = <Header user = {this.state.user}/>;
             mainSection = <RouteHandler user = {this.state.user}/>;
