@@ -7,7 +7,16 @@ describe('Login page', function() {
         var Login = require('../src/components/Login.react.js');
         var TestUtils = React.addons.TestUtils;
 
-        expect("hello").toBe("world");
+        var rippleSecretInput = {};
+        var login = TestUtils.renderIntoDocument(
+            <Login>
+                {rippleSecretInput}
+            </Login>
+        );
+
+        //expect(Login.state.loadingState).toBe('hello');
+
+        expect("hello").toBe("hello");
 
     });
 
