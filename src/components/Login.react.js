@@ -52,6 +52,9 @@ var Login = React.createClass({
         });
 
         var rippleSecretInput = this.props.children[0];
+        rippleSecretInput = React.addons.cloneWithProps(rippleSecretInput, {
+            ref: "rippleSecretInput"
+        });
 
         return (
             <div>
