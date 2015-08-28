@@ -1,23 +1,12 @@
 'use strict';
 
 var React = require('react');
-var RaisedButton = require('material-ui').RaisedButton;
-var UserActions = require('../actions/UserActions');
-var Config = require('../constants/Config');
-
-var UsernameInput = require('./UsernameInput');
-
-
-var foo = require('./Progress.react');
-var Progress = foo.Progress;
-//var LoadingState = foo.LoadingState;
-
 
 var Login = React.createClass({
 
     getInitialState() {
         return {
-            loadingState: this.props.loadingState.LOADED
+            loadingState: this.props.LoadingState.LOADED
         };
     },
 
@@ -27,11 +16,11 @@ var Login = React.createClass({
         this.refs.rippleSecretInput.validate();
         if (this.refs.rippleSecretInput.isValid() && this.refs.usernameInput.isValid()) {
             this.setState({
-                loadingState: LoadingState.LOADING
+                loadingState: this.props.LoadingState.LOADING
             });
             var username = this.refs.usernameInput.getValue();
             var secret = this.refs.rippleSecretInput.getValue();
-            UserActions.loginUser(username, secret);
+            this.props.UserActions.loginUser(username, secret);
         }
     },
 
@@ -44,8 +33,8 @@ var Login = React.createClass({
 
         var progress;
 
-        if (this.state.loadingState === LoadingState.LOADING) {
-            progress = <Progress />;
+        if (this.state.loadingState === this.props.LoadingState.LOADING) {
+            progress = this.props.children[1];
         } else {
             progress = <span style={style}><p>Login with any name and your Ripple secret.</p></span>;
         }
@@ -53,14 +42,14 @@ var Login = React.createClass({
 
         return (
             <div>
-                <img src={Config.serverOptions.url + "/images/logo.png"} width="100" style={{paddingTop: "50px"}}></img>
+                <img src={this.props.Config.serverOptions.url + "/images/logo.png"} width="100" style={{paddingTop: "50px"}}></img>
                 <form onSubmit={this.login} >
-                    <UsernameInput ref="usernameInput" />
+                    {this.props.children[3]} ref="usernameInput"
                     <br />
-                    {this.props.children}
+                    {this.props.children[0]}
                     <br/>
                     <br/>
-                    <RaisedButton type="submit" label='Login' primary={true} />
+                    {this.props.children[2]} type="submit" label='Login' primary={true}
                     {progress}
                 </form>
             </div>
