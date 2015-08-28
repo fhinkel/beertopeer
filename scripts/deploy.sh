@@ -1,6 +1,7 @@
     #!/bin/bash
     # Any command that using GH_OAUTH_TOKEN must pipe the output to /dev/null to not expose your oauth token
     echo 'submodule'
+    echo ${GH_OWNER}
     git submodule add -b gh-pages https://${GH_OAUTH_TOKEN}@github.com/${GH_OWNER}/${GH_PROJECT_NAME} site > /dev/null 2>&1
      cd site
      echo 'checkout'
