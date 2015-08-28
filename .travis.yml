@@ -45,7 +45,6 @@ script:
     #- grunt build
     #- mocha test/spec/services/*
 deploy:
-    skip_cleanup: true
     provider: script
     script: deploy.sh
     on:
