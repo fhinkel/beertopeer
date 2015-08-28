@@ -39,17 +39,28 @@ var Login = React.createClass({
             progress = <span style={style}><p>Login with any name and your Ripple secret.</p></span>;
         }
 
+        var raisedButton = this.props.children[2];
+        raisedButton = React.addons.cloneWithProps(raisedButton, {
+            type: "submit",
+            label: "Login",
+            primary: true
+        });
+
+        var usernameInput = this.props.children[3];
+        usernameInput = React.addons.cloneWithProps(usernameInput, {
+            ref: "usernameInput"
+        });
 
         return (
             <div>
                 <img src={this.props.Config.serverOptions.url + "/images/logo.png"} width="100" style={{paddingTop: "50px"}}></img>
                 <form onSubmit={this.login} >
-                    {this.props.children[3]} ref="usernameInput"
+                    {usernameInput}
                     <br />
                     {this.props.children[0]}
                     <br/>
                     <br/>
-                    {this.props.children[2]} type="submit" label='Login' primary={true}
+                    {raisedButton}
                     {progress}
                 </form>
             </div>
