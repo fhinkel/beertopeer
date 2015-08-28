@@ -40,6 +40,7 @@ before_script:
 script:
     # We want to gate on passing tests and a successful build
     - bower install
+    - npm test
     - grunt build
     - mocha test/spec/services/*
 after_success:
